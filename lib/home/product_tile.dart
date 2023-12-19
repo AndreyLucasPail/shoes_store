@@ -12,13 +12,14 @@ class ProductsTile extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          AspectRatio(
-            aspectRatio: 0.9,
-            child: Image.network(
-              products!.images![0],
-              fit: BoxFit.cover,
+        children: [(products != null && products!.images != null && products!.images!.isNotEmpty ?
+          Container(
+            height: 200,
+            width: 200,
+            decoration: BoxDecoration(
+              image: DecorationImage(image: NetworkImage(products!.images![0])),
             ),
+          ) : Container()
           ),
 
         ],

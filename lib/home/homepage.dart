@@ -11,28 +11,33 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: const Text("SNKRS"),
         centerTitle: true,
       ),
       drawer: const Drawer(),
-      body: FutureBuilder<DocumentSnapshot>(
-        future: FirebaseFirestore.instance.collection("products").doc("basketball").get(),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection("products").snapshots(),
         builder: (context, futureSnapshot) {
           if(!futureSnapshot.hasData){
             return const Center(
               child: CircularProgressIndicator(),
             );
           }else{
+            final List<ProductsData> productsList = futureSnapshot.data!.docs.map((doc){
+              return ProductsData.fromFirestore(doc);
+            }).toList();
+
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
               ), 
-              itemCount: futureSnapshot.data!.docs.length,
+              itemCount: productsList.length,
               itemBuilder: (context, index){
-                ProductsData productsData = ProductsData.fromDocument(futureSnapshot.data!.docs[index]);
-                productsData.category = snapshot!.id;
-                return ProductsTile(products: productsData,);
+                ProductsData productsData = productsList[index];
+                //productsData.category = snapshot!.id;
+                return ProductsTile(products: productsData);
               },
             );
           }
