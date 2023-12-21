@@ -9,19 +9,26 @@ class ProductsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 5,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [(products != null && products!.images != null && products!.images!.isNotEmpty ?
           Container(
-            height: 200,
-            width: 200,
+            padding: const EdgeInsets.all(8.0),
+            height: 155,
             decoration: BoxDecoration(
               image: DecorationImage(image: NetworkImage(products!.images![0])),
             ),
           ) : Container()
           ),
-
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              "${products!.price}",
+              style: const TextStyle(fontSize: 20),
+            )
+          ), 
         ],
       ),
     );
