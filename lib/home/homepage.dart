@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/data/home_ads_data.dart';
 
@@ -10,8 +11,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  late HomeAds? adsImage;
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,13 +21,26 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       drawer: const Drawer(),
-      body: ListView(
+      body: Column(
         children: [
-          Container(
-            
-            decoration: BoxDecoration(
-              image: DecorationImage(image: NetworkImage("${adsImage!.adidasImg1}"))
-            ),
+          StreamBuilder<DocumentSnapshot>(
+            stream: FirebaseFirestore.instance.collection("homePage").doc("homePageImg").snapshots(),
+            builder: (context, snapshot) {
+              if(!snapshot.hasData || snapshot.data == null){
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }else{
+                final listAds = HomeAds.fromFireStore(snapshot.data as DocumentSnapshot<Map<String, dynamic>>);
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: NetworkImage("${listAds.adidasImg1}"))
+                  ),
+                );
+              }
+            }
           ),
         ],
       )
