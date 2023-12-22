@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shoes_store/data/home_ads_data.dart';
+import 'package:shoes_store/home/widget/ads_tile.dart';
+import 'package:shoes_store/home/widget/product_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,29 +21,44 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       drawer: const Drawer(),
-      body: Column(
-        children: [
-          StreamBuilder<DocumentSnapshot>(
-            stream: FirebaseFirestore.instance.collection("homePage").doc("homePageImg").snapshots(),
-            builder: (context, snapshot) {
-              if(!snapshot.hasData || snapshot.data == null){
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }else{
-                final listAds = HomeAds.fromFireStore(snapshot.data as DocumentSnapshot<Map<String, dynamic>>);
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage("${listAds.adidasImg1}"))
-                  ),
-                );
-              }
-            }
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              AdsTile(
+                image: "assets/jordan1.png",
+                width: MediaQuery.of(context).size.width,
+                height: 220,
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: ProductsTile(),
+              ),
+              AdsTile(
+                image: "assets/curry.jpg",
+                width: MediaQuery.of(context).size.width,
+                height: 210,
+              ),
+              AdsTile(
+                image: "assets/adidas.png",
+                width: MediaQuery.of(context).size.width,
+                height: 180,
+              ),
+              AdsTile(
+                image: "assets/jordan3.jpg",
+                width: MediaQuery.of(context).size.width,
+                height: 450,
+              ),
+              AdsTile(
+                image: "assets/nike4.png",
+                width: MediaQuery.of(context).size.width,
+                height: 260,
+              ),
+            ],
           ),
-        ],
-      )
+        ),
+      ),
     );
   }
 
