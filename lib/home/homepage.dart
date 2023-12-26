@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/home/widget/ads_tile.dart';
+import 'package:shoes_store/home/custom_drawer.dart';
 import 'package:shoes_store/home/widget/product_tile.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text("SNKRS"),
         centerTitle: true,
       ),
-      drawer: const Drawer(),
+      drawer: const CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: SingleChildScrollView(
