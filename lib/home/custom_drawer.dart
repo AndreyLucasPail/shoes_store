@@ -54,10 +54,11 @@ class CustomDrawer extends StatelessWidget {
                 category: "basquete",
               ),
               children: [
-                TextButton(onPressed: (){}, child: Text("Nike")),
-                TextButton(onPressed: (){}, child: Text("Adidas")),
-                TextButton(onPressed: (){}, child: Text("Jordan")),
-                TextButton(onPressed: (){}, child: Text("Under Armour")),
+                TextButton(onPressed: (){}, child: const Text("Nike")),
+                TextButton(onPressed: (){}, child: const Text("Adidas")),
+                TextButton(onPressed: (){}, child: const Text("Jordan")),
+                TextButton(onPressed: (){}, child: const Text("Under Armour")),
+                TextButton(onPressed: (){}, child: const Text("Ver Todos")),
               ],
             ),
             const DrawerTile(
