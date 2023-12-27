@@ -15,8 +15,8 @@ class DrawerTile extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                height: 60,
-                width: 60,
+                height: 50,
+                width: 50,
                 color: Colors.transparent,
                 child: Image.asset(image!),
               ),
