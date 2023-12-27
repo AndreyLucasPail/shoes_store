@@ -41,11 +41,6 @@ class DrawerTile extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            color: Colors.black,
-            width: MediaQuery.of(context).size.width,
-            height: 1,
-          ),
         ],
       ),
     );

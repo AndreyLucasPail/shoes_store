@@ -46,10 +46,19 @@ class CustomDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            const DrawerTile(
-              image: "assets/bola-de-basquete.png",
-              text: "Basquete",
-              category: "basquete",
+            ExpansionTile(
+              expandedAlignment: Alignment.center,
+              title: const DrawerTile(
+                image: "assets/bola-de-basquete.png",
+                text: "Basquete",
+                category: "basquete",
+              ),
+              children: [
+                TextButton(onPressed: (){}, child: Text("Nike")),
+                TextButton(onPressed: (){}, child: Text("Adidas")),
+                TextButton(onPressed: (){}, child: Text("Jordan")),
+                TextButton(onPressed: (){}, child: Text("Under Armour")),
+              ],
             ),
             const DrawerTile(
               image: "assets/corrida.png",
