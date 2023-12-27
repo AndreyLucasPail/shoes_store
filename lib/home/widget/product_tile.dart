@@ -69,7 +69,7 @@ class ProductsTile extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Align(
-                                alignment: Alignment.centerRight,
+                                alignment: Alignment.center,
                                 child: Text(
                                   "R\$ ${productsData.price}",
                                   style: const TextStyle(fontSize: 16),

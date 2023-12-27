@@ -5,7 +5,7 @@ import 'package:shoes_store/home/homepage.dart';
 import 'package:shoes_store/products-screen/widgets/products_tile.dart';
 
 class ProductsScreen extends StatelessWidget {
-  const ProductsScreen({super.key, required this.category, this.brand});
+  const ProductsScreen({super.key, this.category, this.brand});
 
   final String? category;
   final String? brand;
@@ -26,8 +26,8 @@ class ProductsScreen extends StatelessWidget {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection("products").doc("basketball").
-          collection("shoes").doc("adidas").collection("model").snapshots(), 
+        stream: FirebaseFirestore.instance.collection("products").doc(category).
+          collection("shoes").doc(brand).collection("model").snapshots(), 
         builder: (context, snpashot) {
           if(!snpashot.hasData){
             return const Center(

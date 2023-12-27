@@ -10,7 +10,7 @@ class ProductsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 320,
       width: MediaQuery.of(context).size.width,
       child: Padding(

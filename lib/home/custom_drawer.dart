@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/home/widget/drawer_tile.dart';
+import 'package:shoes_store/products-screen/products_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -49,47 +50,68 @@ class CustomDrawer extends StatelessWidget {
             ExpansionTile(
               expandedAlignment: Alignment.center,
               title: const DrawerTile(
-                image: "assets/bola-de-basquete.png",
                 text: "Basquete",
-                category: "basquete",
+                image: "assets/bola-de-basquete.png",
               ),
               children: [
-                TextButton(onPressed: (){}, child: const Text("Nike")),
-                TextButton(onPressed: (){}, child: const Text("Adidas")),
-                TextButton(onPressed: (){}, child: const Text("Jordan")),
-                TextButton(onPressed: (){}, child: const Text("Under Armour")),
+                TextButton(
+                  onPressed: (){
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "basketball", brand: "Nike",))
+                    );
+                  }, 
+                  child: const Text("Nike")
+                ),
+                TextButton(
+                  onPressed: (){
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "basketball", brand: "adidas",))
+                    );
+                  }, 
+                  child: const Text("Adidas")
+                ),
+                TextButton(
+                  onPressed: (){
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "basketball", brand: "jordan",))
+                    );
+                  }, 
+                  child: const Text("Jordan")
+                ),
+                TextButton(
+                  onPressed: (){
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "basketball", brand: "underArmour",))
+                    );
+                  }, 
+                  child: const Text("Under Armour")
+                ),
                 TextButton(onPressed: (){}, child: const Text("Ver Todos")),
               ],
             ),
             const DrawerTile(
               image: "assets/corrida.png",
               text: "Corrida",
-              category: "corrida",
             ),
             const DrawerTile(
               image: "assets/chute.png",
               text: "Futebol",
-              category: "futebol",
             ),
             const DrawerTile(
               image: "assets/sapatos.png",
               text: "Tênis casual",
-              category: "casual",
             ),
             const DrawerTile(
               image: "assets/skate.png",
               text: "Skate",
-              category: "skate",
             ),
             const DrawerTile(
               image: "assets/andando.png",
               text: "Caminhada",
-              category: "caminhada",
             ),
             const DrawerTile(
               image: "assets/volei.png",
               text: "Volei",
-              category: "volei",
             ),
           ],
         )
