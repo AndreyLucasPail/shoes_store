@@ -49,30 +49,37 @@ class CustomDrawer extends StatelessWidget {
             const DrawerTile(
               image: "assets/bola-de-basquete.png",
               text: "Basquete",
+              category: "basquete",
             ),
             const DrawerTile(
               image: "assets/corrida.png",
               text: "Corrida",
+              category: "corrida",
             ),
             const DrawerTile(
               image: "assets/chute.png",
               text: "Futebol",
+              category: "futebol",
             ),
             const DrawerTile(
               image: "assets/sapatos.png",
               text: "Tênis casual",
+              category: "casual",
             ),
             const DrawerTile(
               image: "assets/skate.png",
               text: "Skate",
+              category: "skate",
             ),
             const DrawerTile(
               image: "assets/andando.png",
               text: "Caminhada",
+              category: "caminhada",
             ),
             const DrawerTile(
               image: "assets/volei.png",
               text: "Volei",
+              category: "volei",
             ),
           ],
         )
