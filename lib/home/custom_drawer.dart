@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/home/widget/Expansion_tile.dart';
 import 'package:shoes_store/home/widget/drawer_tile.dart';
-import 'package:shoes_store/products-screen/products_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -48,215 +47,16 @@ class CustomDrawer extends StatelessWidget {
                 ],
               ),
             ),
-            ExpansionTileDrawer(),
-            ExpansionTile(
-              expandedAlignment: Alignment.center,
-              title: const DrawerTile(
-                text: "Basquete",
-                image: "assets/bola-de-basquete.png",
-              ),
-              children: [
-                TextButton(
-                  onPressed: (){
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "basketball", brand: "Nike",))
-                    );
-                  }, 
-                  child: const Text(
-                    "Nike",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: (){
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "basketball", brand: "adidas",))
-                    );
-                  }, 
-                  child: const Text(
-                    "Adidas",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: (){
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "basketball", brand: "jordan",))
-                    );
-                  }, 
-                  child: const Text(
-                    "Jordan",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  )
-                ),
-                TextButton(
-                  onPressed: (){
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "basketball", brand: "underArmour",))
-                    );
-                  }, 
-                  child: const Text(
-                    "Under Armour",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: (){}, 
-                  child: const Text(
-                    "Ver Todos",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-              ],
+            const ExpansionTileDrawer(
+              text: "Basquete",
+              image: "assets/bola-de-basquete.png",
+              category: "basketball",
             ),
-            ExpansionTile(
-              title: const DrawerTile(
-                image: "assets/corrida.png",
-                text: "Corrida",
-              ),
-              children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "run", brand: "Nike",))
-                    );
-                  }, 
-                  child: const Text(
-                    "Nike",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "run", brand: "adidas",))
-                    );
-                  }, 
-                  child: const Text(
-                    "Adidas",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "run", brand: "asics",))
-                    );
-                  }, 
-                  child: const Text(
-                    "Asics",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "run", brand: "newBalance",))
-                    );
-                  }, 
-                  child: const Text(
-                    "New Balance",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "run", brand: "puma",))
-                    );
-                  }, 
-                  child: const Text(
-                    "Puma",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "run", brand: "reebok",))
-                    );
-                  }, 
-                  child: const Text(
-                    "ReeBok",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "run", brand: "underArmour",))
-                    );
-                  }, 
-                  child: const Text(
-                    "Under Armour",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const ProductsScreen(category: "run", brand: "Nike",))
-                    );
-                  }, 
-                  child: const Text(
-                    "Ver Todos",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            const ExpansionTileDrawer(
+              text: "Corrida",
+              image: "assets/corrida.png",
+              category: "run",
+            ),           
             const DrawerTile(
               image: "assets/chute.png",
               text: "Futebol",

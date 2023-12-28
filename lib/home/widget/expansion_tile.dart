@@ -1,20 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/home/widget/drawer_tile.dart';
+import 'package:shoes_store/products-screen/products_screen.dart';
 
 class ExpansionTileDrawer extends StatelessWidget {
-  const ExpansionTileDrawer({super.key,});
+  const ExpansionTileDrawer({super.key, this.text, this.image, this.category,});
+
+  final String? text;
+  final String? image;
+  final String? category;
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      title: const DrawerTile(
-        text: "Basquete",
-        image: "assets/bola-de-basquete.png",
+      title: DrawerTile(
+        text: text!,
+        image: image,
       ),
       children: [
         StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection("products").doc("basketball").
+          stream: FirebaseFirestore.instance.collection("products").doc(category).
             collection("shoes").snapshots(), 
           builder: (context, snapshot){
             if(!snapshot.hasData){
@@ -27,7 +32,11 @@ class ExpansionTileDrawer extends StatelessWidget {
 
               List<Widget> brandWidgets = brandList.map((brandName) {
                 return TextButton(
-                    onPressed: (){}, 
+                    onPressed: (){
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => ProductsScreen(category: category, brand: brandName.id,))
+                      );
+                    }, 
                     child: Text(
                       brandName.id,
                       style: const TextStyle(
