@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/home/widget/Expansion_tile.dart';
-import 'package:shoes_store/home/widget/drawer_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -56,26 +55,31 @@ class CustomDrawer extends StatelessWidget {
               text: "Corrida",
               image: "assets/corrida.png",
               category: "run",
-            ),           
-            const DrawerTile(
-              image: "assets/chute.png",
+            ),
+            const ExpansionTileDrawer(
               text: "Futebol",
-            ),
-            const DrawerTile(
-              image: "assets/sapatos.png",
+              image: "assets/chute.png",
+              category: "futball",
+            ),            
+            const ExpansionTileDrawer(
               text: "Tênis casual",
+              image: "assets/sapatos.png",
+              category: "casual",
             ),
-            const DrawerTile(
+            const ExpansionTileDrawer(
               image: "assets/skate.png",
               text: "Skate",
+              category: "skate",
             ),
-            const DrawerTile(
+            const ExpansionTileDrawer(
               image: "assets/andando.png",
               text: "Caminhada",
-            ),
-            const DrawerTile(
+              category: "walk",
+            ),            
+            const ExpansionTileDrawer(
               image: "assets/volei.png",
               text: "Volei",
+              category: "volleyball",
             ),
           ],
         )
