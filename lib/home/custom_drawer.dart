@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_store/home/widget/Expansion_tile.dart';
 import 'package:shoes_store/home/widget/drawer_tile.dart';
 import 'package:shoes_store/products-screen/products_screen.dart';
 
@@ -47,6 +48,7 @@ class CustomDrawer extends StatelessWidget {
                 ],
               ),
             ),
+            ExpansionTileDrawer(),
             ExpansionTile(
               expandedAlignment: Alignment.center,
               title: const DrawerTile(
