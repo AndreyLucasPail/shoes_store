@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: ProductsTile(brand: "Nike", category: "basketball",),
+                child: ProductsTile(brand: "adidas", category: "basketball",),
               ),
               AdsTile(
                 image: "assets/curry.jpg",
