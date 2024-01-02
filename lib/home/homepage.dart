@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const Padding(
                 padding: EdgeInsets.all(8.0),
-                child: ProductsTile(),
+                child: ProductsTile(brand: "Nike", category: "basketball",),
               ),
               AdsTile(
                 image: "assets/curry.jpg",
@@ -50,6 +50,10 @@ class _HomePageState extends State<HomePage> {
                 image: "assets/jordan3.jpg",
                 width: MediaQuery.of(context).size.width,
                 height: 450,
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: ProductsTile(category: "run", brand: "Nike",),
               ),
               AdsTile(
                 image: "assets/nike4.png",

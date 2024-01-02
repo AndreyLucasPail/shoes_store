@@ -13,6 +13,9 @@ class ProductsTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(2),
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
         elevation: 5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,7 +48,7 @@ class ProductsTile extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(2.0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
               child: Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(

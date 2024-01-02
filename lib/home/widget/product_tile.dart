@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:shoes_store/data/produtcs_data.dart';
 
 class ProductsTile extends StatelessWidget {
-  const ProductsTile({super.key,});
+  const ProductsTile({super.key, this.category, this.brand,});
+
+  final String? category;
+  final String? brand;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection("products").doc("basketball").collection("shoes").doc("Nike")
+      stream: FirebaseFirestore.instance.collection("products").doc(category).collection("shoes").doc(brand)
         .collection("model").snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if(!snapshot.hasData && snapshot.data == null){
