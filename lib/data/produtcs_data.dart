@@ -7,10 +7,12 @@ class ProductsData{
     this.images,
     this.name,
     this.price,
-    this.sizes
+    this.sizes,
+    this.description,
   });
 
   String? name;
+  String? description;
   String? brandId;
   String? id;
   double? price;
@@ -24,6 +26,7 @@ class ProductsData{
       id : data["id"],
       name : data["name"],
       price : data["price"],
+      description: data["description"],
       images : data["img"] is Iterable ? List<String>.from(data["img"]) : null,
       sizes : data["size"] is Iterable ? List<String>.from(data["size"]) : null,
     );
