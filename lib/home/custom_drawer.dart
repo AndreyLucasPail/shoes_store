@@ -34,7 +34,7 @@ class CustomDrawer extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {},
                       child: const Text(
-                        "Entre ou Cadastre-se",
+                        "Entre ou Cadastre-se >",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,

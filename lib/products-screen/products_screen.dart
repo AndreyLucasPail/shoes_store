@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/data/produtcs_data.dart';
+import 'package:shoes_store/home/custom_drawer.dart';
 import 'package:shoes_store/home/homepage.dart';
 import 'package:shoes_store/products-screen/widgets/products_tile.dart';
 
@@ -25,6 +26,7 @@ class ProductsScreen extends StatelessWidget {
           child: const Text("SNKRS"),
         ),
       ),
+      drawer: const CustomDrawer(),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection("products").doc(category).
           collection("shoes").doc(brand).collection("model").snapshots(), 
@@ -40,11 +42,11 @@ class ProductsScreen extends StatelessWidget {
 
             return GridView.builder(
               itemCount: productsList.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), 
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.8), 
               itemBuilder: (context, index){
-
+            
                 ProductsData productsData = productsList[index];
-
+            
                 return ProductsTile(products: productsData,);
               }
             );

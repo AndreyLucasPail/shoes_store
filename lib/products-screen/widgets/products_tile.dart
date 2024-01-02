@@ -12,36 +12,53 @@ class ProductsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(2),
-      child: SizedBox(
-        height: 300,
-        child: Card(
-          elevation: 5,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  height: 150,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(products!.images![0]),
-                      fit: BoxFit.cover
-                    ),
+      child: Card(
+        elevation: 5,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                height: 150,
+                width: 200,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(products!.images![0]),
+                    fit: BoxFit.cover
                   ),
                 ),
               ),
-              Align(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: Align(
                 alignment: Alignment.center,
-                child: Text("${products!.name}")
+                child: Text(
+                  "${products!.name}",
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
               ),
-              Align(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: Align(
                 alignment: Alignment.bottomLeft,
-                child: Text("R\$ ${products!.price}")
-              )
-            ],
-          ),
+                child: Text(
+                  "R\$ ${products!.price}",
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    letterSpacing: 1,
+                  ),
+                )
+              ),
+            )
+          ],
         ),
       ),
     );
