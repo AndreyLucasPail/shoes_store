@@ -138,9 +138,17 @@ class _ProductTabState extends State<ProductTab> {
                   ),
                 ),
                 const SizedBox(height: 8,),
-                Text(
-                  "${product!.description}"
-                ),                
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "${product!.description}",
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30,),                
               ],
             ),
           ),
