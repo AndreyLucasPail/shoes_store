@@ -107,7 +107,7 @@ class _ProductTabState extends State<ProductTab> {
                     }).toList(),
                   ),
                 ),
-                const SizedBox(height: 16,),
+                const SizedBox(height: 34,),
                 SizedBox(
                   height: 50,
                   width: 300,
@@ -126,7 +126,7 @@ class _ProductTabState extends State<ProductTab> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16,),
+                const SizedBox(height: 34,),
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(

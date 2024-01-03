@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_store/home/singin_screen.dart';
 import 'package:shoes_store/home/widget/Expansion_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -32,7 +33,11 @@ class CustomDrawer extends StatelessWidget {
                     left: 20,
                     bottom: 2.0,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => const SingIn())
+                        );
+                      },
                       child: const Text(
                         "Entre ou Cadastre-se >",
                         style: TextStyle(
