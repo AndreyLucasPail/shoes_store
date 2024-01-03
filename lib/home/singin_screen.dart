@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_store/home/singup_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
 class SingIn extends StatefulWidget {
@@ -16,6 +17,7 @@ class _SingInState extends State<SingIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: const Text(
@@ -27,7 +29,7 @@ class _SingInState extends State<SingIn> {
       body: Container(
         alignment: Alignment.center,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.fromLTRB(8, 30, 8, 10),
           child: Column(
             children: [
               SizedBox(
@@ -43,6 +45,7 @@ class _SingInState extends State<SingIn> {
                 keyboardType: TextInputType.emailAddress,
                 obscureText: false,
                 controller: emailController,
+                prefix: const Icon(Icons.person),
               ),
               const SizedBox(height: 16,),
               const Align(
@@ -53,6 +56,7 @@ class _SingInState extends State<SingIn> {
                 keyboardType: TextInputType.multiline,
                 obscureText: false,
                 controller: passwordController,
+                prefix: const Icon(Icons.lock),
               ),
               const SizedBox(height: 30),
               SizedBox(
@@ -82,7 +86,11 @@ class _SingInState extends State<SingIn> {
                     backgroundColor: const Color.fromARGB(255, 38, 24, 94),
                     shape: const StadiumBorder()
                   ),
-                  onPressed: (){}, 
+                  onPressed: (){
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const SingUp())
+                    );
+                  }, 
                   child: const Text(
                     "Criar Conta",
                     style: TextStyle(
