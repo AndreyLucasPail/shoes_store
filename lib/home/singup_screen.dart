@@ -23,6 +23,12 @@ class _SingUpState extends State<SingUp> {
   final confirmPasswordController = TextEditingController();
 
   @override
+  void dispose() {
+    super.dispose();
+    userBloc.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[200],

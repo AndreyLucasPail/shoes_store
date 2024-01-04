@@ -8,12 +8,14 @@ class UserBloc extends BlocBase{
 
   final nameController = BehaviorSubject<String>();
   final emailController = BehaviorSubject<String>();
+  final passwordController = BehaviorSubject<String>();
   final addressController = BehaviorSubject<String>();
   final birthdayController = BehaviorSubject<String>();
   final cepController = BehaviorSubject<String>();
 
   Stream<String> get outName => nameController.stream;
   Stream<String> get outEmail => emailController.stream;
+  Stream<String> get outpass => passwordController.stream;
   Stream<String> get outAddress => addressController.stream;
   Stream<String> get outBirthday => birthdayController.stream;
   Stream<String> get outCep => cepController.stream;
@@ -39,5 +41,16 @@ class UserBloc extends BlocBase{
       email: userData["email"], 
       password: password
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.close();
+    emailController.close();
+    passwordController.close();
+    addressController.close();
+    birthdayController.close();
+    cepController.close();
   }
 }
