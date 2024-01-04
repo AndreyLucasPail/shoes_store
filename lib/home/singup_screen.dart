@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/home/singin_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
@@ -10,6 +11,8 @@ class SingUp extends StatefulWidget {
 }
 
 class _SingUpState extends State<SingUp> {
+  
+  final UserBloc userBloc = UserBloc();
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -175,7 +178,14 @@ class _SingUpState extends State<SingUp> {
                   width: 300,
                   child: ElevatedButton(
                     onPressed: () {
-                      
+                      userBloc.saveUser(
+                        nameController.text, 
+                        passwordController.text, 
+                        emailController.text, 
+                        cepController.text, 
+                        birthdayController.text, 
+                        addressController.text,
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       shape: const StadiumBorder(),
