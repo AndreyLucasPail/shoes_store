@@ -13,27 +13,30 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      cursorColor: Colors.black,
-      validator: validetor,
-      obscureText: obscureText!,
-      controller: controller,
-      keyboardType: keyboardType,
-      decoration: InputDecoration(
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color.fromARGB(255, 38, 24, 94),
-            width: 2,
-          )
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 2, 0, 8),
+      child: TextFormField(
+        cursorColor: Colors.black,
+        validator: validetor,
+        obscureText: obscureText!,
+        controller: controller,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Color.fromARGB(255, 38, 24, 94),
+              width: 2,
+            )
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Color.fromARGB(255, 38, 24, 94),
+              width: 2,
+            ), 
+          ),
+          prefixIcon: prefix!,
+          prefixIconColor: const Color.fromARGB(255, 38, 24, 94),
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Color.fromARGB(255, 38, 24, 94),
-            width: 2,
-          ), 
-        ),
-        prefixIcon: prefix!,
-        prefixIconColor: const Color.fromARGB(255, 38, 24, 94),
       ),
     );
   }

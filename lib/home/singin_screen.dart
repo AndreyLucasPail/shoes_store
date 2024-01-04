@@ -47,7 +47,7 @@ class _SingInState extends State<SingIn> {
                 controller: emailController,
                 prefix: const Icon(Icons.person),
               ),
-              const SizedBox(height: 16,),
+              const SizedBox(height: 8,),
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Text("Senha:")

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_store/home/singin_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
 class SingUp extends StatefulWidget {
@@ -32,7 +33,7 @@ class _SingUpState extends State<SingUp> {
         child: Container(
           alignment: Alignment.center,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(8, 20, 8, 10),
+            padding: const EdgeInsets.fromLTRB(8, 40, 8, 20),
             child: Column(
               children: [
                 SizedBox(
@@ -123,6 +124,22 @@ class _SingUpState extends State<SingUp> {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
+                    "Endereço:",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                CustomTextField(
+                  controller: cepController,
+                  keyboardType: TextInputType.streetAddress,
+                  obscureText: false,
+                  prefix: const Icon(Icons.house),
+                ),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
                     "Data de Nascimento:",
                     style: TextStyle(
                       fontSize: 15,
@@ -136,6 +153,23 @@ class _SingUpState extends State<SingUp> {
                   obscureText: false,
                   prefix: const Icon(Icons.cake),
                 ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: TextButton(
+                    onPressed: (){
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => const SingIn())
+                      );
+                    }, 
+                    child: const Text(
+                      "Já tem uma conta? Entrar",
+                      style: TextStyle(
+                        color: Colors.black
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 10,),
                 SizedBox(
                   height: 50,
                   width: 300,
