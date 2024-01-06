@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/bloc/singup_bloc.dart';
 import 'package:shoes_store/home/singin_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
@@ -12,7 +12,7 @@ class SingUp extends StatefulWidget {
 
 class _SingUpState extends State<SingUp> {
   
-  final UserBloc userBloc = UserBloc();
+  final SingUpBloc userBloc = SingUpBloc();
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();

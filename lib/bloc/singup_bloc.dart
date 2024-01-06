@@ -2,9 +2,10 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:shoes_store/bloc/validators/singup_validator.dart';
 
 
-class UserBloc extends BlocBase{
+class SingUpBloc extends BlocBase with SingUpValidator{
 
   final nameController = BehaviorSubject<String>();
   final emailController = BehaviorSubject<String>();
@@ -14,11 +15,11 @@ class UserBloc extends BlocBase{
   final cepController = BehaviorSubject<String>();
 
   Stream<String> get outName => nameController.stream;
-  Stream<String> get outEmail => emailController.stream;
-  Stream<String> get outpass => passwordController.stream;
+  Stream<String> get outEmail => emailController.stream.transform(validateEmail);
+  Stream<String> get outpass => passwordController.stream.transform(validatePassword);
   Stream<String> get outAddress => addressController.stream;
   Stream<String> get outBirthday => birthdayController.stream;
-  Stream<String> get outCep => cepController.stream;
+  Stream<String> get outCep => cepController.stream.transform(cepValidator);
 
   User? firebaseUser;
   Map<String, dynamic> userData = {};
