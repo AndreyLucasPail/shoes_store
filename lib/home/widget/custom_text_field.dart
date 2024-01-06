@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({super.key, this.controller, this.keyboardType, this.obscureText,
-   this.prefix, this.validetor,this.stream});
+   this.prefix, this.onChanged,this.stream});
 
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final bool? obscureText;
   final Widget? prefix;
-  final String Function(String?)? validetor;
+  final Function(String)? onChanged;
   final Stream<String>? stream;
 
 
@@ -21,7 +21,7 @@ class CustomTextField extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(0, 2, 0, 8),
           child: TextFormField(
             cursorColor: Colors.black,
-            validator: validetor,
+            onChanged: onChanged,
             obscureText: obscureText!,
             controller: controller,
             keyboardType: keyboardType,
@@ -40,7 +40,8 @@ class CustomTextField extends StatelessWidget {
               ),
               errorBorder: const OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.red
+                  color: Colors.red,
+                  width: 2
                 ),
               ),
               prefixIcon: prefix!,

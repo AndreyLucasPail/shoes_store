@@ -14,7 +14,7 @@ mixin class SingUpValidator {
 
   final validatePassword = StreamTransformer<String, String>.fromHandlers(
     handleData: (pass, sink) {
-      if(pass.length < 6){
+      if(pass.length >= 6){
         sink.add(pass);
       }else{
         sink.addError("Senha inválida");
@@ -24,17 +24,17 @@ mixin class SingUpValidator {
 
   final cepValidator = StreamTransformer<String, String>.fromHandlers(
     handleData: (cep, sink) {
-      if(cep.length <= 6){
+      if(cep.length <= 8){
         sink.add(cep);
       }else{
-        sink.addError("O CEP deve conter 6 digitos");
+        sink.addError("O CEP deve conter 8 digitos");
       }
     },
   );
 
   final nameValidator = StreamTransformer<String, String>.fromHandlers(
     handleData: (name, sink) {
-      if(name.isEmpty){
+      if(name.isNotEmpty){
         sink.add(name);
       }else{
         sink.addError("Campo não pode star vázio");
@@ -44,7 +44,7 @@ mixin class SingUpValidator {
 
   final addressValidator = StreamTransformer<String, String>.fromHandlers(
     handleData: (address, sink) {
-      if(address.isEmpty){
+      if(address.isNotEmpty){
         sink.add(address);
       }else{
         sink.addError("Campo não pode star vázio");
@@ -54,7 +54,7 @@ mixin class SingUpValidator {
 
   final birthdayValidator = StreamTransformer<String, String>.fromHandlers(
     handleData: (birthday, sink) {
-      if(birthday.isEmpty){
+      if(birthday.isNotEmpty){
         sink.add(birthday);
       }else{
         sink.addError("Campo não pode star vázio");

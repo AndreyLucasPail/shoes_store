@@ -67,6 +67,7 @@ class _SingUpState extends State<SingUp> {
                   obscureText: false,
                   prefix: const Icon(Icons.person),
                   stream: singupBloc.outName,
+                  onChanged: singupBloc.changeName,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -84,6 +85,7 @@ class _SingUpState extends State<SingUp> {
                   obscureText: false,
                   prefix: const Icon(Icons.person),
                   stream: singupBloc.outEmail,
+                  onChanged: singupBloc.changeEmail,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -101,6 +103,7 @@ class _SingUpState extends State<SingUp> {
                   obscureText: true,
                   prefix: const Icon(Icons.lock),
                   stream: singupBloc.outpass,
+                  onChanged: singupBloc.changePass,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -134,6 +137,7 @@ class _SingUpState extends State<SingUp> {
                   obscureText: false,
                   prefix: const Icon(Icons.house),
                   stream: singupBloc.outCep,
+                  onChanged: singupBloc.changeCep,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -151,6 +155,7 @@ class _SingUpState extends State<SingUp> {
                   obscureText: false,
                   prefix: const Icon(Icons.house),
                   stream: singupBloc.outAddress,
+                  onChanged: singupBloc.changeAddres,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -168,6 +173,7 @@ class _SingUpState extends State<SingUp> {
                   obscureText: false,
                   prefix: const Icon(Icons.cake),
                   stream: singupBloc.outBirthday,
+                  onChanged: singupBloc.changeBirthday,
                 ),
                 Align(
                   alignment: Alignment.bottomRight,

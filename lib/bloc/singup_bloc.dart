@@ -50,6 +50,13 @@ class SingUpBloc extends BlocBase with SingUpValidator{
     (a, b, c, d, e, f) => true
     );
 
+  Function(String)? get changeName => nameController.sink.add;
+  Function(String)? get changeEmail => emailController.sink.add;
+  Function(String)? get changePass => passwordController.sink.add;
+  Function(String)? get changeAddres => addressController.sink.add;
+  Function(String)? get changeBirthday => birthdayController.sink.add;
+  Function(String)? get changeCep => cepController.sink.add;
+  
   @override
   void dispose() {
     super.dispose();
