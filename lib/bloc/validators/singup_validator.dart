@@ -31,4 +31,34 @@ mixin class SingUpValidator {
       }
     },
   );
+
+  final nameValidator = StreamTransformer<String, String>.fromHandlers(
+    handleData: (name, sink) {
+      if(name.isEmpty){
+        sink.add(name);
+      }else{
+        sink.addError("Campo não pode star vázio");
+      }
+    },
+  );
+
+  final addressValidator = StreamTransformer<String, String>.fromHandlers(
+    handleData: (address, sink) {
+      if(address.isEmpty){
+        sink.add(address);
+      }else{
+        sink.addError("Campo não pode star vázio");
+      }
+    },
+  );
+
+  final birthdayValidator = StreamTransformer<String, String>.fromHandlers(
+    handleData: (birthday, sink) {
+      if(birthday.isEmpty){
+        sink.add(birthday);
+      }else{
+        sink.addError("Campo não pode star vázio");
+      }
+    },
+  );
 }

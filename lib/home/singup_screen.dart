@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/singup_bloc.dart';
+import 'package:shoes_store/home/homepage.dart';
 import 'package:shoes_store/home/singin_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
@@ -12,7 +13,7 @@ class SingUp extends StatefulWidget {
 
 class _SingUpState extends State<SingUp> {
   
-  final SingUpBloc userBloc = SingUpBloc();
+  final SingUpBloc singupBloc = SingUpBloc();
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -25,7 +26,7 @@ class _SingUpState extends State<SingUp> {
   @override
   void dispose() {
     super.dispose();
-    userBloc.dispose();
+    singupBloc.dispose();
   }
 
   @override
@@ -65,6 +66,7 @@ class _SingUpState extends State<SingUp> {
                   keyboardType: TextInputType.name,
                   obscureText: false,
                   prefix: const Icon(Icons.person),
+                  stream: singupBloc.outName,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -81,6 +83,7 @@ class _SingUpState extends State<SingUp> {
                   keyboardType: TextInputType.emailAddress,
                   obscureText: false,
                   prefix: const Icon(Icons.person),
+                  stream: singupBloc.outEmail,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -95,8 +98,9 @@ class _SingUpState extends State<SingUp> {
                 CustomTextField(
                   controller: passwordController,
                   keyboardType: TextInputType.multiline,
-                  obscureText: false,
+                  obscureText: true,
                   prefix: const Icon(Icons.lock),
+                  stream: singupBloc.outpass,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -111,7 +115,7 @@ class _SingUpState extends State<SingUp> {
                 CustomTextField(
                   controller: confirmPasswordController,
                   keyboardType: TextInputType.multiline,
-                  obscureText: false,
+                  obscureText: true,
                   prefix: const Icon(Icons.lock),
                 ),
                 const Align(
@@ -129,6 +133,7 @@ class _SingUpState extends State<SingUp> {
                   keyboardType: TextInputType.number,
                   obscureText: false,
                   prefix: const Icon(Icons.house),
+                  stream: singupBloc.outCep,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -141,10 +146,11 @@ class _SingUpState extends State<SingUp> {
                   ),
                 ),
                 CustomTextField(
-                  controller: cepController,
+                  controller: addressController,
                   keyboardType: TextInputType.streetAddress,
                   obscureText: false,
                   prefix: const Icon(Icons.house),
+                  stream: singupBloc.outAddress,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -157,10 +163,11 @@ class _SingUpState extends State<SingUp> {
                   ),
                 ),
                 CustomTextField(
-                  controller: cepController,
+                  controller: birthdayController,
                   keyboardType: TextInputType.datetime,
                   obscureText: false,
                   prefix: const Icon(Icons.cake),
+                  stream: singupBloc.outBirthday,
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -182,33 +189,71 @@ class _SingUpState extends State<SingUp> {
                 SizedBox(
                   height: 50,
                   width: 300,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      userBloc.saveUser(
-                        nameController.text, 
-                        passwordController.text, 
-                        emailController.text, 
-                        cepController.text, 
-                        birthdayController.text, 
-                        addressController.text,
+                  child: StreamBuilder<bool>(
+                    stream: singupBloc.submitedValid(),
+                    builder: (context, snapshot) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          Map<String, dynamic> userData ={
+                            "name": nameController.text, 
+                            "password": passwordController.text, 
+                            "email": emailController.text, 
+                            "CEP": cepController.text, 
+                            "birthday": birthdayController.text, 
+                            "adress": addressController.text,
+                          };
+                  
+                          singupBloc.singUp(
+                            userData: userData,
+                            firebaseUser: nameController.text, 
+                            password: passwordController.text,
+                            onSuccess: onSuccess,
+                            onFail: onFail,
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: const StadiumBorder(),
+                          backgroundColor: const Color.fromARGB(255, 38, 24, 94),
+                        ),
+                        child: const Text(
+                          "Finalizar Cadastro",
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
                       );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: const StadiumBorder(),
-                      backgroundColor: const Color.fromARGB(255, 38, 24, 94),
-                    ),
-                    child: const Text(
-                      "Finalizar Cadastro",
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
+                    }
                   ),
                 )
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void onSuccess(){
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Usuário criado com sucesso!"),
+        duration: Duration(seconds: 1),
+        backgroundColor: Color.fromARGB(255, 38, 24, 94),
+      ),
+    );
+    Future.delayed(const Duration(seconds: 1)).then((value) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const HomePage())
+      );
+    });
+  }
+
+  void onFail(){
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Erro ao criar Usuário!"),
+        backgroundColor: Colors.red,
+        duration: Duration(seconds: 2),
       ),
     );
   }
