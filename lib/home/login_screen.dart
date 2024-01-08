@@ -106,4 +106,20 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+  void onSuccess(){
+    Navigator.of(context).pop();
+  }
+
+  void onFail(){
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(
+          "Erro ao entrar!!",
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+    );
+  }
 }
