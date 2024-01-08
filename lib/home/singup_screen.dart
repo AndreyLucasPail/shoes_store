@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/singup_bloc.dart';
 import 'package:shoes_store/home/homepage.dart';
-import 'package:shoes_store/home/singin_screen.dart';
+import 'package:shoes_store/home/login_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
 class SingUp extends StatefulWidget {
@@ -180,7 +180,7 @@ class _SingUpState extends State<SingUp> {
                   child: TextButton(
                     onPressed: (){
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => const SingIn())
+                        MaterialPageRoute(builder: (context) => const LoginScreen())
                       );
                     }, 
                     child: const Text(
@@ -202,7 +202,6 @@ class _SingUpState extends State<SingUp> {
                         onPressed: () {
                           Map<String, dynamic> userData ={
                             "name": nameController.text, 
-                            "password": passwordController.text, 
                             "email": emailController.text, 
                             "CEP": cepController.text, 
                             "birthday": birthdayController.text, 

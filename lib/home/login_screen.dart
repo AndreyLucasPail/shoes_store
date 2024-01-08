@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:shoes_store/home/singup_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
-class SingIn extends StatefulWidget {
-  const SingIn({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<SingIn> createState() => _SingInState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SingInState extends State<SingIn> {
+class _LoginScreenState extends State<LoginScreen> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();

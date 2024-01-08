@@ -19,6 +19,60 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 38, 24, 94),
         title: const Text("SNKRS"),
+        actions: [
+          PopupMenuButton(
+            shape: ContinuousRectangleBorder(
+              borderRadius: BorderRadius.circular(20)
+            ),
+            icon: const Icon(Icons.person_2_rounded),
+            itemBuilder: (context) => <PopupMenuEntry>[
+              PopupMenuItem(
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Perfil",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              ),
+              PopupMenuItem(
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Meus Pedidos",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              ),
+              PopupMenuItem(
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Carrinho",
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              ),
+              PopupMenuItem(
+                child: TextButton(
+                  onPressed: (){},
+                  child: Text(
+                    "Sair",
+                    style: TextStyle(
+                      color: Colors.black
+                    ),
+                  ),
+                )
+              ),
+            ]
+          ),
+        ],
         centerTitle: true,
       ),
       drawer: const CustomDrawer(),

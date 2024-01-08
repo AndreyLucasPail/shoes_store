@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes_store/home/singin_screen.dart';
+import 'package:shoes_store/home/login_screen.dart';
 import 'package:shoes_store/home/widget/Expansion_tile.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -35,7 +35,7 @@ class CustomDrawer extends StatelessWidget {
                     child: TextButton(
                       onPressed: () {
                         Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const SingIn())
+                          MaterialPageRoute(builder: (context) => const LoginScreen())
                         );
                       },
                       child: const Text(
