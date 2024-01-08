@@ -1,6 +1,6 @@
 import 'dart:async';
 
-mixin class SingUpValidator {
+mixin class Validator {
   
   final validateEmail = StreamTransformer<String, String>.fromHandlers(
     handleData: (email, sink) {

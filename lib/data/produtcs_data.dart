@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductsData{
   ProductsData({
-    this.brandId,
     this.id,
     this.images,
     this.name,

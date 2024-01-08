@@ -2,11 +2,11 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shoes_store/bloc/validators/singup_validator.dart';
+import 'package:shoes_store/bloc/validators/validator.dart';
 import 'package:rxdart/rxdart.dart';
 
 
-class SingUpBloc extends BlocBase with SingUpValidator{
+class SingUpBloc extends BlocBase with Validator{
 
   final nameController = BehaviorSubject<String>();
   final emailController = BehaviorSubject<String>();
@@ -40,7 +40,6 @@ class SingUpBloc extends BlocBase with SingUpValidator{
       await saveUser(userData, firebaseUser);
       onSuccess();
     }).catchError((e){
-      print("Erro: $e");
       onFail();
     });
   }
