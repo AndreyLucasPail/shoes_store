@@ -6,7 +6,7 @@ import 'package:shoes_store/bloc/validators/validator.dart';
 import 'package:rxdart/rxdart.dart';
 
 
-class SingUpBloc extends BlocBase with Validator{
+class UserBloc extends BlocBase with Validator{
 
   final nameController = BehaviorSubject<String>();
   final emailController = BehaviorSubject<String>();
@@ -22,22 +22,25 @@ class SingUpBloc extends BlocBase with Validator{
   Stream<String> get outBirthday => birthdayController.stream.transform(birthdayValidator);
   Stream<String> get outCep => cepController.stream.transform(cepValidator);
 
-  String? firebaseUser;
+  String? firebaseUserId;
   Map<String, dynamic> userData = {};
   FirebaseAuth auth = FirebaseAuth.instance;
+  User? firebaseUser;
+  FirebaseFirestore firebase = FirebaseFirestore.instance;
 
-  Future<void> saveUser(Map<String, dynamic> userData, String firebaseUser) async {
+  Future<void> saveUser(Map<String, dynamic> userData, User? firebaseUser) async {
     this.userData = userData;
-    await FirebaseFirestore.instance.collection("Users").doc(firebaseUser).set(userData);
+    await firebase.collection("Users").doc(firebaseUser!.uid).set(userData);
   }
 
-  void singUp({required Map<String, dynamic> userData, required firebaseUser, required String password, 
+  void singUp({required Map<String, dynamic> userData,required String password, 
     required VoidCallback onSuccess, required VoidCallback onFail}){
     auth.createUserWithEmailAndPassword(
       email: userData["email"], 
       password: password,
     ).then((user) async {
-      await saveUser(userData, firebaseUser);
+      firebaseUser = user.user;
+      await saveUser(userData, firebaseUser!);
       onSuccess();
     }).catchError((e){
       onFail();
@@ -55,6 +58,32 @@ class SingUpBloc extends BlocBase with Validator{
   Function(String)? get changeAddres => addressController.sink.add;
   Function(String)? get changeBirthday => birthdayController.sink.add;
   Function(String)? get changeCep => cepController.sink.add;
+
+  void login(VoidCallback onSuccess, VoidCallback onFail){
+    auth.signInWithEmailAndPassword(
+      email: emailController.value, password: passwordController.value,
+    ).then((user){
+
+      firebaseUser = user.user;
+      onSuccess();
+
+    }).catchError((e){
+      
+      onFail();
+
+    });
+  }
+
+  Future<void> loadCurrentUser() async {
+    firebaseUser ??= auth.currentUser;
+
+    if(firebaseUser != null){
+      if(userData["name"] == null){
+        DocumentSnapshot docUser = await firebase.collection("Users").doc(firebaseUser!.uid).get();
+        userData = docUser.data() as Map<String, dynamic>;
+      }
+    }
+  }
   
   @override
   void dispose() {

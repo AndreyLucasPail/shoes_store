@@ -2,7 +2,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:shoes_store/data/produtcs_data.dart';
+import 'package:shoes_store/model/produtc_model.dart';
 
 class ProductTab extends StatefulWidget {
   const ProductTab({super.key, required this.product});

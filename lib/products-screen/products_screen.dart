@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shoes_store/data/produtcs_data.dart';
+import 'package:shoes_store/model/produtc_model.dart';
 import 'package:shoes_store/home/custom_drawer.dart';
 import 'package:shoes_store/home/homepage.dart';
 import 'package:shoes_store/products-screen/widgets/products_tile.dart';

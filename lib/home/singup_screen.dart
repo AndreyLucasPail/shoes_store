@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes_store/bloc/singup_bloc.dart';
+import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/home/homepage.dart';
 import 'package:shoes_store/home/login_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
@@ -13,7 +13,7 @@ class SingUp extends StatefulWidget {
 
 class _SingUpState extends State<SingUp> {
   
-  final SingUpBloc singupBloc = SingUpBloc();
+  final UserBloc userBloc = UserBloc();
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -26,7 +26,7 @@ class _SingUpState extends State<SingUp> {
   @override
   void dispose() {
     super.dispose();
-    singupBloc.dispose();
+    userBloc.dispose();
   }
 
   @override
@@ -66,8 +66,8 @@ class _SingUpState extends State<SingUp> {
                   keyboardType: TextInputType.name,
                   obscureText: false,
                   prefix: const Icon(Icons.person),
-                  stream: singupBloc.outName,
-                  onChanged: singupBloc.changeName,
+                  stream: userBloc.outName,
+                  onChanged: userBloc.changeName,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -84,8 +84,8 @@ class _SingUpState extends State<SingUp> {
                   keyboardType: TextInputType.emailAddress,
                   obscureText: false,
                   prefix: const Icon(Icons.person),
-                  stream: singupBloc.outEmail,
-                  onChanged: singupBloc.changeEmail,
+                  stream: userBloc.outEmail,
+                  onChanged: userBloc.changeEmail,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -102,8 +102,8 @@ class _SingUpState extends State<SingUp> {
                   keyboardType: TextInputType.multiline,
                   obscureText: true,
                   prefix: const Icon(Icons.lock),
-                  stream: singupBloc.outpass,
-                  onChanged: singupBloc.changePass,
+                  stream: userBloc.outpass,
+                  onChanged: userBloc.changePass,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -136,8 +136,8 @@ class _SingUpState extends State<SingUp> {
                   keyboardType: TextInputType.number,
                   obscureText: false,
                   prefix: const Icon(Icons.house),
-                  stream: singupBloc.outCep,
-                  onChanged: singupBloc.changeCep,
+                  stream: userBloc.outCep,
+                  onChanged: userBloc.changeCep,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -154,8 +154,8 @@ class _SingUpState extends State<SingUp> {
                   keyboardType: TextInputType.streetAddress,
                   obscureText: false,
                   prefix: const Icon(Icons.house),
-                  stream: singupBloc.outAddress,
-                  onChanged: singupBloc.changeAddres,
+                  stream: userBloc.outAddress,
+                  onChanged: userBloc.changeAddres,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -172,8 +172,8 @@ class _SingUpState extends State<SingUp> {
                   keyboardType: TextInputType.datetime,
                   obscureText: false,
                   prefix: const Icon(Icons.cake),
-                  stream: singupBloc.outBirthday,
-                  onChanged: singupBloc.changeBirthday,
+                  stream: userBloc.outBirthday,
+                  onChanged: userBloc.changeBirthday,
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -196,7 +196,7 @@ class _SingUpState extends State<SingUp> {
                   height: 50,
                   width: 300,
                   child: StreamBuilder<bool>(
-                    stream: singupBloc.submitedValid(),
+                    stream: userBloc.submitedValid(),
                     builder: (context, snapshot) {
                       return ElevatedButton(
                         onPressed: () {
@@ -208,9 +208,8 @@ class _SingUpState extends State<SingUp> {
                             "adress": addressController.text,
                           };
                   
-                          singupBloc.singUp(
+                          userBloc.singUp(
                             userData: userData,
-                            firebaseUser: nameController.text, 
                             password: passwordController.text,
                             onSuccess: onSuccess,
                             onFail: onFail,

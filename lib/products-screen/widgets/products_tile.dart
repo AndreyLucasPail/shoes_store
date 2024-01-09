@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes_store/data/produtcs_data.dart';
+import 'package:shoes_store/model/produtc_model.dart';
 import 'package:shoes_store/products-screen/widgets/product_tab.dart';
 
 class ProductsTile extends StatelessWidget {

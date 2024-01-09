@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
               PopupMenuItem(
                 child: TextButton(
                   onPressed: (){},
-                  child: Text(
+                  child: const Text(
                     "Sair",
                     style: TextStyle(
                       color: Colors.black
