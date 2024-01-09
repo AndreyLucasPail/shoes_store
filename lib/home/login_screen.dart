@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/home/singup_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
@@ -11,8 +12,18 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 
+  UserBloc userBloc = UserBloc();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    userBloc.dispose();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               CustomTextField(
                 keyboardType: TextInputType.multiline,
-                obscureText: false,
+                obscureText: true,
                 controller: passwordController,
                 prefix: const Icon(Icons.lock),
               ),
@@ -62,19 +73,32 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: 50,
                 width: 300,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 38, 24, 94),
-                    shape: const StadiumBorder()
-                  ),
-                  onPressed: () {}, 
-                  child: const Text(
-                    "Entrar",
-                    style: TextStyle(
-                      fontSize: 18,
-                      letterSpacing: 1,
-                    ),
-                  ),
+                child: StreamBuilder<Object>(
+                  stream: userBloc.submitedValid(),
+                  builder: (context, snapshot) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 38, 24, 94),
+                        shape: const StadiumBorder()
+                      ),
+                      onPressed: () {
+                        userBloc.login(
+                          emailController.text,
+                          passwordController.text,
+                          onSuccess,
+                          onFail,
+                        );
+                        print(userBloc.userData["name"]);
+                      }, 
+                      child: const Text(
+                        "Entrar",
+                        style: TextStyle(
+                          fontSize: 18,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    );
+                  }
                 ),
               ),
               const SizedBox(height: 8,),
@@ -108,6 +132,13 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void onSuccess(){
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Color.fromARGB(255, 38, 24, 94),
+        content: Text("Usuário logado com sucesso"),
+      )
+    );
+
     Navigator.of(context).pop();
   }
 

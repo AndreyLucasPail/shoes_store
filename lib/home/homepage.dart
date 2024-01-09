@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/home/widget/ads_tile.dart';
 import 'package:shoes_store/home/custom_drawer.dart';
 import 'package:shoes_store/home/widget/product_tile.dart';
@@ -11,6 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  UserBloc userBloc = UserBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +64,9 @@ class _HomePageState extends State<HomePage> {
               ),
               PopupMenuItem(
                 child: TextButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    userBloc.singOut();
+                  },
                   child: const Text(
                     "Sair",
                     style: TextStyle(

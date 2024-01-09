@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/home/login_screen.dart';
 import 'package:shoes_store/home/widget/Expansion_tile.dart';
 
-class CustomDrawer extends StatelessWidget {
+class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
+
+  @override
+  State<CustomDrawer> createState() => _CustomDrawerState();
+}
+
+class _CustomDrawerState extends State<CustomDrawer> {
+ 
+  UserBloc userBloc = UserBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +41,8 @@ class CustomDrawer extends StatelessWidget {
                   Positioned(
                     left: 20,
                     bottom: 2.0,
-                    child: TextButton(
+                    child: userBloc.isLoggedIn() ? Text("Bem Vindo,\n ${userBloc.loadCurrentUser()}") :
+                    TextButton(
                       onPressed: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => const LoginScreen())

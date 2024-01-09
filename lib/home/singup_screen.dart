@@ -196,7 +196,7 @@ class _SingUpState extends State<SingUp> {
                   height: 50,
                   width: 300,
                   child: StreamBuilder<bool>(
-                    stream: userBloc.submitedValid(),
+                    stream: userBloc.submitedValidSingUp(),
                     builder: (context, snapshot) {
                       return ElevatedButton(
                         onPressed: () {

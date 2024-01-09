@@ -47,10 +47,14 @@ class UserBloc extends BlocBase with Validator{
     });
   }
 
-  Stream<bool> submitedValid() => Rx.combineLatest6(
+  Stream<bool> submitedValidSingUp() => Rx.combineLatest6(
     outName, outEmail, outpass, outAddress, outBirthday, outCep, 
     (a, b, c, d, e, f) => true
-    );
+  );
+
+  Stream<bool> submitedValid() => Rx.combineLatest2(
+    outEmail, outpass, (a, b) => true
+  );
 
   Function(String)? get changeName => nameController.sink.add;
   Function(String)? get changeEmail => emailController.sink.add;
@@ -59,9 +63,9 @@ class UserBloc extends BlocBase with Validator{
   Function(String)? get changeBirthday => birthdayController.sink.add;
   Function(String)? get changeCep => cepController.sink.add;
 
-  void login(VoidCallback onSuccess, VoidCallback onFail){
+  void login(String email, String password, VoidCallback onSuccess, VoidCallback onFail){
     auth.signInWithEmailAndPassword(
-      email: emailController.value, password: passwordController.value,
+      email: email, password: password,
     ).then((user){
 
       firebaseUser = user.user;
@@ -74,7 +78,22 @@ class UserBloc extends BlocBase with Validator{
     });
   }
 
-  Future<void> loadCurrentUser() async {
+  void singOut() async {
+    await auth.signOut();
+
+    userData = <String, dynamic>{};
+    firebaseUser = null;
+  }
+
+  void recoverPass(String email) {
+    auth.sendPasswordResetEmail(email: email);
+  }
+
+  bool isLoggedIn(){
+    return firebaseUser != null;
+  }
+
+  Future<Map<String, dynamic>> loadCurrentUser() async {
     firebaseUser ??= auth.currentUser;
 
     if(firebaseUser != null){
@@ -83,6 +102,7 @@ class UserBloc extends BlocBase with Validator{
         userData = docUser.data() as Map<String, dynamic>;
       }
     }
+    return userData;
   }
   
   @override
