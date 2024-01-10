@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
-import 'package:shoes_store/home/singup_screen.dart';
+import 'package:shoes_store/home/screens/singup_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {

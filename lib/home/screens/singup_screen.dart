@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
-import 'package:shoes_store/home/homepage.dart';
-import 'package:shoes_store/home/login_screen.dart';
+import 'package:shoes_store/home/screens/homepage.dart';
+import 'package:shoes_store/home/screens/login_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
 class SingUp extends StatefulWidget {
