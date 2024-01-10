@@ -20,8 +20,8 @@ class ProductsTile extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }else{
-          final List<ProductsData> productsList = snapshot.data!.docs.map((doc) {
-          return ProductsData.fromFirestore(doc);
+          final List<ProductsModel> productsList = snapshot.data!.docs.map((doc) {
+          return ProductsModel.fromFirestore(doc);
             }).toList();
 
           return SizedBox(
@@ -33,14 +33,14 @@ class ProductsTile extends StatelessWidget {
               itemCount: productsList.length,
               itemBuilder: (context, index) {
             
-                ProductsData productsData = productsList[index];
+                ProductsModel productsData = productsList[index];
             
                 return Row(
                   children: [
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => ProductTab(product: productsData))
+                          MaterialPageRoute(builder: (context) => ProductTab(product: productsData, category: category, brand: brand,))
                         );
                       },
                       child: Card(

@@ -2,22 +2,38 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:shoes_store/bloc/cart_bloc.dart';
+import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/model/cart_model.dart';
 import 'package:shoes_store/model/produtc_model.dart';
 
 class ProductTab extends StatefulWidget {
-  const ProductTab({super.key, required this.product});
+  const ProductTab({super.key, required this.product, required this.category, required this.brand});
 
-  final ProductsData? product;
+  final ProductsModel? product;
+  final String? category;
+  final String? brand;
 
   @override
-  State<ProductTab> createState() => _ProductTabState(product);
+  State<ProductTab> createState() => _ProductTabState(product, category, brand);
 }
 
 class _ProductTabState extends State<ProductTab> {
-  _ProductTabState(this.product);
+  _ProductTabState(this.product, this.category, this.brand);
 
-  final ProductsData? product;
+  final ProductsModel? product;
+  final String? category; 
+  final String? brand;
   String? size;
+  UserBloc? userBloc = UserBloc();
+  CartBloc? cartBloc = CartBloc();
+
+  @override
+  void initState() {
+    super.initState();
+    userBloc = UserBloc();
+    cartBloc = CartBloc();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +70,24 @@ class _ProductTabState extends State<ProductTab> {
                     color: Colors.black,
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 12,),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Preço",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                Text(
+                  "R\$ ${product!.price}",
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
                   ),
                 ),
                 const SizedBox(height: 16,),
@@ -116,7 +150,20 @@ class _ProductTabState extends State<ProductTab> {
                       backgroundColor: const Color.fromARGB(255, 38, 24, 94),
                       shape: const StadiumBorder(),
                     ),
-                    onPressed: () {}, 
+                    onPressed: size != null ? () {
+                      if(userBloc!.isLoggedIn()){
+
+                        CartModel cartProduct = CartModel();
+                        cartProduct.category = category;
+                        cartProduct.size = size;
+                        cartProduct.productId = product!.id;
+                        cartProduct.quantity = 1;
+                        cartProduct.price = product!.price;
+
+                        cartBloc!.addCartItem(cartProduct);
+                      }
+                      cartSuccess();
+                    } : null, 
                     child: const Text(
                       "Adicionar ao Carrinho",
                       style: TextStyle(
@@ -153,6 +200,20 @@ class _ProductTabState extends State<ProductTab> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void cartSuccess(){
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Color.fromARGB(255, 38, 24, 94),
+        content: Text(
+          "Pedido adicionado com sucesso!!",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        )
       ),
     );
   }

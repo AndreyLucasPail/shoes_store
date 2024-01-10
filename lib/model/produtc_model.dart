@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProductsData{
-  ProductsData({
+class ProductsModel{
+  ProductsModel({
     this.id,
     this.images,
     this.name,
@@ -18,10 +18,10 @@ class ProductsData{
   List<String>? images;
   List<String>? sizes;
 
-  factory ProductsData.fromFirestore(QueryDocumentSnapshot snapshot){
+  factory ProductsModel.fromFirestore(QueryDocumentSnapshot snapshot){
     final data = snapshot.data() as Map<String, dynamic>;
 
-    return ProductsData(
+    return ProductsModel(
       id : data["id"],
       name : data["name"],
       price : data["price"],

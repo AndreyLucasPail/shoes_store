@@ -30,48 +30,50 @@ class _HomePageState extends State<HomePage> {
             icon: const Icon(Icons.person_2_rounded),
             itemBuilder: (context) => <PopupMenuEntry>[
               PopupMenuItem(
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Perfil",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
+                onTap: () {
+                  
+                },
+                child: const Text(
+                  "Perfil",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
                   ),
                 )
               ),
               PopupMenuItem(
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Meus Pedidos",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
+                onTap: () {
+                  
+                },
+                child: const Text(
+                  "Meus Pedidos",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
                   ),
                 )
               ),
               PopupMenuItem(
-                child: TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Carrinho",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
+                onTap: () {
+                  
+                },
+                child: const Text(
+                  "Carrinho",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
                   ),
                 )
               ),
               PopupMenuItem(
-                child: TextButton(
-                  onPressed: (){
-                    userBloc.singOut();
-                  },
-                  child: const Text(
-                    "Sair",
-                    style: TextStyle(
-                      color: Colors.black
-                    ),
+                onTap: (){
+                  userBloc.singOut();
+                },
+                child: const Text(
+                  "Sair",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
                   ),
                 )
               ),

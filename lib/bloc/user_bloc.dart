@@ -23,7 +23,6 @@ class UserBloc extends BlocBase with Validator{
   Stream<String> get outBirthday => birthdayController.stream.transform(birthdayValidator);
   Stream<String> get outCep => cepController.stream.transform(cepValidator);
 
-  String? firebaseUserId;
   Map<String, dynamic> userData = {};
   FirebaseAuth auth = FirebaseAuth.instance;
   User? firebaseUser;
@@ -92,7 +91,6 @@ class UserBloc extends BlocBase with Validator{
   }
 
   bool isLoggedIn(){
-    print(firebaseUser);
     return firebaseUser != null;
   }
 

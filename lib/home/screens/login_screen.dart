@@ -88,7 +88,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           onSuccess,
                           onFail,
                         );
-                        print(userBloc.userData["name"]);
                       }, 
                       child: const Text(
                         "Entrar",

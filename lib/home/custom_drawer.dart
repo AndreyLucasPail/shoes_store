@@ -27,11 +27,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
       if (user == null) {
         print('User is currently signed out!');
       } else {
-        print('User is signed in!');
         userBloc.loadCurrentUser().then((value) {
           if(value != null){
-            setState(() {
-              
+            setState(() {        
             });
           }
         });

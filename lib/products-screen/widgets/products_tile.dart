@@ -7,7 +7,7 @@ class ProductsTile extends StatelessWidget {
 
   final String? category;
   final String? brand;
-  final ProductsData? products;
+  final ProductsModel? products;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ProductsTile extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => ProductTab(product: products!,))
+            MaterialPageRoute(builder: (context) => ProductTab(product: products!, category: category, brand: brand,))
           );
         },
         child: Card(

@@ -36,8 +36,8 @@ class ProductsScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }else{
-            final List<ProductsData> productsList = snpashot.data!.docs.map((doc) {
-              return ProductsData.fromFirestore(doc);
+            final List<ProductsModel> productsList = snpashot.data!.docs.map((doc) {
+              return ProductsModel.fromFirestore(doc);
             }).toList();
 
             return GridView.builder(
@@ -45,9 +45,9 @@ class ProductsScreen extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.8), 
               itemBuilder: (context, index){
             
-                ProductsData productsData = productsList[index];
+                ProductsModel productData = productsList[index];
             
-                return ProductsTile(products: productsData,);
+                return ProductsTile(products: productData, category: category, brand: brand,);
               }
             );
           }
