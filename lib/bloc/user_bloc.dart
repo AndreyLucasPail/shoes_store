@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/validators/validator.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shoes_store/model/user_model.dart';
 
 
 class UserBloc extends BlocBase with Validator{
@@ -27,6 +28,7 @@ class UserBloc extends BlocBase with Validator{
   FirebaseAuth auth = FirebaseAuth.instance;
   User? firebaseUser;
   FirebaseFirestore firebase = FirebaseFirestore.instance;
+  UserModel? currentUserData;
 
   Future<void> saveUser(Map<String, dynamic> userData, User? firebaseUser) async {
     this.userData = userData;
@@ -90,19 +92,21 @@ class UserBloc extends BlocBase with Validator{
   }
 
   bool isLoggedIn(){
+    print(firebaseUser);
     return firebaseUser != null;
   }
 
-  Future<Map<String, dynamic>> loadCurrentUser() async {
+  Future<UserModel?> loadCurrentUser() async {
     firebaseUser ??= auth.currentUser;
 
     if(firebaseUser != null){
       if(userData["name"] == null){
         DocumentSnapshot docUser = await firebase.collection("Users").doc(firebaseUser!.uid).get();
-        userData = docUser.data() as Map<String, dynamic>;
+        currentUserData = UserModel.fromFirestore(docUser);
       }
     }
-    return userData;
+
+    return currentUserData;
   }
   
   @override

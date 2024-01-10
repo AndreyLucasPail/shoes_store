@@ -15,7 +15,7 @@ class UserModel {
   String? cep;
   String? birthday;
 
-  factory UserModel.fromFirestore(QueryDocumentSnapshot snapshot){
+  factory UserModel.fromFirestore(DocumentSnapshot snapshot){
     final data = snapshot.data() as Map<String, dynamic>;
 
     return UserModel(

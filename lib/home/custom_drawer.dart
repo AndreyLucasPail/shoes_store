@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/home/screens/login_screen.dart';
 import 'package:shoes_store/home/widget/Expansion_tile.dart';
+import 'package:shoes_store/model/user_model.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -13,6 +15,29 @@ class CustomDrawer extends StatefulWidget {
 class _CustomDrawerState extends State<CustomDrawer> {
  
   UserBloc userBloc = UserBloc();
+
+  @override
+  void initState() {
+    super.initState();
+    userBloc = UserBloc();
+
+    FirebaseAuth.instance
+      .authStateChanges()
+      .listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+        userBloc.loadCurrentUser().then((value) {
+          if(value != null){
+            setState(() {
+              
+            });
+          }
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +65,19 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ),
                   Positioned(
                     left: 20,
-                    bottom: 2.0,
-                    child: userBloc.isLoggedIn() ? Text("Bem Vindo,\n ${userBloc.loadCurrentUser()}") :
+                    bottom: 10.0,
+                    child: userBloc.isLoggedIn() ? FutureBuilder<UserModel?>(
+                      future: userBloc.loadCurrentUser(), 
+                      builder: (context, snapshot){
+                        return Text(
+                          "Bem Vindo, \n${snapshot.data?.name}",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18
+                          ),
+                        );
+                      }
+                    ) :
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).push(
@@ -52,7 +88,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         "Entre ou Cadastre-se >",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 18,
                           fontWeight: FontWeight.w400
                         ),
                       ),
