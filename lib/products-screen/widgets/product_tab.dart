@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/home/screens/login_screen.dart';
 import 'package:shoes_store/model/cart_model.dart';
 import 'package:shoes_store/model/produtc_model.dart';
 
@@ -150,9 +151,9 @@ class _ProductTabState extends State<ProductTab> {
                       backgroundColor: const Color.fromARGB(255, 38, 24, 94),
                       shape: const StadiumBorder(),
                     ),
-                    onPressed: size != null ? () {
+                    onPressed: size != null ? () async {
                       if(userBloc!.isLoggedIn()){
-
+                  
                         CartModel cartProduct = CartModel();
                         cartProduct.category = category;
                         cartProduct.size = size;
@@ -160,9 +161,20 @@ class _ProductTabState extends State<ProductTab> {
                         cartProduct.quantity = 1;
                         cartProduct.price = product!.price;
 
-                        cartBloc!.addCartItem(cartProduct);
+                        try {
+                          await cartBloc!.addCartItem(cartProduct);
+                          print(cartProduct);
+                        }catch (e){
+                          print("Erro ao adicionar ao carrinho $e");
+                        }
+
+                        cartSuccess();
+                      }else{
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => const LoginScreen())
+                        );
                       }
-                      cartSuccess();
+                      
                     } : null, 
                     child: const Text(
                       "Adicionar ao Carrinho",
@@ -216,5 +228,11 @@ class _ProductTabState extends State<ProductTab> {
         )
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    userBloc!.dispose();
   }
 }

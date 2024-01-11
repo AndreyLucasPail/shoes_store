@@ -29,6 +29,7 @@ class CartModel{
     return{
       "category" : category,
       "productId" : productId,
+      "brand" : brand,
       "quantity" : quantity,
       "size" : size,
       "product" : productsModel!.toFirestore(),
