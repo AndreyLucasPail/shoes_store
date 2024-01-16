@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/home/screens/login_screen.dart';
-import 'package:shoes_store/home/widget/Expansion_tile.dart';
+import 'package:shoes_store/home/tiles/Expansion_tile.dart';
 import 'package:shoes_store/model/user_model.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -66,8 +66,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   Positioned(
                     left: 20,
                     bottom: 10.0,
-                    child: userBloc.isLoggedIn() ? FutureBuilder<UserModel?>(
-                      future: userBloc.loadCurrentUser(), 
+                    child: userBloc.isLoggedIn() ? StreamBuilder<UserModel?>(
+                      stream: userBloc.outUser, 
                       builder: (context, snapshot){
                         return Text(
                           "Bem Vindo, \n${snapshot.data?.name}",

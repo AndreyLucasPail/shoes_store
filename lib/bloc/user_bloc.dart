@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +17,7 @@ class UserBloc extends BlocBase with Validator{
   final addressController = BehaviorSubject<String>();
   final birthdayController = BehaviorSubject<String>();
   final cepController = BehaviorSubject<String>();
+  StreamController<UserModel> userController = StreamController<UserModel>();
 
   Stream<String> get outName => nameController.stream.transform(nameValidator);
   Stream<String> get outEmail => emailController.stream.transform(validateEmail);
@@ -22,6 +25,7 @@ class UserBloc extends BlocBase with Validator{
   Stream<String> get outAddress => addressController.stream.transform(addressValidator);
   Stream<String> get outBirthday => birthdayController.stream.transform(birthdayValidator);
   Stream<String> get outCep => cepController.stream.transform(cepValidator);
+  Stream<UserModel> get outUser => userController.stream;
 
   Map<String, dynamic> userData = {};
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -67,13 +71,15 @@ class UserBloc extends BlocBase with Validator{
   void login(String email, String password, VoidCallback onSuccess, VoidCallback onFail){
     auth.signInWithEmailAndPassword(
       email: email, password: password,
-    ).then((user){
+    ).then((user) async {
 
       firebaseUser = user.user;
+      await loadCurrentUser();
       onSuccess();
+      print('Usuário atual após login: $firebaseUser');
 
     }).catchError((e){
-      
+      print('Erro no login: $e');
       onFail();
 
     });
@@ -101,6 +107,8 @@ class UserBloc extends BlocBase with Validator{
       if(userData["name"] == null){
         DocumentSnapshot docUser = await firebase.collection("Users").doc(firebaseUser!.uid).get();
         currentUserData = UserModel.fromFirestore(docUser);
+        userController.add(currentUserData!);
+        print('Usuário atual carregado: ${currentUserData!.name}');
       }
     }
 
