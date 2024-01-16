@@ -9,7 +9,7 @@ import 'package:shoes_store/model/cart_model.dart';
 import 'package:shoes_store/model/produtc_model.dart';
 
 class ProductTab extends StatefulWidget {
-  const ProductTab({super.key, required this.product, required this.category, required this.brand});
+  const ProductTab({super.key, required this.product, required this.category, required this.brand,});
 
   final ProductsModel? product;
   final String? category;
@@ -22,11 +22,12 @@ class ProductTab extends StatefulWidget {
 class _ProductTabState extends State<ProductTab> {
   _ProductTabState(this.product, this.category, this.brand);
 
+  late UserBloc userBloc;
+
   final ProductsModel? product;
   final String? category; 
   final String? brand;
   String? size;
-  UserBloc? userBloc = UserBloc();
   CartBloc? cartBloc = CartBloc();
 
   @override
@@ -152,8 +153,11 @@ class _ProductTabState extends State<ProductTab> {
                       shape: const StadiumBorder(),
                     ),
                     onPressed: size != null ? () async {
-                      if(userBloc!.isLoggedIn()){
-                  
+                      if(!userBloc.isLoggedIn()){
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => const LoginScreen())
+                        );                        
+                      }else{
                         CartModel cartProduct = CartModel();
                         cartProduct.category = category;
                         cartProduct.size = size;
@@ -161,18 +165,10 @@ class _ProductTabState extends State<ProductTab> {
                         cartProduct.quantity = 1;
                         cartProduct.price = product!.price;
 
-                        try {
-                          await cartBloc!.addCartItem(cartProduct);
-                          print(cartProduct);
-                        }catch (e){
-                          print("Erro ao adicionar ao carrinho $e");
-                        }
+                        await cartBloc!.addCartItem(cartProduct);
+                        print(cartProduct);                        
 
                         cartSuccess();
-                      }else{
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const LoginScreen())
-                        );
                       }
                       
                     } : null, 
@@ -233,6 +229,6 @@ class _ProductTabState extends State<ProductTab> {
   @override
   void dispose() {
     super.dispose();
-    userBloc!.dispose();
+    userBloc.dispose();
   }
 }

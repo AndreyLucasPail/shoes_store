@@ -104,12 +104,10 @@ class UserBloc extends BlocBase with Validator{
     firebaseUser ??= auth.currentUser;
 
     if(firebaseUser != null){
-      if(userData["name"] == null){
-        DocumentSnapshot docUser = await firebase.collection("Users").doc(firebaseUser!.uid).get();
-        currentUserData = UserModel.fromFirestore(docUser);
-        userController.add(currentUserData!);
-        print('Usuário atual carregado: ${currentUserData!.name}');
-      }
+      DocumentSnapshot docUser = await firebase.collection("Users").doc(firebaseUser!.uid).get();
+      currentUserData = UserModel.fromFirestore(docUser);
+      userController.add(currentUserData!);
+      print('Usuário atual carregado: ${currentUserData!.name}');
     }
 
     return currentUserData;
@@ -124,5 +122,6 @@ class UserBloc extends BlocBase with Validator{
     addressController.close();
     birthdayController.close();
     cepController.close();
+    userController.close();
   }
 }
