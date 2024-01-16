@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:shoes_store/home/widget/drawer_tile.dart';
+import 'package:shoes_store/home/tiles/drawer_tile.dart';
 import 'package:shoes_store/products-screen/products_screen.dart';
 
 class ExpansionTileDrawer extends StatelessWidget {

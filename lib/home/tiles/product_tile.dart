@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/model/produtc_model.dart';
-import 'package:shoes_store/products-screen/widgets/product_tab.dart';
+import 'package:shoes_store/products-screen/tabs/product_tab.dart';
 
 class ProductsTile extends StatelessWidget {
   const ProductsTile({super.key, this.category, this.brand,});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
-import 'package:shoes_store/home/widget/ads_tile.dart';
-import 'package:shoes_store/home/custom_drawer.dart';
-import 'package:shoes_store/home/widget/product_tile.dart';
+import 'package:shoes_store/home/tiles/ads_tile.dart';
+import 'package:shoes_store/home/widget/custom_drawer.dart';
+import 'package:shoes_store/home/tiles/product_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
