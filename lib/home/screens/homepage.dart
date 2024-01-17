@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/cart_screens/cart_screen.dart';
 import 'package:shoes_store/home/tiles/ads_tile.dart';
 import 'package:shoes_store/home/widget/custom_drawer.dart';
 import 'package:shoes_store/home/tiles/product_tile.dart';
@@ -55,7 +56,9 @@ class _HomePageState extends State<HomePage> {
               ),
               PopupMenuItem(
                 onTap: () {
-                  
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => const CartScreen())
+                  );
                 },
                 child: const Text(
                   "Carrinho",

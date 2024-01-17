@@ -12,7 +12,6 @@ class ProductsModel{
 
   String? name;
   String? description;
-  String? brandId;
   String? id;
   double? price;
   List<String>? images;
@@ -22,7 +21,7 @@ class ProductsModel{
     final data = snapshot.data() as Map<String, dynamic>;
 
     return ProductsModel(
-      id : data["id"],
+      id : snapshot.id,
       name : data["name"],
       price : data["price"],
       description: data["description"],

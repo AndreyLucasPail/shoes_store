@@ -1,6 +1,7 @@
 // ignore_for_file: no_logic_in_create_state
 
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
@@ -35,6 +36,12 @@ class _ProductTabState extends State<ProductTab> {
     super.initState();
     userBloc = UserBloc();
     cartBloc = CartBloc();
+
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if(user != null){
+        userBloc.loadCurrentUser();
+      }
+    });
   }
 
   @override
@@ -52,7 +59,7 @@ class _ProductTabState extends State<ProductTab> {
             aspectRatio: 0.9,
             child: CarouselSlider(
               options: CarouselOptions(
-                autoPlay: true,
+                autoPlay: false,
                 reverse: true,
                 height: 400,
                 enlargeCenterPage: true,
@@ -160,13 +167,13 @@ class _ProductTabState extends State<ProductTab> {
                       }else{
                         CartModel cartProduct = CartModel();
                         cartProduct.category = category;
-                        cartProduct.size = size;
                         cartProduct.productId = product!.id;
-                        cartProduct.quantity = 1;
+                        cartProduct.brand = brand;
+                        cartProduct.quantity = 1;                        
+                        cartProduct.size = size;                        
                         cartProduct.price = product!.price;
 
-                        await cartBloc!.addCartItem(cartProduct);
-                        print(cartProduct);                        
+                        await cartBloc!.addCartItem(cartProduct);                   
 
                         cartSuccess();
                       }

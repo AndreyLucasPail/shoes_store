@@ -27,12 +27,13 @@ class CartModel{
 
   Map<String, dynamic> toMap(){
     return{
-      "category" : category,
-      "productId" : productId,
-      "brand" : brand,
-      "quantity" : quantity,
-      "size" : size,
-      "product" : productsModel!.toFirestore(),
+      "category" : category ?? "",
+      "productId" : productId ?? "",
+      "brand" : brand ?? "",
+      "quantity" : quantity ?? "",
+      "size" : size ?? "",
+      "price" : price ?? "",
+      "products" : productsModel?.toFirestore() ?? "",
     };
   }
 
