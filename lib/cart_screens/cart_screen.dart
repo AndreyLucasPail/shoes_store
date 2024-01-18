@@ -22,20 +22,25 @@ class _CartScreenState extends State<CartScreen> {
         title: const Text("SNKRS"),
         centerTitle: true,
       ),
-      body: StreamBuilder<CartModel>(
-        stream: null,
-        builder: (context, snapshot) {
-          return ListView(
-            children: [
-                    Column(
-                      children: [
-                        cartBloc.product.map((products) {
-                      return CartTile(cartProduct: products,)
-                    }).toList();
-                ],
-              ),
-            ],
+      body: StreamBuilder<List<CartModel>>(
+        stream: cartBloc.cartStream, 
+        builder: (context, snapshot){
+          if(!snapshot.hasData){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }else{
+
+            final List<CartModel>? cartItem = snapshot.data;
+
+            return ListView.builder(
+              itemCount: cartItem!.length,
+              itemBuilder: ((context, index) {
+                return CartTile(cartProduct: cartItem[index],);
+              }
+            ),
           );
+          }
         }
       ),
     );

@@ -17,7 +17,7 @@ class ProductsModel{
   List<String>? images;
   List<String>? sizes;
 
-  factory ProductsModel.fromFirestore(QueryDocumentSnapshot snapshot){
+  factory ProductsModel.fromFirestore(DocumentSnapshot snapshot){
     final data = snapshot.data() as Map<String, dynamic>;
 
     return ProductsModel(

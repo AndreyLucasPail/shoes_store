@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
               ),
               PopupMenuItem(
                 onTap: () {
-                  Navigator.of(context).pushReplacement(
+                  Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const CartScreen())
                   );
                 },
