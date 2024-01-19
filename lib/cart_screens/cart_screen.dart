@@ -28,10 +28,11 @@ class _CartScreenState extends State<CartScreen> {
     cartBloc = CartBloc();
 
     loadCartItems();
-
+    
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if(user != null){
         userBloc.loadCurrentUser();
+        print("Usuario !!!!! ${user.uid} !!! ${user.email}");
       }
     });
   }
@@ -49,7 +50,7 @@ class _CartScreenState extends State<CartScreen> {
         stream: cartBloc.cartStream, 
         builder: (context, snapshot){
           print("Rebuilding StreamBuilder");
-          if(!snapshot.hasData){
+          if(!snapshot.hasData || snapshot.data == null){
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -58,11 +59,17 @@ class _CartScreenState extends State<CartScreen> {
             return const UserNotLogged();
 
           }else if(snapshot.data!.isEmpty){
+            print("Carrinho vazio");
             return const EmptyCartTile();
 
           }else{
+            print("Dados do carrinho: ${snapshot.data}");
+
             final List<CartModel> cartItem = snapshot.data!.map((e) => CartModel.fromFirestore(e as QueryDocumentSnapshot<Object?>)
             ).toList();
+
+            print("Número de itens no carrinho: ${cartItem.length}");
+            print("Itens no carrinho: $cartItem");
 
             return ListView.builder(
               itemCount: cartItem.length,
@@ -78,6 +85,6 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   void loadCartItems() async {
-    await cartBloc.loadCartItem(userBloc);
+    await cartBloc.loadCartItem();
   }
 }

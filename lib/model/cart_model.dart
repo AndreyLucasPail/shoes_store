@@ -30,9 +30,9 @@ class CartModel{
       "category" : category ?? "",
       "productId" : productId ?? "",
       "brand" : brand ?? "",
-      "quantity" : quantity ?? "",
+      "quantity" : quantity ?? 0,
       "size" : size ?? "",
-      "price" : price ?? "",
+      "price" : price ?? 0.0,
       "products" : productsModel?.toFirestore() ?? "",
     };
   }
