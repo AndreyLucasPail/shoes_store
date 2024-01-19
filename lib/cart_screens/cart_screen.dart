@@ -1,6 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
-import 'package:shoes_store/cart_screens/widgets/cart_tile.dart';
+import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/cart_screens/tile/cart_tile.dart';
+import 'package:shoes_store/cart_screens/tile/empty_cart_tile.dart';
+import 'package:shoes_store/cart_screens/tile/user_not_logged_tile.dart';
 import 'package:shoes_store/model/cart_model.dart';
 
 class CartScreen extends StatefulWidget {
@@ -12,7 +17,24 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
 
-  CartBloc cartBloc = CartBloc();
+  late CartBloc cartBloc;
+  UserBloc userBloc = UserBloc();
+
+  @override
+  void initState() {
+    super.initState();
+
+    userBloc = UserBloc();
+    cartBloc = CartBloc();
+
+    loadCartItems();
+
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if(user != null){
+        userBloc.loadCurrentUser();
+      }
+    });
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -23,18 +45,27 @@ class _CartScreenState extends State<CartScreen> {
         centerTitle: true,
       ),
       body: StreamBuilder<List<CartModel>>(
+        key: UniqueKey(),
         stream: cartBloc.cartStream, 
         builder: (context, snapshot){
+          print("Rebuilding StreamBuilder");
           if(!snapshot.hasData){
             return const Center(
               child: CircularProgressIndicator(),
             );
-          }else{
 
-            final List<CartModel>? cartItem = snapshot.data;
+          }else if(!userBloc.isLoggedIn()){
+            return const UserNotLogged();
+
+          }else if(snapshot.data!.isEmpty){
+            return const EmptyCartTile();
+
+          }else{
+            final List<CartModel> cartItem = snapshot.data!.map((e) => CartModel.fromFirestore(e as QueryDocumentSnapshot<Object?>)
+            ).toList();
 
             return ListView.builder(
-              itemCount: cartItem!.length,
+              itemCount: cartItem.length,
               itemBuilder: ((context, index) {
                 return CartTile(cartProduct: cartItem[index],);
               }
@@ -44,5 +75,9 @@ class _CartScreenState extends State<CartScreen> {
         }
       ),
     );
+  }
+
+  void loadCartItems() async {
+    await cartBloc.loadCartItem(userBloc);
   }
 }

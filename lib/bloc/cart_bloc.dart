@@ -36,14 +36,36 @@ class CartBloc extends BlocBase{
       print("nenhum usuario encontrado");
     }
 
-    cartController.add(product);    
+    cartController.sink.add(product); 
+    print("Estado do stream após adicionar itens: ${cartController.value}");   
   }
 
-  void loadCartItem() async {
-    QuerySnapshot querySnapshot = await firebase.collection("Users").doc(user!.firebaseUser!.uid).collection("cart").get();
+  Future<void> loadCartItem(UserBloc userBloc) async {
+    
+    user = userBloc;
 
-    product = querySnapshot.docs.map((doc) => CartModel.fromFirestore(doc)).toList();
-    cartController.add(product);
+  if(user != null && user!.firebaseUser != null){
+      QuerySnapshot querySnapshot = await firebase
+        .collection("Users")
+        .doc(user!.firebaseUser!.uid)
+        .collection("cart")
+        .get();
+
+      product = querySnapshot.docs.map((doc) => CartModel.fromFirestore(doc)).toList();
+      
+      print("Número de itens no carrinho: ${product.length}");
+
+      cartController.sink.add(product);
+      print("Estado do stream após carregar itens: ${cartController.value}");
+    }
+
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    cartController.close();
   }
 
 }
