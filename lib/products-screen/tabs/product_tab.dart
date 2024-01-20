@@ -172,6 +172,8 @@ class _ProductTabState extends State<ProductTab> {
                         cartProduct.quantity = 1;                        
                         cartProduct.size = size;                        
                         cartProduct.price = product!.price;
+                        cartProduct.imgCart = product!.images![0];
+                        cartProduct.model = product!.name;
 
                         await cartBloc!.addCartItem(cartProduct);                   
 

@@ -12,6 +12,8 @@ class CartModel{
   String? size;
   double? price;
   ProductsModel? productsModel;
+  String? imgCart;
+  String? model;
 
   CartModel.fromFirestore(QueryDocumentSnapshot snapshot){
     
@@ -19,10 +21,11 @@ class CartModel{
     category = snapshot.get("category");
     brand = snapshot.get("brand");
     productId = snapshot.get("productId");
-    quantity = snapshot.get("qunatity");
+    quantity = snapshot.get("quantity");
     size = snapshot.get("size");
     price = snapshot.get("price");
- 
+    imgCart = snapshot.get("imgCart");
+    model = snapshot.get("model");
   }
 
   Map<String, dynamic> toMap(){
@@ -34,6 +37,8 @@ class CartModel{
       "size" : size ?? "",
       "price" : price ?? 0.0,
       "products" : productsModel?.toFirestore() ?? "",
+      "imgCart" : imgCart ?? "",
+      "model" : model ?? "",
     };
   }
 

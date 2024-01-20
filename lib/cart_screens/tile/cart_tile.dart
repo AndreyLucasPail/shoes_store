@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:shoes_store/model/cart_model.dart';
 
 class CartTile extends StatelessWidget {
@@ -9,38 +10,60 @@ class CartTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Row(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10))
+      ),
+      child: Slidable(
+        endActionPane: ActionPane(
+        motion: const DrawerMotion(),
+        extentRatio: 0.25, 
         children: [
-          Container(
-            height: 120,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                  cartProduct!.productsModel!.images![0]),
+          SlidableAction(onPressed: (context){},
+          icon: Icons.delete,
+          backgroundColor: const Color.fromARGB(255, 38, 24, 94),
+            ),          
+          ]
+        ),        
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                image: DecorationImage(
+                  image: NetworkImage(
+                    "${cartProduct!.imgCart}"
+                  ),
                   fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Column(
-            children: [
-              Text("${cartProduct!.productsModel!.name}"),
-              Text("${cartProduct!.price}"),
-            ],
-          ),
-          Column(
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.remove)
-              ),
-              Text("${cartProduct!.quantity}"),
-              IconButton(
-                onPressed: () {}, 
-                icon: const Icon(Icons.add)
-              ),
-            ],
-          ),
-        ],
+            Column(
+              children: [
+                Text(
+                  "${cartProduct!.model}",
+                  style: TextStyle(),
+                ),
+                Text("${cartProduct!.price}"),
+              ],
+            ),
+            Column(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.remove)
+                ),
+                Text("${cartProduct!.quantity}"),
+                IconButton(
+                  onPressed: () {}, 
+                  icon: const Icon(Icons.add)
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

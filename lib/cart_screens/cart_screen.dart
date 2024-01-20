@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
@@ -40,9 +39,10 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 38, 24, 94),
-        title: const Text("SNKRS"),
+        title: const Text("Meu Carrinho"),
         centerTitle: true,
       ),
       body: StreamBuilder<List<CartModel>>(
@@ -65,8 +65,7 @@ class _CartScreenState extends State<CartScreen> {
           }else{
             print("Dados do carrinho: ${snapshot.data}");
 
-            final List<CartModel> cartItem = snapshot.data!.map((e) => CartModel.fromFirestore(e as QueryDocumentSnapshot<Object?>)
-            ).toList();
+            final List<CartModel> cartItem = snapshot.data!;
 
             print("Número de itens no carrinho: ${cartItem.length}");
             print("Itens no carrinho: $cartItem");
