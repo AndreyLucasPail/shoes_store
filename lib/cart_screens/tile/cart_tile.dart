@@ -10,7 +10,7 @@ class CartTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10))
       ),
       child: Slidable(
@@ -43,7 +43,7 @@ class CartTile extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  "${cartProduct!.model}",
+                  "${cartProduct!.model}\n\n",
                   style: TextStyle(),
                 ),
                 Text("${cartProduct!.price}"),
