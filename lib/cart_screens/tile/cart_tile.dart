@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/model/cart_model.dart';
 
 class CartTile extends StatelessWidget {
-  const CartTile({super.key, this.cartProduct,});
+  const CartTile({super.key, this.cartProduct, this.cartBloc,});
 
   final CartModel? cartProduct;
+  final CartBloc? cartBloc;
   
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,9 @@ class CartTile extends StatelessWidget {
         motion: const DrawerMotion(),
         extentRatio: 0.25, 
         children: [
-          SlidableAction(onPressed: (context){},
+          SlidableAction(onPressed: (context){
+            cartBloc!.removeCartProduct(cartProduct!);
+          },
           icon: Icons.delete,
           backgroundColor: const Color.fromARGB(255, 38, 24, 94),
             ),          

@@ -4,6 +4,7 @@ import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/cart_screens/tile/cart_tile.dart';
 import 'package:shoes_store/cart_screens/tile/empty_cart_tile.dart';
+import 'package:shoes_store/cart_screens/tile/ship_card.dart';
 import 'package:shoes_store/cart_screens/tile/user_not_logged_tile.dart';
 import 'package:shoes_store/model/cart_model.dart';
 
@@ -61,15 +62,20 @@ class _CartScreenState extends State<CartScreen> {
 
           }else{
 
-            final List<CartModel> cartItem = snapshot.data!;
+            final cartItem = snapshot.data!;
 
-            return ListView.builder(
-              itemCount: cartItem.length,
-              itemBuilder: ((context, index) {
-                return CartTile(cartProduct: cartItem[index],);
-              }
-            ),
-          );
+            List<Widget> cartWidget = cartItem.map((cartCard) {
+              return CartTile(cartProduct: cartCard);
+            }).toList();
+
+            return ListView(
+              children: [
+                Column(
+                  children: cartWidget,
+                ),
+                const ShipCard()
+              ],
+            );
           }
         }
       ),

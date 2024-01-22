@@ -51,6 +51,23 @@ class CartBloc extends BlocBase{
     cartController.sink.add(product);
   }
 
+  void removeCartProduct(CartModel cartProduct){
+
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if(user != null){
+      firebase.collection("Users")
+      .doc(user.uid)
+      .collection("cart")
+      .doc(cartProduct.cId)
+      .delete();
+
+      product.remove(cartProduct);
+
+      cartController.sink.add(product);
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
