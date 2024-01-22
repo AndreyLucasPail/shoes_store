@@ -68,6 +68,10 @@ class CartBloc extends BlocBase{
     }
   }
 
+  double shipPrice(){
+    return 9.99;
+  }
+
   @override
   void dispose() {
     super.dispose();

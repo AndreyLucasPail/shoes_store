@@ -4,7 +4,8 @@ import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/cart_screens/tile/cart_tile.dart';
 import 'package:shoes_store/cart_screens/tile/empty_cart_tile.dart';
-import 'package:shoes_store/cart_screens/tile/ship_card.dart';
+import 'package:shoes_store/cart_screens/widget/price_card.dart';
+import 'package:shoes_store/cart_screens/widget/ship_card.dart';
 import 'package:shoes_store/cart_screens/tile/user_not_logged_tile.dart';
 import 'package:shoes_store/model/cart_model.dart';
 
@@ -65,7 +66,7 @@ class _CartScreenState extends State<CartScreen> {
             final cartItem = snapshot.data!;
 
             List<Widget> cartWidget = cartItem.map((cartCard) {
-              return CartTile(cartProduct: cartCard);
+              return CartTile(cartProduct: cartCard, cartBloc: cartBloc,);
             }).toList();
 
             return ListView(
@@ -73,7 +74,8 @@ class _CartScreenState extends State<CartScreen> {
                 Column(
                   children: cartWidget,
                 ),
-                const ShipCard()
+                const ShipCard(), 
+                const CardPrice(),
               ],
             );
           }

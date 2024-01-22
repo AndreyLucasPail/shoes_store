@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/model/cart_model.dart';
 
@@ -15,19 +14,24 @@ class CartTile extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10))
       ),
-      child: Slidable(
-        endActionPane: ActionPane(
-        motion: const DrawerMotion(),
-        extentRatio: 0.25, 
-        children: [
-          SlidableAction(onPressed: (context){
-            cartBloc!.removeCartProduct(cartProduct!);
-          },
-          icon: Icons.delete,
-          backgroundColor: const Color.fromARGB(255, 38, 24, 94),
-            ),          
-          ]
-        ),        
+      child: Dismissible(
+        key: UniqueKey(),
+        background: Container(
+          color: const Color.fromARGB(255, 38, 24, 94),
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(Icons.delete, color: Colors.white,),
+                Icon(Icons.delete, color: Colors.white,),
+              ],
+            ),
+          )
+        ),
+        onDismissed: (direction) {
+          cartBloc!.removeCartProduct(cartProduct!);
+        },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
