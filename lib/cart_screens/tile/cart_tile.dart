@@ -65,7 +65,9 @@ class CartTile extends StatelessWidget {
                 ),
                 Text("${cartProduct!.quantity}"),
                 IconButton(
-                  onPressed: () {}, 
+                  onPressed: () {
+                    cartBloc!.incProduct(cartProduct!);
+                  }, 
                   icon: const Icon(Icons.add)
                 ),
               ],

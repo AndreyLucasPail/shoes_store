@@ -10,10 +10,14 @@ class CartBloc extends BlocBase{
   FirebaseFirestore firebase = FirebaseFirestore.instance;
   List<CartModel> product = [];
   UserBloc? user;
+  int? counter = 0;
 
   final cartController = BehaviorSubject<List<CartModel>>.seeded([]);
+  final quantityController = BehaviorSubject();
 
   Stream<List<CartModel>> get cartStream => cartController.stream;
+  Stream get qunatityStream => quantityController.stream;
+
 
   Future<void> addCartItem(CartModel cartProduct) async {
 
@@ -66,6 +70,37 @@ class CartBloc extends BlocBase{
 
       cartController.sink.add(product);
     }
+  }
+
+  void incProduct(CartModel cartProduct){
+    User? user = FirebaseAuth.instance.currentUser;
+
+    counter = cartProduct.quantity;
+    cartProduct.quantity = counter! + 1;
+
+    firebase.collection("Users")
+      .doc(user!.uid)
+      .collection("cart")
+      .doc(cartProduct.cId)
+      .update(cartProduct.toMap());
+
+    quantityController.sink.add(cartProduct);
+  }
+
+  void decProduct(CartModel cartProduct){
+    User? user = FirebaseAuth.instance.currentUser;
+
+    counter = cartProduct.quantity;
+    cartProduct.quantity = counter! - 1;
+
+    firebase.collection("Users")
+      .doc(user!.uid)
+      .collection("cart")
+      .doc(cartProduct.cId)
+      .update(cartProduct.toMap());
+
+    quantityController.sink.add(cartProduct);
+    
   }
 
   double shipPrice(){
