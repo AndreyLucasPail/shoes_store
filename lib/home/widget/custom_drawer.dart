@@ -24,9 +24,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
     FirebaseAuth.instance
       .authStateChanges()
       .listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
+      if (user != null) {
         if(mounted){
           userBloc.loadCurrentUser().then((value) {
           if(value != null){

@@ -44,7 +44,7 @@ class CartTile extends StatelessWidget {
               children: [
                 Text(
                   "${cartProduct!.model}\n\n",
-                  style: TextStyle(),
+                  style: const TextStyle(),
                 ),
                 Text("${cartProduct!.price}"),
               ],

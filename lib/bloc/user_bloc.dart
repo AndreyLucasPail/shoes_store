@@ -76,12 +76,9 @@ class UserBloc extends BlocBase with Validator{
       firebaseUser = user.user;
       await loadCurrentUser();
       onSuccess();
-      print('Usuário atual após login: $firebaseUser');
-
     }).catchError((e){
-      print('Erro no login: $e');
-      onFail();
 
+      onFail();
     });
   }
 
@@ -107,7 +104,6 @@ class UserBloc extends BlocBase with Validator{
       DocumentSnapshot docUser = await firebase.collection("Users").doc(firebaseUser!.uid).get();
       currentUserData = UserModel.fromFirestore(docUser);
       userController.add(currentUserData!);
-      print('Usuário atual carregado: ${currentUserData!.name}');
     }
 
     return currentUserData;

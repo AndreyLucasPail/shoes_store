@@ -22,28 +22,21 @@ class CartBloc extends BlocBase{
     User? user = FirebaseAuth.instance.currentUser;
 
     if(user != null){  
-      print("Dados do carrinho: ${cartProduct.toMap()}");
       await firebase
         .collection("Users")
         .doc(user.uid)
         .collection("cart")
         .add(cartProduct.toMap()).then((doc) {
           cartProduct.cId = doc.id;
-          print("Item adicionado ao carrinho com ID: ${doc.id}");
       });
-      print("USUARIO: $user");
-    }else{
-      print("nenhum usuario encontrado");
     }
 
     cartController.sink.add(product); 
-    print("Estado do stream após adicionar itens: ${cartController.value}");   
   }
 
   Future<void> loadCartItem() async {
     
     User? user = FirebaseAuth.instance.currentUser;
-    print("!!!!!!! usuario apos carregar o carrinho $user");
 
   if(user != null){    
       QuerySnapshot querySnapshot = await firebase
@@ -53,15 +46,9 @@ class CartBloc extends BlocBase{
         .get();
 
       product = querySnapshot.docs.map((doc) => CartModel.fromFirestore(doc)).toList();
-      
-      print("Número de itens no carrinho: ${product.length}");
-      print("Itens no carrinho: $product");
-
     }
 
     cartController.sink.add(product);
-    print("Estado do stream após carregar itens: ${cartController.value}");
-
   }
 
   @override

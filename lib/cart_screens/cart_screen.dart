@@ -31,7 +31,6 @@ class _CartScreenState extends State<CartScreen> {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if(user != null){
         userBloc.loadCurrentUser();
-        print("Usuario !!!!! ${user.uid} !!! ${user.email}");
       }
     });
   }
@@ -49,7 +48,6 @@ class _CartScreenState extends State<CartScreen> {
         key: UniqueKey(),
         stream: cartBloc.cartStream, 
         builder: (context, snapshot){
-          print("Rebuilding StreamBuilder");
           if(!snapshot.hasData || snapshot.data == null){
             return const Center(
               child: CircularProgressIndicator(),
@@ -59,16 +57,11 @@ class _CartScreenState extends State<CartScreen> {
             return const UserNotLogged();
 
           }else if(snapshot.data!.isEmpty){
-            print("Carrinho vazio");
             return const EmptyCartTile();
 
           }else{
-            print("Dados do carrinho: ${snapshot.data}");
 
             final List<CartModel> cartItem = snapshot.data!;
-
-            print("Número de itens no carrinho: ${cartItem.length}");
-            print("Itens no carrinho: $cartItem");
 
             return ListView.builder(
               itemCount: cartItem.length,
