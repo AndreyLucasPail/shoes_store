@@ -1,17 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shoes_store/model/cart_model.dart';
 
 class OrderModel {
   
-  String? clientID;
+  String? id;
   double? productsPrice;
   double? shipPrice;
   double? totalPrice;
   int? status;
-  List<CartModel>? products;
+  List? products;
 
   OrderModel.fromFirestore(QueryDocumentSnapshot snapshot){
-    clientID = snapshot.get("clientID");
+    id = snapshot.id;
     productsPrice = snapshot.get("productsPrice");
     shipPrice = snapshot.get("shipPrice");
     totalPrice = snapshot.get("totalPrice");
@@ -21,7 +20,7 @@ class OrderModel {
 
   Map<String, dynamic> toMap(){
     return{
-      "clientID" : clientID ?? "",
+      "id" : id ?? "",
       "productsPrice" : productsPrice ?? 0.0,
       "shipPrice" : shipPrice ?? 0.0,
       "totalPrice" : totalPrice ?? 0.0,

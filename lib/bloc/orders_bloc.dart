@@ -6,9 +6,9 @@ import 'package:shoes_store/model/order_model.dart';
 
 class OrdersBloc extends BlocBase{
   
-  final orderController = BehaviorSubject();
+  final orderController = BehaviorSubject<List<OrderModel>>.seeded([]);
 
-  Stream get streamOrder => orderController.stream;
+  Stream<List<OrderModel>> get streamOrder => orderController.stream;
 
   List<OrderModel> orders = [];
   FirebaseFirestore firebase = FirebaseFirestore.instance;

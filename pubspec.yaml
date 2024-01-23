@@ -42,6 +42,7 @@ dependencies:
   rxdart: ^0.27.7
   firebase_auth: ^4.16.0
   flutter_slidable: ^3.0.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

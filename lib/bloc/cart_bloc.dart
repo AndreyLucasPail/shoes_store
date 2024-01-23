@@ -128,7 +128,6 @@ class CartBloc extends BlocBase{
 
     DocumentReference ref = await firebase.collection("Users").doc(user!.uid).collection("orders").add(
       {
-        "clientID" : user.uid,
         "products" : product.map((cartProduct) => cartProduct.toMap()).toList(),
         "productsPrice" : getPrice(),
         "shipPrice" : shipPrice(),
