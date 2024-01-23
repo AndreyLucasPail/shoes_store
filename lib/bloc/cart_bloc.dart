@@ -123,6 +123,35 @@ class CartBloc extends BlocBase{
     return 9.99;
   }
 
+  Future<String?> finishOrder() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    DocumentReference ref = await firebase.collection("orders").add(
+      {
+        "clientID" : user!.uid,
+        "products" : product.map((cartProduct) => cartProduct.toMap()).toList(),
+        "productsPrice" : getPrice(),
+        "shipPrice" : shipPrice(),
+        "totalPrice" : getPrice() + shipPrice(),
+        "status" : 1,
+      }
+    );
+
+    await firebase.collection("Users").doc(user.uid).collection("orders").add({
+      "orderID" : ref.id,
+    });
+
+    QuerySnapshot query = await firebase.collection("Users").doc(user.uid).collection("cart").get();
+
+    for(DocumentSnapshot doc in query.docs){
+      doc.reference.delete();
+    }
+
+    product.clear();
+
+    return ref.id;
+  }
+
   @override
   void dispose() {
     super.dispose();

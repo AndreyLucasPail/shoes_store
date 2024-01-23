@@ -63,9 +63,9 @@ class CartTile extends StatelessWidget {
                 return Column(
                   children: [
                     IconButton(
-                      onPressed: () {
+                      onPressed: cartProduct!.quantity! > 1 ? () {
                         cartBloc!.decProduct(cartProduct!);
-                      },
+                      } : null,
                       icon: const Icon(Icons.remove)
                     ),
                     Text("${cartProduct!.quantity}"),
