@@ -91,7 +91,7 @@ class CardPrice extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "R\$ ${cartBloc!.getPrice().toDouble() + ship.toDouble()}",
+                      "R\$ ${(cartBloc!.getPrice().toDouble() + ship.toDouble()).toStringAsFixed(2)}",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold
@@ -110,10 +110,8 @@ class CardPrice extends StatelessWidget {
                     onPressed: () async {
                       cartBloc!.finishOrder();
 
-                      String? orderId = await cartBloc!.finishOrder();
-
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => FinishOrder(orderId: orderId,))
+                        MaterialPageRoute(builder: (context) => FinishOrder())
                       );
                     }, 
                     child: const Text(

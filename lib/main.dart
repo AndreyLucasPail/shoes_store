@@ -2,6 +2,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
+import 'package:shoes_store/bloc/orders_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/home/screens/homepage.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       blocs: [
         Bloc((i) => CartBloc()),
         Bloc((i) => UserBloc()),
+        Bloc((i) => OrdersBloc())
       ],
       dependencies: const [],
       child: const MaterialApp(
