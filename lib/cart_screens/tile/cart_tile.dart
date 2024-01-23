@@ -57,20 +57,27 @@ class CartTile extends StatelessWidget {
                 Text("${cartProduct!.price}"),
               ],
             ),
-            Column(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.remove)
-                ),
-                Text("${cartProduct!.quantity}"),
-                IconButton(
-                  onPressed: () {
-                    cartBloc!.incProduct(cartProduct!);
-                  }, 
-                  icon: const Icon(Icons.add)
-                ),
-              ],
+            StreamBuilder<int>(
+              stream: cartBloc!.quantityStream,
+              builder: (context, snapshot) {
+                return Column(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        cartBloc!.decProduct(cartProduct!);
+                      },
+                      icon: const Icon(Icons.remove)
+                    ),
+                    Text("${cartProduct!.quantity}"),
+                    IconButton(
+                      onPressed: () {
+                        cartBloc!.incProduct(cartProduct!);
+                      }, 
+                      icon: const Icon(Icons.add)
+                    ),
+                  ],
+                );
+              }
             ),
           ],
         ),

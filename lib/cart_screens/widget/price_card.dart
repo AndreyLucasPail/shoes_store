@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 
 class CardPrice extends StatelessWidget {
-  const CardPrice({super.key});
+  const CardPrice({super.key, this.cartBloc});
+
+  final CartBloc? cartBloc;
 
   @override
   Widget build(BuildContext context) {
 
-    CartBloc cartBloc = CartBloc();
+    double ship = cartBloc!.shipPrice();
+    double price = cartBloc!.getPrice();
 
-    double ship = cartBloc.shipPrice();
-
-    return StreamBuilder(
-      stream: cartBloc.qunatityStream,
+    return StreamBuilder<double>(
+      stream: cartBloc!.priceStream,
       builder: (context, snapshot) {
         return Card(
           child: Padding(
@@ -28,14 +29,16 @@ class CardPrice extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16,),
-                const Row(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Subtotal:",
                       style: TextStyle(
                         fontSize: 16,
                       ),
                     ),
+                    Text("R\$ ${price.toStringAsFixed(2)}"),
                   ],
                 ),
                 const Divider(color: Colors.black,),

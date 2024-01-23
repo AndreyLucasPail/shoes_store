@@ -13,10 +13,12 @@ class CartBloc extends BlocBase{
   int? counter = 0;
 
   final cartController = BehaviorSubject<List<CartModel>>.seeded([]);
-  final quantityController = BehaviorSubject();
+  final quantityController = BehaviorSubject<int>();
+  final priceController = BehaviorSubject<double>.seeded(0.0);
 
   Stream<List<CartModel>> get cartStream => cartController.stream;
-  Stream get qunatityStream => quantityController.stream;
+  Stream<int> get quantityStream => quantityController.stream;
+  Stream<double> get priceStream => priceController.stream;
 
 
   Future<void> addCartItem(CartModel cartProduct) async {
@@ -84,7 +86,7 @@ class CartBloc extends BlocBase{
       .doc(cartProduct.cId)
       .update(cartProduct.toMap());
 
-    quantityController.sink.add(cartProduct);
+    quantityController.sink.add(cartProduct.quantity!);
   }
 
   void decProduct(CartModel cartProduct){
@@ -99,8 +101,22 @@ class CartBloc extends BlocBase{
       .doc(cartProduct.cId)
       .update(cartProduct.toMap());
 
-    quantityController.sink.add(cartProduct);
+    quantityController.sink.add(cartProduct.quantity!);
     
+  }
+
+  double getPrice(){
+    double price = 0.0;
+
+    for(CartModel item in product){
+      if(item.price != null){
+        price += item.price!.toDouble() * item.quantity!.toDouble();
+      }
+    }
+
+    priceController.sink.add(price);
+
+    return price;
   }
 
   double shipPrice(){

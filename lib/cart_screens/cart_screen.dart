@@ -75,7 +75,7 @@ class _CartScreenState extends State<CartScreen> {
                   children: cartWidget,
                 ),
                 const ShipCard(), 
-                const CardPrice(),
+                CardPrice(cartBloc: cartBloc,),
               ],
             );
           }
