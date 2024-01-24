@@ -21,7 +21,7 @@ class UserModel {
     return UserModel(
       name: data["name"],
       email: data["email"],
-      address: data["address"],
+      address: data["adress"],
       cep: data["CEP"],
       birthday: data["birthday"],
     );
@@ -31,7 +31,7 @@ class UserModel {
     return {
       "name" : name,
       "email" : email,
-      "address" : address,
+      "adress" : address,
       "CEP" : cep,
       "birthday" : birthday
     };

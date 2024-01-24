@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shoes_store/model/produtc_model.dart';
 import 'package:shoes_store/products-screen/tabs/product_tab.dart';
 
@@ -11,6 +12,9 @@ class ProductsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
+
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection("products").doc(category).collection("shoes").doc(brand)
         .collection("model").snapshots(),
@@ -81,7 +85,7 @@ class ProductsTile extends StatelessWidget {
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    "R\$ ${productsData.price}",
+                                    "R\$ ${formatNumber.format(productsData.price)}",
                                     style: const TextStyle(fontSize: 16),
                                   )
                                 ),

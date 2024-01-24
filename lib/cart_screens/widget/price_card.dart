@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/cart_screens/finished_order_screen.dart';
 
@@ -13,6 +14,7 @@ class CardPrice extends StatelessWidget {
   Widget build(BuildContext context) {
 
     double ship = cartBloc!.shipPrice();
+    NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
 
     return StreamBuilder<double>(
       stream: cartBloc!.priceStream,
@@ -40,7 +42,7 @@ class CardPrice extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    Text("R\$ ${cartBloc!.getPrice().toStringAsFixed(2)}"),
+                    Text("R\$ ${formatNumber.format(cartBloc!.getPrice())}"),
                   ],
                 ),
                 const Divider(color: Colors.black,),
@@ -91,7 +93,7 @@ class CardPrice extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "R\$ ${(cartBloc!.getPrice().toDouble() + ship.toDouble()).toStringAsFixed(2)}",
+                      "R\$ ${formatNumber.format(cartBloc!.getPrice().toDouble() + ship.toDouble())}",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold

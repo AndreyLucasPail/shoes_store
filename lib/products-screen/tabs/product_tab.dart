@@ -3,6 +3,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/home/screens/login_screen.dart';
@@ -30,6 +31,7 @@ class _ProductTabState extends State<ProductTab> {
   final String? brand;
   String? size;
   CartBloc? cartBloc = CartBloc();
+  NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
 
   @override
   void initState() {
@@ -65,7 +67,11 @@ class _ProductTabState extends State<ProductTab> {
                 enlargeCenterPage: true,
               ),
               items: product!.images!.map((url) {
-                return Image.network(url, fit: BoxFit.cover,);
+                return Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: NetworkImage(url))
+                  ),
+                );
               }).toList(),            
             ),
           ),
@@ -93,7 +99,7 @@ class _ProductTabState extends State<ProductTab> {
                   ),
                 ),
                 Text(
-                  "R\$ ${product!.price}",
+                  "R\$ ${formatNumber.format(product!.price)}",
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 25,
@@ -132,16 +138,17 @@ class _ProductTabState extends State<ProductTab> {
                           width: 50,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
+                            color: sizeButtonText == size ? const Color.fromARGB(255, 38, 24, 94) : Colors.white,
                             borderRadius: const BorderRadius.all(Radius.circular(4)),
                             border: Border.all(
-                              color: sizeButtonText == size ? Colors.orange : Colors.black,
+                              color:sizeButtonText == size ? const Color.fromARGB(255, 38, 24, 94) : Colors.black,
                               width: 2,
                             ),
                           ),
                           child: Text(
                             sizeButtonText,
-                            style: const TextStyle(
-                              color: Colors.black,
+                            style: TextStyle(
+                              color: sizeButtonText == size ? Colors.white : Colors.black,
                               fontSize: 16,
                             ),
                           ),

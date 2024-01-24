@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_store/model/order_model.dart';
+import 'package:shoes_store/orders_screen/track_order_screen.dart';
 
 class OrderTile extends StatelessWidget {
   const OrderTile({super.key, this.order});
@@ -10,7 +11,7 @@ class OrderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    //NumberFormat formatNumber = NumberFormat("#.##0.00", "pt_BR");
+    NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
@@ -30,7 +31,7 @@ class OrderTile extends StatelessWidget {
               ),
               const SizedBox(height: 10,),
               const Text(
-                "Itens do pedido:",
+                "Resumos do pedido:",
                 style: TextStyle(
                   fontSize: 17,
                 ),
@@ -51,7 +52,7 @@ class OrderTile extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "R\$ ${item["price"]}",
+                              "R\$ ${formatNumber.format(item["price"])}",
                               style: const TextStyle(
                                 fontSize: 15
                               ),
@@ -74,7 +75,7 @@ class OrderTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "R\$ ${order!.totalPrice}",
+                    "R\$ ${formatNumber.format(order!.totalPrice)}",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold
@@ -90,7 +91,11 @@ class OrderTile extends StatelessWidget {
                     shape: const StadiumBorder(),
                     backgroundColor: const Color.fromARGB(255, 38, 24, 94),
                   ),
-                  onPressed: (){}, 
+                  onPressed: (){
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => TrackOrder(order: order,))
+                    );
+                  }, 
                   child: const Text(
                     "Acompanhar pedido",
                     style: TextStyle(

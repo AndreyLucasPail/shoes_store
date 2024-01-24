@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/model/cart_model.dart';
 
@@ -10,6 +11,9 @@ class CartTile extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+
+    NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
+    
     return Card(
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10))
@@ -17,7 +21,10 @@ class CartTile extends StatelessWidget {
       child: Dismissible(
         key: UniqueKey(),
         background: Container(
-          color: const Color.fromARGB(255, 38, 24, 94),
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 38, 24, 94),
+            borderRadius: BorderRadius.all(Radius.circular(10))
+          ),
           child: const Padding(
             padding: EdgeInsets.all(8.0),
             child: Row(
@@ -48,14 +55,35 @@ class CartTile extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              children: [
-                Text(
-                  "${cartProduct!.model}\n\n",
-                  style: const TextStyle(),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(8, 4, 3, 4),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${cartProduct!.model}",
+                      style: const TextStyle(
+                        fontSize: 16
+                      ),
+                    ),
+                    const SizedBox(height: 4,),
+                    Text(
+                      "Tamanho: ${cartProduct!.size}",
+                      style: const TextStyle(
+                        fontSize: 15
+                      ),
+                    ),
+                    const SizedBox(height: 4,),
+                    Text(
+                      formatNumber.format(cartProduct!.price),
+                      style: const TextStyle(
+                        fontSize: 16
+                      ),
+                    ),
+                  ],
                 ),
-                Text("${cartProduct!.price}"),
-              ],
+              ),
             ),
             StreamBuilder<int>(
               stream: cartBloc!.quantityStream,

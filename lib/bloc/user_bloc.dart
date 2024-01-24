@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -103,9 +102,13 @@ class UserBloc extends BlocBase with Validator{
     if(firebaseUser != null){
       DocumentSnapshot docUser = await firebase.collection("Users").doc(firebaseUser!.uid).get();
       currentUserData = UserModel.fromFirestore(docUser);
-      userController.add(currentUserData!);
+      userController.sink.add(currentUserData!);
+
+      print(currentUserData!.name);
     }
 
+    
+    
     return currentUserData;
   }
   

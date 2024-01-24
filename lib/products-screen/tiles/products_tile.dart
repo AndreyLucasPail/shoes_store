@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shoes_store/model/produtc_model.dart';
 import 'package:shoes_store/products-screen/tabs/product_tab.dart';
 
@@ -11,6 +12,9 @@ class ProductsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
+
     return Padding(
       padding: const EdgeInsets.all(2),
       child: InkWell(
@@ -59,7 +63,7 @@ class ProductsTile extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    "R\$ ${products!.price}",
+                    "R\$ ${formatNumber.format(products!.price)}",
                     style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
