@@ -12,9 +12,11 @@ class OrderTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
+    DateTime orderDateTime = order!.orderDate!.toDate();
+    String orderDateFormat = DateFormat("dd/MM/yy").format(orderDateTime);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
+      padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -30,10 +32,18 @@ class OrderTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10,),
+              Text(
+                "Data do pedido: $orderDateFormat",
+                style: const TextStyle(
+                  fontSize: 18
+                ),
+              ),
+              const SizedBox(height: 10,),
               const Text(
                 "Resumos do pedido:",
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 10,),
@@ -48,13 +58,13 @@ class OrderTile extends StatelessWidget {
                             Text(
                               item["model"],
                               style: const TextStyle(
-                                fontSize: 15,
+                                fontSize: 16,
                               ),
                             ),
                             Text(
                               "R\$ ${formatNumber.format(item["price"])}",
                               style: const TextStyle(
-                                fontSize: 15
+                                fontSize: 16
                               ),
                             ),
                           ],

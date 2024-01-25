@@ -133,6 +133,7 @@ class CartBloc extends BlocBase{
         "shipPrice" : shipPrice(),
         "totalPrice" : getPrice() + shipPrice(),
         "status" : 1,
+        "orderDate" : DateTime.now(),
       }
     );
 

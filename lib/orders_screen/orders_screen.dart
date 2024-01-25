@@ -26,6 +26,7 @@ class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 38, 24, 94),
         title: const Text("SNKRS"),

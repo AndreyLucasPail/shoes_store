@@ -8,6 +8,7 @@ class OrderModel {
   double? totalPrice;
   int? status;
   List? products;
+  Timestamp? orderDate;
 
   OrderModel.fromFirestore(QueryDocumentSnapshot snapshot){
     id = snapshot.id;
@@ -16,6 +17,7 @@ class OrderModel {
     totalPrice = snapshot.get("totalPrice");
     status = snapshot.get("status");
     products = snapshot.get("products");
+    orderDate = snapshot.get("orderDate");
   }
 
   Map<String, dynamic> toMap(){
@@ -25,7 +27,8 @@ class OrderModel {
       "shipPrice" : shipPrice ?? 0.0,
       "totalPrice" : totalPrice ?? 0.0,
       "status" : status ?? 1,
-      "products" : products ?? [], 
+      "products" : products ?? [],
+      "orderDate" : orderDate ?? "", 
     };
   }
 }

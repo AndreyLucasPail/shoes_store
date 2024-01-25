@@ -22,7 +22,7 @@ class OrdersBloc extends BlocBase{
         .collection("orders")
         .get();
 
-      orders = query.docs.map((doc) => OrderModel.fromFirestore(doc)).toList();
+      orders = query.docs.map((doc) => OrderModel.fromFirestore(doc)).toList().reversed.toList();
     }
 
     orderController.sink.add(orders);
