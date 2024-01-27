@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/orders_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/model/order_model.dart';
+import 'package:shoes_store/orders_screen/tab/empty_order.dart';
 import 'package:shoes_store/orders_screen/tab/user_not_logged_tab.dart';
 import 'package:shoes_store/orders_screen/tile/order_tile.dart';
 
@@ -25,6 +27,12 @@ class _OrderScreenState extends State<OrderScreen> {
     ordersBloc = OrdersBloc();
 
     ordersBloc.loadOrders();
+
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if(user != null){
+        userBloc.loadCurrentUser();
+      }
+    });
   }
 
   @override
@@ -45,6 +53,10 @@ class _OrderScreenState extends State<OrderScreen> {
             );
           }else if(!userBloc.isLoggedIn()){
             return const UserNotLogeedIn();
+            
+          }else if(snapshot.data!.isEmpty){
+            return const EmptyOrder();
+          
           }else{
     
             List<OrderModel> ordersList = snapshot.data!;

@@ -15,7 +15,7 @@ class OrderModel {
     productsPrice = snapshot.get("productsPrice");
     shipPrice = snapshot.get("shipPrice");
     totalPrice = snapshot.get("totalPrice");
-    status = snapshot.get("status");
+    status = snapshot.get("status") ?? 1;
     products = snapshot.get("products");
     orderDate = snapshot.get("orderDate");
   }

@@ -113,7 +113,7 @@ class CardPrice extends StatelessWidget {
                       cartBloc!.finishOrder();
 
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => FinishOrder())
+                        MaterialPageRoute(builder: (context) => const FinishOrder())
                       );
                     }, 
                     child: const Text(

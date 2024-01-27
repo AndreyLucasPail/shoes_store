@@ -16,13 +16,13 @@ class OrderTile extends StatelessWidget {
     String orderDateFormat = DateFormat("dd/MM/yy").format(orderDateTime);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+      padding: const EdgeInsets.fromLTRB(6, 4, 6, 4),
       child: Card(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.fromLTRB(10, 20, 10, 25),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -58,12 +58,15 @@ class OrderTile extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              item["model"],
-                              style: const TextStyle(
-                                fontSize: 16,
+                            Flexible(
+                              child: Text(
+                                item["model"],
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                ),
                               ),
                             ),
+                            const SizedBox(width: 10,),
                             Text(
                               "R\$ ${formatNumber.format(item["price"])}",
                               style: const TextStyle(

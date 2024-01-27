@@ -63,7 +63,7 @@ class _TrackOrderCardState extends State<TrackOrderCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Id do pedido: ${order!.id}",
+                          "Id do pedido:\n ${order!.id}",
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -77,7 +77,7 @@ class _TrackOrderCardState extends State<TrackOrderCard> {
                             fontWeight: FontWeight.bold
                           ),
                         ),
-                        const SizedBox(height: 8,),
+                        const SizedBox(height: 6,),
                         Text(
                           userModel?.address ?? "Endereço não disponível",
                           style: const TextStyle(

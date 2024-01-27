@@ -20,7 +20,7 @@ class TrackOrder extends StatelessWidget {
       body: ListView(
       children: [
         TrackOrderCard(order: order,),
-        const TrackOrderTab(),
+        TrackOrderTab(order: order,),
         ],
       ),
     );
