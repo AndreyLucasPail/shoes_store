@@ -7,6 +7,7 @@ class UserNotLogeedIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.grey[100],
       padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

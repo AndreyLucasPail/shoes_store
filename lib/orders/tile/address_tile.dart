@@ -44,6 +44,7 @@ class _TrackOrderCardState extends State<TrackOrderCard> {
           return Padding(
             padding: const EdgeInsets.all(6.0),
             child: Card(
+              elevation: 5,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10))
               ),

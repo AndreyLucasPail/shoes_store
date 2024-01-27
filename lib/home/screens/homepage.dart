@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
-import 'package:shoes_store/cart_screens/cart_screen.dart';
+import 'package:shoes_store/cart/screen/cart_screen.dart';
 import 'package:shoes_store/home/tiles/ads_tile.dart';
 import 'package:shoes_store/home/widget/custom_drawer.dart';
 import 'package:shoes_store/home/tiles/product_tile.dart';
-import 'package:shoes_store/orders_screen/orders_screen.dart';
+import 'package:shoes_store/orders/screen/orders_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 38, 24, 94),
         title: const Text("SNKRS"),

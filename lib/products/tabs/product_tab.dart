@@ -49,7 +49,7 @@ class _ProductTabState extends State<ProductTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 38, 24, 94),
         centerTitle: true,
@@ -138,7 +138,7 @@ class _ProductTabState extends State<ProductTab> {
                           width: 50,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: sizeButtonText == size ? const Color.fromARGB(255, 38, 24, 94) : Colors.grey[300],
+                            color: sizeButtonText == size ? const Color.fromARGB(255, 38, 24, 94) : Colors.grey[100],
                             borderRadius: const BorderRadius.all(Radius.circular(4)),
                             border: Border.all(
                               color:sizeButtonText == size ? const Color.fromARGB(255, 38, 24, 94) : Colors.black,

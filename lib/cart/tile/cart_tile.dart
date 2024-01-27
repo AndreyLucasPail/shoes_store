@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/model/cart_model.dart';
+import 'package:blur/blur.dart';
 
 class CartTile extends StatelessWidget {
   const CartTile({super.key, this.cartProduct, this.cartBloc,});
@@ -15,6 +16,7 @@ class CartTile extends StatelessWidget {
     NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
     
     return Card(
+      elevation: 5,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10))
       ),
@@ -113,29 +115,35 @@ class CartTile extends StatelessWidget {
     return showDialog(
       context: context, 
       builder: (context){
-        return AlertDialog(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))
-          ),
-          title: const Text("Remover produto"),
-          content: const Text("Certeza que deseja remover o  produto do carrinho?"),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),     
-              child: const Text(
-                "Cancelar",
-                style: TextStyle(
-                  color: Colors.red
-                ),
+        return Stack(
+          children: [
+            AlertDialog(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                cartBloc!.removeCartProduct(cartProduct!);
-
-                Navigator.pop(context);
-              },     
-              child: const Text("Confirmar"),
+              title: const Text("Remover produto"),
+              content: const Text("Certeza que deseja remover o  produto do carrinho?"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),     
+                  child: const Text(
+                    "Cancelar",
+                    style: TextStyle(
+                      color: Colors.red
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    cartBloc!.removeCartProduct(cartProduct!);
+        
+                    Navigator.pop(context);
+                  },     
+                  child: const Text("Confirmar"),
+                ),
+              ],
+            ).frosted(
+              frostColor: Colors.transparent,
             ),
           ],
         );

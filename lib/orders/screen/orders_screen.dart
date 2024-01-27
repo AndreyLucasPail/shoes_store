@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/orders_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/model/order_model.dart';
-import 'package:shoes_store/orders_screen/tab/empty_order.dart';
-import 'package:shoes_store/orders_screen/tab/user_not_logged_tab.dart';
-import 'package:shoes_store/orders_screen/tile/order_tile.dart';
+import 'package:shoes_store/orders/tab/empty_order.dart';
+import 'package:shoes_store/orders/tab/user_not_logged_tab.dart';
+import 'package:shoes_store/orders/tile/order_tile.dart';
 
 class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
@@ -38,7 +38,7 @@ class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 38, 24, 94),
         title: const Text("SNKRS"),

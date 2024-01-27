@@ -8,6 +8,7 @@ class ShipCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Card(
+        elevation: 5,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))
         ),

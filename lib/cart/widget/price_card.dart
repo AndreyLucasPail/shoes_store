@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
-import 'package:shoes_store/cart_screens/finished_order_screen.dart';
+import 'package:shoes_store/cart/screen/finished_order_screen.dart';
 
 class CardPrice extends StatelessWidget {
   const CardPrice({super.key, this.cartBloc});
@@ -20,6 +20,7 @@ class CardPrice extends StatelessWidget {
       stream: cartBloc!.priceStream,
       builder: (context, snapshot) {
         return Card(
+          elevation: 5,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(8, 10, 8, 10),
             child: Column(

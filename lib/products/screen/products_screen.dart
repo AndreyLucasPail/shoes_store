@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shoes_store/model/produtc_model.dart';
 import 'package:shoes_store/home/widget/custom_drawer.dart';
 import 'package:shoes_store/home/screens/homepage.dart';
-import 'package:shoes_store/products-screen/tiles/products_tile.dart';
+import 'package:shoes_store/products/tiles/products_tile.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key, this.category, this.brand});
@@ -14,6 +14,7 @@ class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 38, 24, 94),
         centerTitle: true,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_store/model/order_model.dart';
-import 'package:shoes_store/orders_screen/track_order_screen.dart';
+import 'package:shoes_store/orders/screen/track_order_screen.dart';
 
 class OrderTile extends StatelessWidget {
   const OrderTile({super.key, this.order});
@@ -18,6 +18,7 @@ class OrderTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(6, 4, 6, 4),
       child: Card(
+        elevation: 5,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))
         ),

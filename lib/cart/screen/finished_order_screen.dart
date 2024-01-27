@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes_store/orders_screen/orders_screen.dart';
+import 'package:shoes_store/orders/screen/orders_screen.dart';
 
 class FinishOrder extends StatelessWidget {
   const FinishOrder({super.key, this.orderId});

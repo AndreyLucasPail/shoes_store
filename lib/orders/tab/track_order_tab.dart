@@ -21,6 +21,7 @@ class _TrackOrderTabState extends State<TrackOrderTab> {
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: Card(
+        elevation: 5,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))
         ),
@@ -120,14 +121,14 @@ class _TrackOrderTabState extends State<TrackOrderTab> {
   }
 
   Widget line(int? status, int thisStatus){
-    Color? color;
+    List<Color> color;
 
     if(status! < thisStatus){
-      color = Colors.grey;
+      color = [Colors.grey, Colors.grey];
     }else if(status == thisStatus){
-      color = const Color.fromARGB(255, 38, 24, 94);
+      color = [const Color.fromARGB(255, 38, 24, 94), Colors.grey[100]!];
     }else{
-      color = Colors.green;
+      color = [Colors.green, Colors.green];
     }
 
     return Row(
@@ -136,7 +137,13 @@ class _TrackOrderTabState extends State<TrackOrderTab> {
         Container(
           height: 50,
           width: 10,
-          color: color,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: color,
+            ),
+          ),
         ),
         const SizedBox(width: 80,),
         const SizedBox(width: 80,),
