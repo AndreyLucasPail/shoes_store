@@ -20,6 +20,7 @@ class CartTile extends StatelessWidget {
       ),
       child: Dismissible(
         key: UniqueKey(),
+        direction: DismissDirection.endToStart,
         background: Container(
           decoration: const BoxDecoration(
             color: Color.fromARGB(255, 38, 24, 94),
@@ -27,18 +28,13 @@ class CartTile extends StatelessWidget {
           ),
           child: const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Icon(Icons.delete, color: Colors.white,),
-                Icon(Icons.delete, color: Colors.white,),
-              ],
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Icon(Icons.delete, color: Colors.white,)
             ),
           )
         ),
-        onDismissed: (direction) {
-          cartBloc!.removeCartProduct(cartProduct!);
-        },
+        confirmDismiss: (direction) => showDialogCart(context),       
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -110,6 +106,40 @@ class CartTile extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<bool?> showDialogCart(BuildContext context) async {
+    return showDialog(
+      context: context, 
+      builder: (context){
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))
+          ),
+          title: const Text("Remover produto"),
+          content: const Text("Certeza que deseja remover o  produto do carrinho?"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),     
+              child: const Text(
+                "Cancelar",
+                style: TextStyle(
+                  color: Colors.red
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                cartBloc!.removeCartProduct(cartProduct!);
+
+                Navigator.pop(context);
+              },     
+              child: const Text("Confirmar"),
+            ),
+          ],
+        );
+      }
     );
   }
 }

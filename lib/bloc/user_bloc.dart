@@ -104,10 +104,7 @@ class UserBloc extends BlocBase with Validator{
       currentUserData = UserModel.fromFirestore(docUser);
       userController.sink.add(currentUserData!);
 
-      print(currentUserData!.name);
-    }
-
-    
+    }   
     
     return currentUserData;
   }

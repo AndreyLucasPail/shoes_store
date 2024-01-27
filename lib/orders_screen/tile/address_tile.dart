@@ -43,61 +43,59 @@ class _TrackOrderCardState extends State<TrackOrderCard> {
 
           return Padding(
             padding: const EdgeInsets.all(6.0),
-            child: Expanded(
-              child: Card(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(image: AssetImage("assets/pagina-inicial.png"))
+            child: Card(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10))
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 60,
+                      width: 60,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(image: AssetImage("assets/pagina-inicial.png"))
+                      ),
+                    ),
+                    const SizedBox(width: 8,),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Id do pedido: ${order!.id}",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),                
                         ),
-                      ),
-                      const SizedBox(width: 8,),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Id do pedido: ${order!.id}",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),                
+                        const SizedBox(height: 10,),
+                        const Text(
+                          "Endereço de entrega:",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold
                           ),
-                          const SizedBox(height: 10,),
-                          const Text(
-                            "Endereço de entrega:",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold
-                            ),
+                        ),
+                        const SizedBox(height: 8,),
+                        Text(
+                          userModel?.address ?? "Endereço não disponível",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500
                           ),
-                          const SizedBox(height: 8,),
-                          Text(
-                            userModel?.address ?? "Endereço não disponível",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500
-                            ),
+                        ),
+                        const SizedBox(height: 8,),
+                        Text(
+                          "CEP: ${userModel!.cep}",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500
                           ),
-                          const SizedBox(height: 8,),
-                          Text(
-                            "CEP: ${userModel!.cep}",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),

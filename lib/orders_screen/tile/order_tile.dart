@@ -18,6 +18,9 @@ class OrderTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
       child: Card(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10))
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
