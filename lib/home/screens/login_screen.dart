@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
-import 'package:shoes_store/home/screens/homepage.dart';
 import 'package:shoes_store/home/screens/singup_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
@@ -139,9 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
       )
     );
 
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const HomePage())
-    );
+    Navigator.of(context).pop();
   }
 
   void onFail(){

@@ -5,6 +5,7 @@ import 'package:shoes_store/home/tiles/ads_tile.dart';
 import 'package:shoes_store/home/widget/custom_drawer.dart';
 import 'package:shoes_store/home/tiles/product_tile.dart';
 import 'package:shoes_store/orders/screen/orders_screen.dart';
+import 'package:shoes_store/user/screen/user_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -33,7 +34,9 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context) => <PopupMenuEntry>[
               PopupMenuItem(
                 onTap: () {
-                  
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const UserScreen())
+                  );
                 },
                 child: const Text(
                   "Perfil",
