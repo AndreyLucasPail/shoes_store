@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/model/user_model.dart';
+import 'package:shoes_store/user/screen/edit_user.dart';
 import 'package:shoes_store/user/tile/user_tile.dart';
 
 class UserScreen extends StatefulWidget {
@@ -35,6 +36,7 @@ class _UserScreenState extends State<UserScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: const Color.fromARGB(255, 38, 24, 94),
         title: const Text("Perfil"),
         centerTitle: true,
@@ -81,7 +83,11 @@ class _UserScreenState extends State<UserScreen> {
                                 backgroundColor: Colors.white,
                                 shape: const StadiumBorder(),
                               ),
-                              onPressed: (){}, 
+                              onPressed: (){
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) => EditUserScreen(userModel: userModel!,))
+                                );
+                              }, 
                               child: const Text(
                                 "Editar perfil >",
                                 style: TextStyle(
