@@ -17,8 +17,7 @@ class UserBloc extends BlocBase with Validator{
   final birthdayController = BehaviorSubject<String>();
   final cepController = BehaviorSubject<String>();
   StreamController<UserModel> userController = StreamController<UserModel>();
-  final listUserController = BehaviorSubject<List<UserModel>>();
-
+ 
   Stream<String> get outName => nameController.stream.transform(nameValidator);
   Stream<String> get outEmail => emailController.stream.transform(validateEmail);
   Stream<String> get outpass => passwordController.stream.transform(validatePassword);
@@ -26,8 +25,7 @@ class UserBloc extends BlocBase with Validator{
   Stream<String> get outBirthday => birthdayController.stream.transform(birthdayValidator);
   Stream<String> get outCep => cepController.stream.transform(cepValidator);
   Stream<UserModel> get outUser => userController.stream;
-  Stream<List<UserModel>> get outListUser => listUserController.stream;
-
+  
   Map<String, dynamic> userData = {};
   FirebaseAuth auth = FirebaseAuth.instance;
   User? firebaseUser;
@@ -37,6 +35,15 @@ class UserBloc extends BlocBase with Validator{
   Future<void> saveUser(Map<String, dynamic> userData, User? firebaseUser) async {
     this.userData = userData;
     await firebase.collection("Users").doc(firebaseUser!.uid).set(userData);
+  }
+
+  Future<void> updateUser(Map<String, dynamic> userData)async {
+    this.userData = userData;
+
+    User? user = FirebaseAuth.instance.currentUser;
+
+    await firebase.collection("Users").doc(user!.uid).update(userData);
+
   }
 
   void singUp({required Map<String, dynamic> userData,required String password, 

@@ -34,7 +34,7 @@ class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: const Color.fromARGB(255, 38, 24, 94),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color.fromARGB(255, 38, 24, 94),
@@ -50,7 +50,7 @@ class _UserScreenState extends State<UserScreen> {
             );
           }else{
 
-            final userModel = snapshot.data;
+            UserModel? userModel = snapshot.data;
 
             return ListView(
               children: [
@@ -59,9 +59,8 @@ class _UserScreenState extends State<UserScreen> {
                   children: [
                     Container(
                       height: 200,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
-                        color: Color.fromARGB(255, 38, 24, 94),
+                      decoration: const BoxDecoration(                        
+                        color: Colors.transparent,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -100,8 +99,12 @@ class _UserScreenState extends State<UserScreen> {
                         ],
                       ),
                     ),
-                    Padding(
+                    Container(
                       padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(30))
+                      ),
                       child: UserTile(userModel: userModel!),
                     ),
                   ],
