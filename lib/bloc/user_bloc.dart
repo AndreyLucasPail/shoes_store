@@ -17,6 +17,7 @@ class UserBloc extends BlocBase with Validator{
   final birthdayController = BehaviorSubject<String>();
   final cepController = BehaviorSubject<String>();
   StreamController<UserModel> userController = StreamController<UserModel>();
+  final listUserController = BehaviorSubject<List<UserModel>>();
 
   Stream<String> get outName => nameController.stream.transform(nameValidator);
   Stream<String> get outEmail => emailController.stream.transform(validateEmail);
@@ -25,6 +26,7 @@ class UserBloc extends BlocBase with Validator{
   Stream<String> get outBirthday => birthdayController.stream.transform(birthdayValidator);
   Stream<String> get outCep => cepController.stream.transform(cepValidator);
   Stream<UserModel> get outUser => userController.stream;
+  Stream<List<UserModel>> get outListUser => listUserController.stream;
 
   Map<String, dynamic> userData = {};
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -103,7 +105,6 @@ class UserBloc extends BlocBase with Validator{
       DocumentSnapshot docUser = await firebase.collection("Users").doc(firebaseUser!.uid).get();
       currentUserData = UserModel.fromFirestore(docUser);
       userController.sink.add(currentUserData!);
-
     }   
     
     return currentUserData;

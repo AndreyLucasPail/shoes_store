@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/model/user_model.dart';
+import 'package:shoes_store/user/tile/user_tile.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({super.key});
@@ -35,43 +36,73 @@ class _UserScreenState extends State<UserScreen> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 38, 24, 94),
-        title: const Text("SNKRS"),
+        title: const Text("Perfil"),
         centerTitle: true,
       ),
       body: StreamBuilder<UserModel>(
         stream: userBloc.outUser,
         builder: (context, snapshot) {
-          return ListView(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Column(
+          if(!snapshot.hasData){
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }else{
+
+            final userModel = snapshot.data;
+
+            return ListView(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Stack(
-                      alignment: Alignment.topCenter,
-                      children: [
-                        CircleAvatar(
-                          radius: 50,
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 45,
-                      width: 120,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 38, 24, 94),
-                          shape: const StadiumBorder(),
-                        ),
-                        onPressed: (){}, 
-                        child: const Text("Editar perfil >"),
+                    Container(
+                      height: 200,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+                        color: Color.fromARGB(255, 38, 24, 94),
                       ),
-                    )
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 100,
+                            width: 100,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(image: AssetImage("assets/homem.png"))
+                            ),
+                          ),
+                          const SizedBox(height: 25,),
+                          SizedBox(
+                            height: 45,
+                            width: 150,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: const StadiumBorder(),
+                              ),
+                              onPressed: (){}, 
+                              child: const Text(
+                                "Editar perfil >",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: UserTile(userModel: userModel!),
+                    ),
                   ],
                 ),
-              ),
-            ],
-          );
+              ],
+            );
+          }
         }
       ),
     );
