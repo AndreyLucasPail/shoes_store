@@ -24,6 +24,9 @@ class _EditUserScreenState extends State<EditUserScreen> {
   final addressController = TextEditingController();
   final birthdayController = TextEditingController();
   final cepController = TextEditingController();
+  final cityController = TextEditingController();
+  final neighborhoodController = TextEditingController();
+  final stateController = TextEditingController();
 
   @override
   void initState() {
@@ -68,6 +71,24 @@ class _EditUserScreenState extends State<EditUserScreen> {
               hintText: "${userModel!.birthday}",
               inputType: TextInputType.datetime,
               controller: birthdayController,
+            ),
+            UserTextField(
+              labelText: "Cidade:",
+              hintText: "${userModel!.city}",
+              inputType: TextInputType.streetAddress,
+              controller: cityController,
+            ),
+            UserTextField(
+              labelText: "Bairro:",
+              hintText: "${userModel!.neighborhood}",
+              inputType: TextInputType.streetAddress,
+              controller: neighborhoodController,
+            ),
+            UserTextField(
+              labelText: "Estado:",
+              hintText: "${userModel!.state}",
+              inputType: TextInputType.streetAddress,
+              controller: stateController,
             ),
             UserTextField(
               labelText: "CEP:",

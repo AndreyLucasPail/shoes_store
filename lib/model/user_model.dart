@@ -7,6 +7,9 @@ class UserModel {
     this.address,
     this.cep,
     this.birthday,
+    this.neighborhood,
+    this.city,
+    this.state,
   });
 
   String? name;
@@ -14,6 +17,9 @@ class UserModel {
   String? address;
   String? cep;
   String? birthday;
+  String? neighborhood;
+  String? city;
+  String? state;
 
   factory UserModel.fromFirestore(DocumentSnapshot snapshot){
     final data = snapshot.data() as Map<String, dynamic>;
@@ -24,6 +30,9 @@ class UserModel {
       address: data["adress"],
       cep: data["CEP"],
       birthday: data["birthday"],
+      neighborhood: data["neighborhood"],
+      city: data["city"],
+      state: data["state"]
     );
   }
 
@@ -33,7 +42,10 @@ class UserModel {
       "email" : email,
       "adress" : address,
       "CEP" : cep,
-      "birthday" : birthday
+      "birthday" : birthday,
+      "neighborhood" : neighborhood,
+      "city": city,
+      "state": state,
     };
   }
 }

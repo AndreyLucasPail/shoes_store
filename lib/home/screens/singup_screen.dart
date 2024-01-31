@@ -22,6 +22,9 @@ class _SingUpState extends State<SingUp> {
   final birthdayController = TextEditingController();
   final addressController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final neighborhoodController = TextEditingController();
+  final cityController = TextEditingController();
+  final stateController = TextEditingController();
 
   @override
   void dispose() {
@@ -120,6 +123,7 @@ class _SingUpState extends State<SingUp> {
                   keyboardType: TextInputType.multiline,
                   obscureText: true,
                   prefix: const Icon(Icons.lock),
+                  validator: validateConfirmPassword,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -156,6 +160,54 @@ class _SingUpState extends State<SingUp> {
                   prefix: const Icon(Icons.house),
                   stream: userBloc.outAddress,
                   onChanged: userBloc.changeAddres,
+                ),
+                 const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Bairro:",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                CustomTextField(
+                  controller: neighborhoodController,
+                  keyboardType: TextInputType.streetAddress,
+                  obscureText: false,
+                  prefix: const Icon(Icons.house),
+                ),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Cidade:",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                CustomTextField(
+                  controller: cityController,
+                  keyboardType: TextInputType.streetAddress,
+                  obscureText: false,
+                  prefix: const Icon(Icons.house),
+                ),
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Estado:",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                CustomTextField(
+                  controller: stateController,
+                  keyboardType: TextInputType.streetAddress,
+                  obscureText: false,
+                  prefix: const Icon(Icons.house),
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
@@ -206,6 +258,9 @@ class _SingUpState extends State<SingUp> {
                             "CEP": cepController.text, 
                             "birthday": birthdayController.text, 
                             "adress": addressController.text,
+                            "neighborhood": neighborhoodController.text,
+                            "city": cityController.text,
+                            "state": stateController.text,
                           };
                   
                           userBloc.singUp(
@@ -260,5 +315,12 @@ class _SingUpState extends State<SingUp> {
         duration: Duration(seconds: 2),
       ),
     );
+  }
+
+  String? validateConfirmPassword(String? text) {
+    if (text == null || text.isEmpty || passwordController.text != confirmPasswordController.text) {
+      return "Passwords do not match";
+    }
+    return null;
   }
 }

@@ -27,12 +27,11 @@ class _CartScreenState extends State<CartScreen> {
 
     userBloc = UserBloc();
     cartBloc = CartBloc();
-
-    loadCartItems();
-    
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        
+    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
       if(user != null){
-        userBloc.loadCurrentUser();
+        await userBloc.loadCurrentUser();
+        await cartBloc.loadCartItem();
       }
     });
   }
@@ -49,7 +48,7 @@ class _CartScreenState extends State<CartScreen> {
       body: StreamBuilder<List<CartModel>>(
         key: UniqueKey(),
         stream: cartBloc.cartStream, 
-        builder: (context, snapshot){
+        builder: (context, snapshot){          
           if(!snapshot.hasData || snapshot.data == null){
             return const Center(
               child: CircularProgressIndicator(),
@@ -82,9 +81,5 @@ class _CartScreenState extends State<CartScreen> {
         }
       ),
     );
-  }
-
-  void loadCartItems() async {
-    await cartBloc.loadCartItem();
   }
 }

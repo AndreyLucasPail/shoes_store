@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({super.key, this.controller, this.keyboardType, this.obscureText,
-   this.prefix, this.onChanged,this.stream});
+   this.prefix, this.onChanged,this.stream, this.validator});
 
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefix;
   final Function(String)? onChanged;
   final Stream<String>? stream;
+  final String? Function(String?)? validator;
 
 
   @override
@@ -20,6 +21,7 @@ class CustomTextField extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.fromLTRB(0, 2, 0, 8),
           child: TextFormField(
+            validator: validator,
             cursorColor: Colors.black,
             onChanged: onChanged,
             obscureText: obscureText!,

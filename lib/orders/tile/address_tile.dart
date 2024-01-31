@@ -49,7 +49,7 @@ class _TrackOrderCardState extends State<TrackOrderCard> {
                 borderRadius: BorderRadius.all(Radius.circular(10))
               ),
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.fromLTRB(10, 15, 10, 20),
                 child: Row(
                   children: [
                     Container(
@@ -80,7 +80,14 @@ class _TrackOrderCardState extends State<TrackOrderCard> {
                         ),
                         const SizedBox(height: 6,),
                         Text(
-                          userModel?.address ?? "Endereço não disponível",
+                          "${userModel!.address}, ${userModel.neighborhood}",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500
+                          ),
+                        ),
+                        Text(
+                          "${userModel.city}, ${userModel.state}",
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500
@@ -88,7 +95,7 @@ class _TrackOrderCardState extends State<TrackOrderCard> {
                         ),
                         const SizedBox(height: 8,),
                         Text(
-                          "CEP: ${userModel!.cep}",
+                          "CEP: ${userModel.cep}",
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500
