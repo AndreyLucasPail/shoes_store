@@ -53,6 +53,7 @@ class _UserScreenState extends State<UserScreen> {
             UserModel? userModel = snapshot.data;
 
             return ListView(
+              shrinkWrap: true,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
