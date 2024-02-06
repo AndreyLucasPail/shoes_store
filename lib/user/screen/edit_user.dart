@@ -1,4 +1,4 @@
-// ignore_for_file: no_logic_in_create_state
+// ignore_for_file: no_logic_in_create_state, use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/model/user_model.dart';
@@ -105,7 +105,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
                   backgroundColor: const Color.fromARGB(255, 38, 24, 94),
                   shape: const StadiumBorder(),
                 ),
-                onPressed: (){
+                onPressed: () async {
                   Map<String, dynamic> userData = {
                     "name": nameController.text == "" ? userModel!.name : nameController.text,
                     "email": emailController.text == "" ? userModel!.email : emailController.text,
@@ -117,12 +117,11 @@ class _EditUserScreenState extends State<EditUserScreen> {
                     "state": stateController.text == "" ? userModel!.state : stateController.text,
                   };
 
-                  userBloc!.updateUser(userData);
+                  await userBloc!.updateUser(userData);
 
                   onSuccess();
 
-                  Navigator.of(context).pop();
-                  
+                  Navigator.of(context).pop(userData);
                 }, 
                 child: const Text(
                   "Salvar",

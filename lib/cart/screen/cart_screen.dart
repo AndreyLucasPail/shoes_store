@@ -46,18 +46,17 @@ class _CartScreenState extends State<CartScreen> {
         centerTitle: true,
       ),
       body: StreamBuilder<List<CartModel>>(
-        key: UniqueKey(),
         stream: cartBloc.cartStream, 
         builder: (context, snapshot){          
-          if(!snapshot.hasData || snapshot.data == null){
+          if(!userBloc.isLoggedIn()){
+            return const UserNotLogged();
+
+          }else if(snapshot.connectionState == ConnectionState.waiting){
             return const Center(
               child: CircularProgressIndicator(),
             );
 
-          }else if(!userBloc.isLoggedIn()){
-            return const UserNotLogged();
-
-          }else if(snapshot.data!.isEmpty){
+          }else if(!snapshot.hasData || snapshot.data!.isEmpty){
             return const EmptyCartTile();
 
           }else{

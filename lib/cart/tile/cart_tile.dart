@@ -143,7 +143,7 @@ class CartTile extends StatelessWidget {
                 ),
               ],
             ).frosted(
-              frostColor: Colors.transparent,
+              frostColor: const Color.fromARGB(255, 38, 24, 94),
             ),
           ],
         );

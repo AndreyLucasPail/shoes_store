@@ -20,7 +20,7 @@ class _OrderScreenState extends State<OrderScreen> {
   UserBloc userBloc = UserBloc();
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
 
     userBloc = UserBloc();
@@ -47,14 +47,14 @@ class _OrderScreenState extends State<OrderScreen> {
       body: StreamBuilder<List<OrderModel>>(
         stream: ordersBloc.streamOrder,
         builder: (context, snapshot){
-          if(!snapshot.hasData || snapshot.data == null){
+          if(snapshot.connectionState == ConnectionState.waiting){
             return const Center(
               child: CircularProgressIndicator(),
             );
           }else if(!userBloc.isLoggedIn()){
             return const UserNotLogeedIn();
             
-          }else if(snapshot.data!.isEmpty){
+          }else if(!snapshot.hasData || snapshot.data!.isEmpty){
             return const EmptyOrder();
           
           }else{

@@ -43,11 +43,13 @@ class UserBloc extends BlocBase with Validator{
 
     User? user = FirebaseAuth.instance.currentUser;
 
-    await firebase.collection("Users").doc(user!.uid).update(userData);
+    if(user != null){
+      await firebase.collection("Users").doc(user.uid).update(userData);
 
-    // DocumentSnapshot doc = await firebase.collection("Users").doc(firebaseUser!.uid).get();
-    // updateUserData = UserModel.fromFirestore(doc);
-    userController.sink.add(loadCurrentUser() as UserModel);
+      DocumentSnapshot doc = await firebase.collection("Users").doc(user.uid).get();
+      updateUserData = UserModel.fromFirestore(doc);
+      userController.sink.add(updateUserData!);
+      }
 
   }
 

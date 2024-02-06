@@ -233,7 +233,7 @@ class _ProductTabState extends State<ProductTab> {
       const SnackBar(
         backgroundColor: Color.fromARGB(255, 38, 24, 94),
         content: Text(
-          "Pedido adicionado com sucesso!!",
+          "Pedido adicionado ao carrinho com sucesso!!",
           style: TextStyle(
             color: Colors.white,
           ),
