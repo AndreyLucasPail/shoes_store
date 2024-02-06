@@ -107,14 +107,19 @@ class _EditUserScreenState extends State<EditUserScreen> {
                 ),
                 onPressed: (){
                   Map<String, dynamic> userData = {
-                    "name" : nameController.text,
-                    "email" : emailController.text,
-                    "adress" : addressController.text,
-                    "birthday" : birthdayController.text,
-                    "CEP" : cepController.text
+                    "name": nameController.text == "" ? userModel!.name : nameController.text,
+                    "email": emailController.text == "" ? userModel!.email : emailController.text,
+                    "adress": addressController.text == "" ?  userModel!.address : addressController.text,
+                    "birthday": birthdayController.text == "" ? userModel!.birthday : birthdayController.text,
+                    "CEP": cepController.text == "" ? userModel!.cep : cepController.text, 
+                    "city": cityController.text == "" ? userModel!.city : cityController.text,
+                    "neighborhood": neighborhoodController.text == "" ? userModel!.neighborhood : neighborhoodController.text, 
+                    "state": stateController.text == "" ? userModel!.state : stateController.text,
                   };
 
                   userBloc!.updateUser(userData);
+
+                  onSuccess();
 
                   Navigator.of(context).pop();
                   
@@ -129,6 +134,21 @@ class _EditUserScreenState extends State<EditUserScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void onSuccess(){
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Color.fromARGB(255, 38, 24, 94),
+        content: Text(
+          "Usuaria atualizado com sucesso!",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+          ),
+        )
       ),
     );
   }

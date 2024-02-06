@@ -47,7 +47,7 @@ class _OrderScreenState extends State<OrderScreen> {
       body: StreamBuilder<List<OrderModel>>(
         stream: ordersBloc.streamOrder,
         builder: (context, snapshot){
-          if(!snapshot.hasData){
+          if(!snapshot.hasData || snapshot.data == null){
             return const Center(
               child: CircularProgressIndicator(),
             );

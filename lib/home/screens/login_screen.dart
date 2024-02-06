@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
-import 'package:shoes_store/home/screens/singup_screen.dart';
 import 'package:shoes_store/home/widget/custom_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -110,9 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: const StadiumBorder()
                   ),
                   onPressed: (){
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => const SingUp())
-                    );
+                    Navigator.of(context).pop();
                   }, 
                   child: const Text(
                     "Criar Conta",

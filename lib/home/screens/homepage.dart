@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/cart/screen/cart_screen.dart';
+import 'package:shoes_store/home/screens/login_screen.dart';
 import 'package:shoes_store/home/tiles/ads_tile.dart';
 import 'package:shoes_store/home/widget/custom_drawer.dart';
 import 'package:shoes_store/home/tiles/product_tile.dart';
@@ -19,6 +21,17 @@ class _HomePageState extends State<HomePage> {
   UserBloc userBloc = UserBloc();
 
   @override
+  void initState() {
+    super.initState();
+
+    FirebaseAuth.instance
+    .authStateChanges()
+    .listen((User? user) {
+      userBloc.loadCurrentUser();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -34,9 +47,15 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (context) => <PopupMenuEntry>[
               PopupMenuItem(
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const UserScreen())
-                  );
+                  if(!userBloc.isLoggedIn()){
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const LoginScreen())
+                    );
+                  }else{
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const UserScreen())
+                    );
+                  }
                 },
                 child: const Text(
                   "Perfil",

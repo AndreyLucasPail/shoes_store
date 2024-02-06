@@ -47,7 +47,7 @@ class _UserScreenState extends State<UserScreen> {
           if(!snapshot.hasData){
             return const Center(
               child: CircularProgressIndicator(),
-            );
+            );          
           }else{
 
             UserModel? userModel = snapshot.data;
