@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/bloc/orders_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
-import 'package:shoes_store/home/screens/homepage.dart';
+import 'package:shoes_store/routes/app_routes.dart';
+import 'package:shoes_store/ui/home/screens/homepage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,9 +29,9 @@ class MyApp extends StatelessWidget {
       dependencies: const [],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        initialRoute: HomePage.tag,
+        onGenerateRoute: AppRoutes.generateRoutes,
       ),
     );
   }
 }
-
