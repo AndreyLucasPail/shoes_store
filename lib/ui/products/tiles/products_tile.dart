@@ -1,7 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_store/model/produtc_model.dart';
-
 import 'package:shoes_store/ui/products/tabs/product_tab.dart';
 
 class ProductsTile extends StatelessWidget {
@@ -20,12 +20,15 @@ class ProductsTile extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       child: InkWell(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
+          Navigator.of(context).push(
+            MaterialPageRoute(
               builder: (context) => ProductTab(
-                    product: products!,
-                    category: category,
-                    brand: brand,
-                  )));
+                product: products!,
+                category: category,
+                brand: brand,
+              ),
+            ),
+          );
         },
         child: Card(
           shape: RoundedRectangleBorder(
@@ -42,8 +45,11 @@ class ProductsTile extends StatelessWidget {
                   width: 200,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(products!.images![0]),
-                        fit: BoxFit.cover),
+                      image: NetworkImage(
+                        products!.images![0],
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -51,7 +57,7 @@ class ProductsTile extends StatelessWidget {
                 padding: const EdgeInsets.all(6.0),
                 child: Align(
                     alignment: Alignment.center,
-                    child: Text(
+                    child: AutoSizeText(
                       "${products!.name}",
                       style: const TextStyle(
                         color: Colors.black,
@@ -63,16 +69,17 @@ class ProductsTile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
                 child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text(
-                      "R\$ ${formatNumber.format(products!.price)}",
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        letterSpacing: 1,
-                      ),
-                    )),
-              )
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    "R\$ ${formatNumber.format(products!.price)}",
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

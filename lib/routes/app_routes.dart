@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/ui/cart/screen/cart_screen.dart';
 import 'package:shoes_store/ui/edit-user/edit_user.dart';
-import 'package:shoes_store/ui/home/screens/homepage.dart';
+import 'package:shoes_store/ui/home/homepage.dart';
 import 'package:shoes_store/ui/login/login_screen.dart';
+import 'package:shoes_store/ui/products/products_screen.dart';
 import 'package:shoes_store/ui/singUp/singup_screen.dart';
 import 'package:shoes_store/ui/orders/screen/orders_screen.dart';
 import 'package:shoes_store/ui/orders/screen/track_order_screen.dart';
-import 'package:shoes_store/ui/products/screen/products_screen.dart';
 import 'package:shoes_store/ui/user/user_screen.dart';
 
 class AppRoutes {

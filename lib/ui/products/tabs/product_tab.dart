@@ -35,6 +35,7 @@ class _ProductTabState extends State<ProductTab> {
   final String? category;
   final String? brand;
   String? size;
+  bool activeButton = false;
   CartBloc? cartBloc = CartBloc();
   NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
 
@@ -74,7 +75,10 @@ class _ProductTabState extends State<ProductTab> {
               items: product!.images!.map((url) {
                 return Container(
                   decoration: BoxDecoration(
-                      image: DecorationImage(image: NetworkImage(url))),
+                    image: DecorationImage(
+                      image: NetworkImage(url),
+                    ),
+                  ),
                 );
               }).toList(),
             ),
@@ -142,20 +146,22 @@ class _ProductTabState extends State<ProductTab> {
                       return GestureDetector(
                         onTap: () {
                           setState(() {
-                            size = sizeButtonText;
+                            size == sizeButtonText
+                                ? activeButton = !activeButton
+                                : activeButton;
                           });
                         },
                         child: Container(
                           width: 50,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: sizeButtonText == size
+                            color: activeButton
                                 ? const Color.fromARGB(255, 38, 24, 94)
                                 : Colors.grey[100],
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(4)),
                             border: Border.all(
-                              color: sizeButtonText == size
+                              color: activeButton
                                   ? const Color.fromARGB(255, 38, 24, 94)
                                   : Colors.black,
                               width: 2,

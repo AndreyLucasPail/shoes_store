@@ -12,12 +12,11 @@ class AdsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(0, 2.5, 0, 2.5),
-      width: width,
+      width: MediaQuery.of(context).size.width,
       height: height,
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(image!)),
-        borderRadius: BorderRadius.circular(0)
-      ),
+          image: DecorationImage(image: AssetImage(image!)),
+          borderRadius: BorderRadius.circular(0)),
     );
   }
 }

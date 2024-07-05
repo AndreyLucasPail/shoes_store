@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
-import 'package:shoes_store/ui/home/screens/homepage.dart';
+import 'package:shoes_store/ui/home/homepage.dart';
 import 'package:shoes_store/ui/login/login_screen.dart';
 import 'package:shoes_store/widgets/login_custom_text_field.dart';
 
