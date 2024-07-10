@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_store/model/produtc_model.dart';
-import 'package:shoes_store/ui/products/tabs/product_tab.dart';
+import 'package:shoes_store/ui/product_screen/product_screen.dart';
 
 class ProductsTile extends StatelessWidget {
   const ProductsTile(
@@ -22,7 +22,7 @@ class ProductsTile extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => ProductTab(
+              builder: (context) => ProductScreen(
                 product: products!,
                 category: category,
                 brand: brand,

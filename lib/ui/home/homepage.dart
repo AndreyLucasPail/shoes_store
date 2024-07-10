@@ -5,7 +5,7 @@ import 'package:shoes_store/ui/cart/screen/cart_screen.dart';
 import 'package:shoes_store/ui/login/login_screen.dart';
 import 'package:shoes_store/ui/home/tiles/ads_tile.dart';
 import 'package:shoes_store/widgets/custom_drawer.dart';
-import 'package:shoes_store/ui/home/tiles/product_tile.dart';
+import 'package:shoes_store/ui/home/tiles/products_tile.dart';
 import 'package:shoes_store/ui/orders/screen/orders_screen.dart';
 import 'package:shoes_store/ui/user/user_screen.dart';
 import 'package:shoes_store/utils/colors/custom_colors.dart';

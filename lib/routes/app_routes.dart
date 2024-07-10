@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_store/ui/product_screen/product_screen.dart';
 import 'package:shoes_store/ui/cart/screen/cart_screen.dart';
 import 'package:shoes_store/ui/edit-user/edit_user.dart';
 import 'package:shoes_store/ui/home/homepage.dart';
@@ -20,6 +21,16 @@ class AppRoutes {
     switch (settings.name) {
       case HomePage.tag:
         return const HomePage();
+      case ProductScreen.tag:
+        ProductScreenArgs args;
+
+        args = settings.arguments as ProductScreenArgs;
+
+        return ProductScreen(
+          product: args.product,
+          brand: args.brand,
+          category: args.category,
+        );
       case LoginScreen.tag:
         return const LoginScreen();
       case SingUpScreen.tag:
@@ -29,7 +40,14 @@ class AppRoutes {
       case TrackOrder.tag:
         return const TrackOrder();
       case ProductsScreen.tag:
-        return const ProductsScreen();
+        ProductsScreenArgs args;
+
+        args = settings.arguments as ProductsScreenArgs;
+
+        return ProductsScreen(
+          brand: args.brand,
+          category: args.category,
+        );
       case UserScreen.tag:
         return const UserScreen();
       case EditUserScreen.tag:

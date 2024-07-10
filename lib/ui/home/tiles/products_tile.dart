@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_store/model/produtc_model.dart';
-import 'package:shoes_store/ui/products/tabs/product_tab.dart';
+import 'package:shoes_store/ui/product_screen/product_screen.dart';
 import 'package:shoes_store/utils/colors/custom_colors.dart';
 
 class ProductsTile extends StatelessWidget {
@@ -53,13 +53,13 @@ class ProductsTile extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => ProductTab(
-                              product: productsData,
-                              category: category,
-                              brand: brand,
-                            ),
+                        Navigator.pushNamed(
+                          context,
+                          ProductScreen.tag,
+                          arguments: ProductScreenArgs(
+                            brand: brand,
+                            category: category,
+                            product: productsData,
                           ),
                         );
                       },
