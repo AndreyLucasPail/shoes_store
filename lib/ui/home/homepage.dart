@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
-import 'package:shoes_store/ui/cart/screen/cart_screen.dart';
+import 'package:shoes_store/ui/cart/cart_screen.dart';
 import 'package:shoes_store/ui/login/login_screen.dart';
 import 'package:shoes_store/ui/home/tiles/ads_tile.dart';
 import 'package:shoes_store/widgets/custom_drawer.dart';
@@ -144,11 +144,13 @@ class _HomePageState extends State<HomePage> {
         ),
         PopupMenuItem(
           onTap: () {
-            userBloc.singOut();
+            userBloc.isLoggedIn()
+                ? userBloc.singOut()
+                : Navigator.pushNamed(context, LoginScreen.tag);
           },
-          child: const Text(
-            "Sair",
-            style: TextStyle(
+          child: Text(
+            userBloc.isLoggedIn() ? "Sair" : "Entrar",
+            style: const TextStyle(
               color: CustomColors.black,
               fontWeight: FontWeight.bold,
             ),

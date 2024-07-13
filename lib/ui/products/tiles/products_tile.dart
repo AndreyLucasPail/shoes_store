@@ -5,8 +5,12 @@ import 'package:shoes_store/model/produtc_model.dart';
 import 'package:shoes_store/ui/product_screen/product_screen.dart';
 
 class ProductsTile extends StatelessWidget {
-  const ProductsTile(
-      {super.key, this.category, this.brand, required this.products});
+  const ProductsTile({
+    super.key,
+    this.category,
+    this.brand,
+    required this.products,
+  });
 
   final String? category;
   final String? brand;
@@ -56,15 +60,16 @@ class ProductsTile extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(6.0),
                 child: Align(
-                    alignment: Alignment.center,
-                    child: AutoSizeText(
-                      "${products!.name}",
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )),
+                  alignment: Alignment.center,
+                  child: AutoSizeText(
+                    "${products!.name}",
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),

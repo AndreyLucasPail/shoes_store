@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
-import 'package:shoes_store/ui/cart/screen/finished_order_screen.dart';
+import 'package:shoes_store/ui/finished_order/finished_order_screen.dart';
 
 class CardPrice extends StatelessWidget {
   const CardPrice({super.key, this.cartBloc});

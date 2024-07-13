@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/ui/product_screen/product_screen.dart';
-import 'package:shoes_store/ui/cart/screen/cart_screen.dart';
+import 'package:shoes_store/ui/cart/cart_screen.dart';
 import 'package:shoes_store/ui/edit-user/edit_user.dart';
 import 'package:shoes_store/ui/home/homepage.dart';
 import 'package:shoes_store/ui/login/login_screen.dart';

@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerLeft,
           child: Text("Email:"),
         ),
-        LoginCustomTextField(
+        CustomTextField(
           keyboardType: TextInputType.emailAddress,
           obscureText: false,
           controller: emailController,
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerLeft,
           child: Text("Senha:"),
         ),
-        LoginCustomTextField(
+        CustomTextField(
           keyboardType: TextInputType.multiline,
           obscureText: true,
           controller: passwordController,
@@ -174,7 +174,9 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: CustomColors.red,
         content: Text(
           "Erro ao entrar!!",
-          style: TextStyle(color: CustomColors.black),
+          style: TextStyle(
+            color: CustomColors.black,
+          ),
         ),
       ),
     );

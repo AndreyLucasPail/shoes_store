@@ -7,15 +7,21 @@ import 'package:shoes_store/ui/products/tiles/products_tile.dart';
 import 'package:shoes_store/utils/colors/custom_colors.dart';
 
 class ProductsScreenArgs {
-  ProductsScreenArgs({required this.brand, required this.category});
+  ProductsScreenArgs({
+    required this.brand,
+    required this.category,
+  });
 
   String? category;
   String? brand;
 }
 
 class ProductsScreen extends StatefulWidget {
-  const ProductsScreen(
-      {super.key, required this.category, required this.brand});
+  const ProductsScreen({
+    super.key,
+    required this.category,
+    required this.brand,
+  });
 
   static const tag = "/productsScreen";
 

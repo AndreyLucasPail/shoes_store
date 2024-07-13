@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LoginCustomTextField extends StatelessWidget {
-  const LoginCustomTextField({
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
     super.key,
     this.controller,
     this.keyboardType,

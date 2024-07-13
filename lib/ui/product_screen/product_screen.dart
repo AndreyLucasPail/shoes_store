@@ -187,10 +187,11 @@ class _ProductScreenState extends State<ProductScreen> {
                 childAspectRatio: 0.5,
               ),
               children: widget.product!.sizes!.map((sizeButtonText) {
-                return GestureDetector(
+                return InkWell(
                   onTap: () {
                     setState(
                       () {
+                        size = sizeButtonText;
                         size == sizeButtonText
                             ? activeButton = !activeButton
                             : activeButton;
@@ -201,12 +202,12 @@ class _ProductScreenState extends State<ProductScreen> {
                     width: 50,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: activeButton
+                      color: size == sizeButtonText
                           ? CustomColors.midNigthBlue
                           : Colors.grey[100],
                       borderRadius: const BorderRadius.all(Radius.circular(4)),
                       border: Border.all(
-                        color: activeButton
+                        color: size == sizeButtonText
                             ? CustomColors.midNigthBlue
                             : CustomColors.black,
                         width: 2,
