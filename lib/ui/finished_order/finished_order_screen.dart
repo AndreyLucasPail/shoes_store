@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes_store/ui/orders/screen/orders_screen.dart';
+import 'package:shoes_store/ui/orders/orders_screen.dart';
 import 'package:shoes_store/utils/colors/custom_colors.dart';
 
 class FinishOrder extends StatefulWidget {

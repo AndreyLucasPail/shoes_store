@@ -6,8 +6,8 @@ import 'package:shoes_store/ui/home/homepage.dart';
 import 'package:shoes_store/ui/login/login_screen.dart';
 import 'package:shoes_store/ui/products/products_screen.dart';
 import 'package:shoes_store/ui/singUp/singup_screen.dart';
-import 'package:shoes_store/ui/orders/screen/orders_screen.dart';
-import 'package:shoes_store/ui/orders/screen/track_order_screen.dart';
+import 'package:shoes_store/ui/orders/orders_screen.dart';
+import 'package:shoes_store/ui/track_order/track_order_screen.dart';
 import 'package:shoes_store/ui/user/user_screen.dart';
 
 class AppRoutes {
@@ -37,8 +37,12 @@ class AppRoutes {
         return const SingUpScreen();
       case OrderScreen.tag:
         return const OrderScreen();
-      case TrackOrder.tag:
-        return const TrackOrder();
+      case TrackOrderScreen.tag:
+        TrackOrderScreenArgs args;
+
+        args = settings.arguments as TrackOrderScreenArgs;
+
+        return TrackOrderScreen(order: args.order);
       case ProductsScreen.tag:
         ProductsScreenArgs args;
 

@@ -1,24 +1,22 @@
-// ignore_for_file: no_logic_in_create_state
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/model/order_model.dart';
 import 'package:shoes_store/model/user_model.dart';
 
-class TrackOrderCard extends StatefulWidget {
-  const TrackOrderCard({super.key, this.order});
+class AddressCard extends StatefulWidget {
+  const AddressCard({super.key, this.order});
 
   final OrderModel? order;
 
   @override
-  State<TrackOrderCard> createState() => _TrackOrderCardState(order);
+  State<AddressCard> createState() => _AddressCardState();
 }
 
-class _TrackOrderCardState extends State<TrackOrderCard> {
-  _TrackOrderCardState(this.order);
+class _AddressCardState extends State<AddressCard> {
+  _AddressCardState();
 
-  final OrderModel? order;
   UserBloc userBloc = UserBloc();
-  
+
   @override
   void initState() {
     super.initState();
@@ -33,20 +31,24 @@ class _TrackOrderCardState extends State<TrackOrderCard> {
     return StreamBuilder<UserModel>(
       stream: userBloc.outUser,
       builder: (context, snapshot) {
-        if(!snapshot.hasData){
+        if (!snapshot.hasData) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        }else{
-
+        } else {
           UserModel? userModel = snapshot.data;
 
           return Padding(
-            padding: const EdgeInsets.all(6.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 4.0,
+            ),
             child: Card(
               elevation: 5,
               shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10))
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 15, 10, 20),
@@ -56,49 +58,51 @@ class _TrackOrderCardState extends State<TrackOrderCard> {
                       height: 60,
                       width: 60,
                       decoration: const BoxDecoration(
-                        image: DecorationImage(image: AssetImage("assets/pagina-inicial.png"))
+                        image: DecorationImage(
+                          image: AssetImage("assets/pagina-inicial.png"),
+                        ),
                       ),
                     ),
-                    const SizedBox(width: 8,),
+                    const SizedBox(width: 8),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Id do pedido:\n ${order!.id}",
+                          "Id do pedido:\n ${widget.order!.id}",
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                          ),                
+                          ),
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 10),
                         const Text(
                           "Endereço de entrega:",
                           style: TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.bold
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 6,),
+                        const SizedBox(height: 6),
                         Text(
                           "${userModel!.address}, ${userModel.neighborhood}",
                           style: const TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                         Text(
                           "${userModel.city}, ${userModel.state}",
                           style: const TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(height: 8,),
+                        const SizedBox(height: 8),
                         Text(
                           "CEP: ${userModel.cep}",
                           style: const TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w500
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ],
@@ -109,7 +113,7 @@ class _TrackOrderCardState extends State<TrackOrderCard> {
             ),
           );
         }
-      }
+      },
     );
   }
 }

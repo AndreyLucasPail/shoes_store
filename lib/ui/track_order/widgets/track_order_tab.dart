@@ -1,72 +1,72 @@
-// ignore_for_file: no_logic_in_create_state
 import 'package:flutter/material.dart';
 import 'package:shoes_store/model/order_model.dart';
+import 'package:shoes_store/utils/colors/custom_colors.dart';
 
-class TrackOrderTab extends StatefulWidget {
-  const TrackOrderTab({super.key, required this.order});
+class TrackOrderCard extends StatefulWidget {
+  const TrackOrderCard({super.key, required this.order});
 
   final OrderModel? order;
 
   @override
-  State<TrackOrderTab> createState() => _TrackOrderTabState(order);
+  State<TrackOrderCard> createState() => _TrackOrderCardState();
 }
 
-class _TrackOrderTabState extends State<TrackOrderTab> {
-  _TrackOrderTabState(this.order);
-
-  final OrderModel? order;
+class _TrackOrderCardState extends State<TrackOrderCard> {
+  _TrackOrderCardState();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(6.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
       child: Card(
-        elevation: 5,
+        elevation: 6,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10))
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               buildCircle(
-                order!.status,
+                widget.order!.status,
                 1,
                 "Pedido recebido",
                 "assets/bloco-de-anotacoes.png",
               ),
-              line(order!.status, 1),
+              line(widget.order!.status, 1),
               buildCircle(
-                order!.status, 
-                2, 
+                widget.order!.status,
+                2,
                 "Pagamento confirmado",
                 "assets/cartao.png",
               ),
-              line(order!.status, 2),
+              line(widget.order!.status, 2),
               buildCircle(
-                order!.status, 
-                3, 
+                widget.order!.status,
+                3,
                 "Em separação",
                 "assets/cumprimento-de-pedidos.png",
               ),
-              line(order!.status, 3),
+              line(widget.order!.status, 3),
               buildCircle(
-                order!.status, 
-                4, 
+                widget.order!.status,
+                4,
                 "Pedido enviado",
-                "assets/carro-van.png"
+                "assets/carro-van.png",
               ),
-              line(order!.status, 4),
+              line(widget.order!.status, 4),
               buildCircle(
-                order!.status, 
-                5, 
+                widget.order!.status,
+                5,
                 "Pedido saiu para entrega",
-                "assets/van-de-entrega.png"
+                "assets/van-de-entrega.png",
               ),
-              line(order!.status, 5),
+              line(widget.order!.status, 5),
               buildCircle(
-                order!.status, 
-                6, 
+                widget.order!.status,
+                6,
                 "Pedido entregue",
                 "assets/entrega.png",
               ),
@@ -77,15 +77,15 @@ class _TrackOrderTabState extends State<TrackOrderTab> {
     );
   }
 
-  Widget buildCircle(int? status, int thisStatus, String? text, String? img){
+  Widget buildCircle(int? status, int thisStatus, String? text, String? img) {
     Color? color;
 
-    if(status! < thisStatus){
-      color = Colors.grey;
-    }else if(status == thisStatus){
-      color = const Color.fromARGB(255, 38, 24, 94);
-    }else{
-      color = Colors.green;
+    if (status! < thisStatus) {
+      color = CustomColors.grey;
+    } else if (status == thisStatus) {
+      color = CustomColors.midNigthBlue;
+    } else {
+      color = CustomColors.green;
     }
 
     return Column(
@@ -98,37 +98,37 @@ class _TrackOrderTabState extends State<TrackOrderTab> {
                 radius: 15,
                 backgroundColor: color,
               ),
-              const SizedBox(width: 30,),
+              const SizedBox(width: 30),
               SizedBox(
                 height: 65,
                 width: 65,
-                child: Image.asset(img!)
+                child: Image.asset(img!),
               ),
-              const SizedBox(width: 15,),
+              const SizedBox(width: 15),
               Flexible(
                 child: Text(
                   text!,
                   style: const TextStyle(
-                    fontSize: 18
+                    fontSize: 18,
                   ),
                 ),
-              ),        
+              ),
             ],
           ),
-        ),        
+        ),
       ],
     );
   }
 
-  Widget line(int? status, int thisStatus){
+  Widget line(int? status, int thisStatus) {
     List<Color> color;
 
-    if(status! < thisStatus){
-      color = [Colors.grey, Colors.grey];
-    }else if(status == thisStatus){
-      color = [const Color.fromARGB(255, 38, 24, 94), Colors.grey[100]!];
-    }else{
-      color = [Colors.green, Colors.green];
+    if (status! < thisStatus) {
+      color = [CustomColors.grey, CustomColors.grey];
+    } else if (status == thisStatus) {
+      color = [CustomColors.midNigthBlue, CustomColors.grey100];
+    } else {
+      color = [CustomColors.green, CustomColors.green];
     }
 
     return Row(
@@ -145,8 +145,7 @@ class _TrackOrderTabState extends State<TrackOrderTab> {
             ),
           ),
         ),
-        const SizedBox(width: 80,),
-        const SizedBox(width: 80,),
+        SizedBox(width: MediaQuery.of(context).size.width * 0.5),
       ],
     );
   }

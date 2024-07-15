@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_store/model/order_model.dart';
-import 'package:shoes_store/ui/orders/screen/track_order_screen.dart';
+import 'package:shoes_store/ui/track_order/track_order_screen.dart';
+import 'package:shoes_store/utils/colors/custom_colors.dart';
 
 class OrderTile extends StatelessWidget {
   const OrderTile({super.key, this.order});
@@ -19,7 +20,10 @@ class OrderTile extends StatelessWidget {
       child: Card(
         elevation: 5,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(10, 20, 10, 25),
           child: Column(
@@ -33,16 +37,12 @@ class OrderTile extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               Text(
                 "Data do pedido: $orderDateFormat",
                 style: const TextStyle(fontSize: 18),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               const Text(
                 "Resumos do pedido:",
                 style: TextStyle(
@@ -50,39 +50,34 @@ class OrderTile extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               Column(
-                  children: order!.products!.map((item) {
-                return Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            item["model"],
-                            style: const TextStyle(
-                              fontSize: 16,
+                children: order!.products!.map((item) {
+                  return Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              item["model"],
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "R\$ ${formatNumber.format(item["price"])}",
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    )
-                  ],
-                );
-              }).toList()),
+                          const SizedBox(width: 10),
+                          Text(
+                            "R\$ ${formatNumber.format(item["price"])}",
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 3)
+                    ],
+                  );
+                }).toList(),
+              ),
               const SizedBox(
                 height: 15,
               ),
@@ -96,25 +91,26 @@ class OrderTile extends StatelessWidget {
                   Text(
                     "R\$ ${formatNumber.format(order!.totalPrice)}",
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20),
               SizedBox(
                 height: 45,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     shape: const StadiumBorder(),
-                    backgroundColor: const Color.fromARGB(255, 38, 24, 94),
+                    backgroundColor: CustomColors.midNigthBlue,
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => TrackOrder(
-                              order: order,
-                            )));
+                    Navigator.pushNamed(
+                      context,
+                      TrackOrderScreen.tag,
+                      arguments: TrackOrderScreenArgs(order: order),
+                    );
                   },
                   child: const Text(
                     "Acompanhar pedido",
