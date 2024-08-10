@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shoes_store/model/produtc_model.dart';
-import 'package:shoes_store/ui/product_screen/product_screen.dart';
+import 'package:shoes_store/ui/shoes_screen/shoes_screen.dart';
 import 'package:shoes_store/utils/colors/custom_colors.dart';
 
 class ProductsTile extends StatelessWidget {
@@ -21,13 +21,7 @@ class ProductsTile extends StatelessWidget {
     NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
 
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection("products")
-          .doc(category)
-          .collection("shoes")
-          .doc(brand)
-          .collection("model")
-          .snapshots(),
+      stream: FirebaseFirestore.instance.collection("home").snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData && snapshot.data == null) {
           return const Center(
@@ -40,12 +34,14 @@ class ProductsTile extends StatelessWidget {
           }).toList();
 
           return SizedBox(
-            height: 300,
+            height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
+            child: GridView.builder(
               itemCount: productsList.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.7,
+              ),
               itemBuilder: (context, index) {
                 ProductsModel productsData = productsList[index];
 
@@ -55,10 +51,10 @@ class ProductsTile extends StatelessWidget {
                       onTap: () {
                         Navigator.pushNamed(
                           context,
-                          ProductScreen.tag,
-                          arguments: ProductScreenArgs(
-                            brand: brand,
-                            category: category,
+                          ShoesScreen.tag,
+                          arguments: ShoesScreenArgs(
+                            brand: productsData.brand,
+                            category: productsData.category,
                             product: productsData,
                           ),
                         );
@@ -67,7 +63,6 @@ class ProductsTile extends StatelessWidget {
                         elevation: 5,
                         child: SizedBox(
                           width: 180,
-                          height: 300,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -77,8 +72,7 @@ class ProductsTile extends StatelessWidget {
                                   ? Align(
                                       alignment: Alignment.topCenter,
                                       child: Container(
-                                        padding: const EdgeInsets.all(8.0),
-                                        height: 200,
+                                        height: 120,
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
                                             image: NetworkImage(
@@ -97,7 +91,7 @@ class ProductsTile extends StatelessWidget {
                                   child: AutoSizeText(
                                     "${productsData.name}",
                                     style: const TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 20,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -110,7 +104,7 @@ class ProductsTile extends StatelessWidget {
                                   child: Text(
                                     "R\$ ${formatNumber.format(productsData.price)}",
                                     style: const TextStyle(
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       color: CustomColors.black,
                                     ),
                                   ),

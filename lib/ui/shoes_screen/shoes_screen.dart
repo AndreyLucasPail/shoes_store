@@ -12,8 +12,8 @@ import 'package:shoes_store/model/cart_model.dart';
 import 'package:shoes_store/model/produtc_model.dart';
 import 'package:shoes_store/utils/colors/custom_colors.dart';
 
-class ProductScreenArgs {
-  ProductScreenArgs({
+class ShoesScreenArgs {
+  ShoesScreenArgs({
     required this.brand,
     required this.category,
     required this.product,
@@ -23,8 +23,8 @@ class ProductScreenArgs {
   final String? brand;
 }
 
-class ProductScreen extends StatefulWidget {
-  const ProductScreen({
+class ShoesScreen extends StatefulWidget {
+  const ShoesScreen({
     super.key,
     required this.product,
     required this.category,
@@ -38,11 +38,11 @@ class ProductScreen extends StatefulWidget {
   final String? brand;
 
   @override
-  State<ProductScreen> createState() => _ProductScreenState();
+  State<ShoesScreen> createState() => _ShoesScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
-  _ProductScreenState();
+class _ShoesScreenState extends State<ShoesScreen> {
+  _ShoesScreenState();
 
   late UserBloc userBloc;
 
