@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:shoes_store/model/produtc_model.dart';
 import 'package:shoes_store/ui/shoes_screen/shoes_screen.dart';
 import 'package:shoes_store/utils/colors/custom_colors.dart';
@@ -20,16 +23,15 @@ class ProductsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
 
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection("home").snapshots(),
-      builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+    return FutureBuilder<List<DocumentSnapshot>>(
+      future: getRandomProducts(),
+      builder: (context, snapshot) {
         if (!snapshot.hasData && snapshot.data == null) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         } else {
-          final List<ProductsModel> productsList =
-              snapshot.data!.docs.map((doc) {
+          final List<ProductsModel> productsList = snapshot.data!.map((doc) {
             return ProductsModel.fromFirestore(doc);
           }).toList();
 
@@ -37,6 +39,7 @@ class ProductsTile extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: productsList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -85,7 +88,7 @@ class ProductsTile extends StatelessWidget {
                                     )
                                   : Container(),
                               Padding(
-                                padding: const EdgeInsets.all(4),
+                                padding: const EdgeInsets.all(6),
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: AutoSizeText(
@@ -98,13 +101,16 @@ class ProductsTile extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0,
+                                  vertical: 6.0,
+                                ),
                                 child: Align(
                                   alignment: Alignment.center,
                                   child: Text(
                                     "R\$ ${formatNumber.format(productsData.price)}",
                                     style: const TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 20,
                                       color: CustomColors.black,
                                     ),
                                   ),
@@ -123,5 +129,67 @@ class ProductsTile extends StatelessWidget {
         }
       },
     );
+  }
+
+  Future<List<DocumentSnapshot>> getRandomProducts() async {
+    Stream<QuerySnapshot<Map<String, dynamic>>> nike = FirebaseFirestore
+        .instance
+        .collection("products")
+        .doc("basketball")
+        .collection("shoes")
+        .doc("Nike")
+        .collection("model")
+        .snapshots();
+    Stream<QuerySnapshot<Map<String, dynamic>>> adidas = FirebaseFirestore
+        .instance
+        .collection("products")
+        .doc("basketball")
+        .collection("shoes")
+        .doc("adidas")
+        .collection("model")
+        .snapshots();
+    Stream<QuerySnapshot<Map<String, dynamic>>> jordan = FirebaseFirestore
+        .instance
+        .collection("products")
+        .doc("basketball")
+        .collection("shoes")
+        .doc("jordan")
+        .collection("model")
+        .snapshots();
+    Stream<QuerySnapshot<Map<String, dynamic>>> underArmour = FirebaseFirestore
+        .instance
+        .collection("products")
+        .doc("basketball")
+        .collection("shoes")
+        .doc("anderArmour")
+        .collection("model")
+        .snapshots();
+
+    final combinedStream = Rx.combineLatest4(
+      nike,
+      adidas,
+      jordan,
+      underArmour,
+      (
+        QuerySnapshot nikeSnap,
+        QuerySnapshot adidasSnap,
+        QuerySnapshot jordanSnap,
+        QuerySnapshot underArmourSnap,
+      ) {
+        return [
+          ...nikeSnap.docs,
+          ...adidasSnap.docs,
+          ...jordanSnap.docs,
+          ...underArmourSnap.docs,
+        ];
+      },
+    );
+
+    List<DocumentSnapshot>? docs = await combinedStream.first;
+
+    docs.shuffle(Random());
+    List<DocumentSnapshot> randomList = docs.take(10).toList();
+    print("<<<<<<<<<<<<<<<<<<<<<<<<< $docs >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    return randomList;
   }
 }

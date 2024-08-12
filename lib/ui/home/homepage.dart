@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/ui/cart/cart_screen.dart';
 import 'package:shoes_store/ui/login/login_screen.dart';
-import 'package:shoes_store/ui/home/tiles/ads_tile.dart';
 import 'package:shoes_store/widgets/custom_drawer.dart';
 import 'package:shoes_store/ui/home/tiles/products_tile.dart';
 import 'package:shoes_store/ui/orders/orders_screen.dart';
