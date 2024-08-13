@@ -1,5 +1,3 @@
-// ignore_for_file: no_logic_in_create_state
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -177,14 +175,14 @@ class _ShoesScreenState extends State<ShoesScreen> {
           ),
           const SizedBox(height: 4),
           SizedBox(
-            height: 35,
+            height: 45,
             child: GridView(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(vertical: 2),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 mainAxisSpacing: 8.0,
-                childAspectRatio: 0.5,
+                childAspectRatio: 0.8,
               ),
               children: widget.product!.sizes!.map((sizeButtonText) {
                 return InkWell(
@@ -199,13 +197,12 @@ class _ShoesScreenState extends State<ShoesScreen> {
                     );
                   },
                   child: Container(
-                    width: 50,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: size == sizeButtonText
                           ? CustomColors.midNigthBlue
                           : Colors.grey[100],
-                      borderRadius: const BorderRadius.all(Radius.circular(4)),
+                      shape: BoxShape.circle,
                       border: Border.all(
                         color: size == sizeButtonText
                             ? CustomColors.midNigthBlue
@@ -219,7 +216,7 @@ class _ShoesScreenState extends State<ShoesScreen> {
                         color: sizeButtonText == size
                             ? Colors.white
                             : CustomColors.black,
-                        fontSize: 16,
+                        fontSize: 18,
                       ),
                     ),
                   ),

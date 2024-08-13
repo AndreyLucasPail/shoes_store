@@ -35,96 +35,93 @@ class ProductsTile extends StatelessWidget {
             return ProductsModel.fromFirestore(doc);
           }).toList();
 
-          return SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: productsList.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.7,
-              ),
-              itemBuilder: (context, index) {
-                ProductsModel productsData = productsList[index];
+          return GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: productsList.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.7,
+            ),
+            itemBuilder: (context, index) {
+              ProductsModel productsData = productsList[index];
 
-                return Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          ShoesScreen.tag,
-                          arguments: ShoesScreenArgs(
-                            brand: productsData.brand,
-                            category: productsData.category,
-                            product: productsData,
-                          ),
-                        );
-                      },
-                      child: Card(
-                        elevation: 5,
-                        child: SizedBox(
-                          width: 180,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              productsData.images != null &&
-                                      productsData.images!.isNotEmpty
-                                  ? Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Container(
-                                        height: 120,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                              productsData.images![0],
-                                            ),
-                                            fit: BoxFit.cover,
+              return Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        ShoesScreen.tag,
+                        arguments: ShoesScreenArgs(
+                          brand: productsData.brand,
+                          category: productsData.category,
+                          product: productsData,
+                        ),
+                      );
+                    },
+                    child: Card(
+                      elevation: 5,
+                      child: SizedBox(
+                        width: 180,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            productsData.images != null &&
+                                    productsData.images!.isNotEmpty
+                                ? Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Container(
+                                      height: 120,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                            productsData.images![0],
                                           ),
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
-                                    )
-                                  : Container(),
-                              Padding(
-                                padding: const EdgeInsets.all(6),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: AutoSizeText(
-                                    "${productsData.name}",
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
                                     ),
+                                  )
+                                : Container(),
+                            Padding(
+                              padding: const EdgeInsets.all(6),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: AutoSizeText(
+                                  "${productsData.name}",
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16.0,
-                                  vertical: 6.0,
-                                ),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "R\$ ${formatNumber.format(productsData.price)}",
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      color: CustomColors.black,
-                                    ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                                vertical: 6.0,
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "R\$ ${formatNumber.format(productsData.price)}",
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: CustomColors.black,
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
-                );
-              },
-            ),
+                  ),
+                ],
+              );
+            },
           );
         }
       },
@@ -189,7 +186,7 @@ class ProductsTile extends StatelessWidget {
 
     docs.shuffle(Random());
     List<DocumentSnapshot> randomList = docs.take(10).toList();
-    print("<<<<<<<<<<<<<<<<<<<<<<<<< $docs >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
     return randomList;
   }
 }
