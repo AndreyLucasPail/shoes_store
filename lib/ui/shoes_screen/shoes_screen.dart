@@ -295,13 +295,11 @@ class _ShoesScreenState extends State<ShoesScreen> {
           const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Expanded(
-              child: AutoSizeText(
-                "${widget.product!.description}",
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: CustomColors.black,
-                ),
+            child: AutoSizeText(
+              "${widget.product!.description}",
+              style: const TextStyle(
+                fontSize: 18,
+                color: CustomColors.black,
               ),
             ),
           ),
