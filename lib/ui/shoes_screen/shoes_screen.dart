@@ -243,8 +243,7 @@ class _ShoesScreenState extends State<ShoesScreen> {
           onPressed: size != null
               ? () async {
                   if (!userBloc.isLoggedIn()) {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
+                    Navigator.pushReplacementNamed(context, LoginScreen.tag);
                   } else {
                     CartModel cartProduct = CartModel();
                     cartProduct.category = widget.category;
