@@ -38,12 +38,12 @@ class ExpansionTileDrawer extends StatelessWidget {
                 (brandName) {
                   return TextButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => ProductsScreen(
-                            category: category,
-                            brand: brandName.id,
-                          ),
+                      Navigator.pushReplacementNamed(
+                        context,
+                        ProductsScreen.tag,
+                        arguments: ProductsScreenArgs(
+                          brand: brandName.id,
+                          category: category,
                         ),
                       );
                     },

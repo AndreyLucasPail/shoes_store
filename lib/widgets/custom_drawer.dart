@@ -50,10 +50,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
               child: Stack(
                 children: [
                   const Positioned(
-                    top: 20.0,
+                    top: 40.0,
                     left: 25.0,
                     child: Text(
-                      "SNKRS \n Store",
+                      "SNKRS Store",
                       style: TextStyle(
                         color: CustomColors.white,
                         fontSize: 35,

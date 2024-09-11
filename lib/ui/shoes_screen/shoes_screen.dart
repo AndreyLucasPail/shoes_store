@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' hide CarouselController;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -67,9 +67,15 @@ class _ShoesScreenState extends State<ShoesScreen> {
     return Scaffold(
       backgroundColor: CustomColors.grey200,
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: CustomColors.white),
         backgroundColor: CustomColors.midNigthBlue,
         centerTitle: true,
-        title: const Text("SNKRS"),
+        title: const Text(
+          "SNKRS",
+          style: TextStyle(
+            color: CustomColors.white,
+          ),
+        ),
       ),
       body: body(),
     );
@@ -201,7 +207,7 @@ class _ShoesScreenState extends State<ShoesScreen> {
                     decoration: BoxDecoration(
                       color: size == sizeButtonText
                           ? CustomColors.midNigthBlue
-                          : Colors.grey[100],
+                          : CustomColors.grey100,
                       shape: BoxShape.circle,
                       border: Border.all(
                         color: size == sizeButtonText
@@ -214,7 +220,7 @@ class _ShoesScreenState extends State<ShoesScreen> {
                       sizeButtonText,
                       style: TextStyle(
                         color: sizeButtonText == size
-                            ? Colors.white
+                            ? CustomColors.white
                             : CustomColors.black,
                         fontSize: 18,
                       ),

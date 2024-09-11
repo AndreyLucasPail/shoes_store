@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' hide CarouselController;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
@@ -41,10 +41,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: CustomColors.grey100,
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: CustomColors.white),
         backgroundColor: CustomColors.midNigthBlue,
-        title: const Text("SNKRS"),
+        title: const Text(
+          "SNKRS",
+          style: TextStyle(
+            color: CustomColors.white,
+          ),
+        ),
         actions: [appBarActions()],
         centerTitle: true,
       ),
@@ -73,7 +79,10 @@ class _HomePageState extends State<HomePage> {
       shape: ContinuousRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      icon: const Icon(Icons.person_2_rounded),
+      icon: const Icon(
+        Icons.person_2_rounded,
+        color: CustomColors.white,
+      ),
       itemBuilder: (context) => <PopupMenuEntry>[
         PopupMenuItem(
           onTap: () {

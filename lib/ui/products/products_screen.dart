@@ -86,13 +86,19 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   AppBar appBar() {
     return AppBar(
+      iconTheme: const IconThemeData(color: CustomColors.white),
       backgroundColor: CustomColors.midNigthBlue,
       centerTitle: true,
       title: InkWell(
         onTap: () {
           Navigator.pushNamed(context, HomePage.tag);
         },
-        child: const Text("SNKRS"),
+        child: const Text(
+          "SNKRS",
+          style: TextStyle(
+            color: CustomColors.white,
+          ),
+        ),
       ),
     );
   }
