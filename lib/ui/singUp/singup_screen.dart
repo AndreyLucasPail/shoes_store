@@ -40,8 +40,16 @@ class _SingUpScreenState extends State<SingUpScreen> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: CustomColors.midNigthBlue,
+        iconTheme: const IconThemeData(
+          color: CustomColors.white,
+        ),
         centerTitle: true,
-        title: const Text("SNKRS"),
+        title: const Text(
+          "SNKRS",
+          style: TextStyle(
+            color: CustomColors.white,
+          ),
+        ),
       ),
       body: body(),
     );

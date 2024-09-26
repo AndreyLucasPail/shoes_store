@@ -43,7 +43,15 @@ class _CartScreenState extends State<CartScreen> {
       backgroundColor: CustomColors.grey100,
       appBar: AppBar(
         backgroundColor: CustomColors.midNigthBlue,
-        title: const Text("Meu Carrinho"),
+        iconTheme: const IconThemeData(
+          color: CustomColors.white,
+        ),
+        title: const Text(
+          "Meu Carrinho",
+          style: TextStyle(
+            color: CustomColors.white,
+          ),
+        ),
         centerTitle: true,
       ),
       body: body(),
@@ -148,7 +156,7 @@ class _CartScreenState extends State<CartScreen> {
           Icon(
             Icons.remove_shopping_cart,
             size: 120,
-            color: Color.fromARGB(255, 38, 24, 94),
+            color: CustomColors.midNigthBlue,
           ),
           SizedBox(
             height: 15,
@@ -156,7 +164,7 @@ class _CartScreenState extends State<CartScreen> {
           Text(
             "Nenhum Produto no carrinho",
             style: TextStyle(
-              color: Color.fromARGB(255, 38, 24, 94),
+              color: CustomColors.midNigthBlue,
               fontSize: 30,
             ),
             textAlign: TextAlign.center,

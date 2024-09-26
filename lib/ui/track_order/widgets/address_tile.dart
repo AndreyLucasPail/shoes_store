@@ -84,7 +84,14 @@ class _AddressCardState extends State<AddressCard> {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          "${userModel!.address}, ${userModel.neighborhood}",
+                          "${userModel!.address}",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          "Bairro:  ${userModel.neighborhood}",
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,

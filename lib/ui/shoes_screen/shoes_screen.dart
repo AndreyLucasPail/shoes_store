@@ -272,6 +272,7 @@ class _ShoesScreenState extends State<ShoesScreen> {
             style: TextStyle(
               fontSize: 16,
               letterSpacing: 1,
+              color: CustomColors.white,
             ),
           ),
         ),

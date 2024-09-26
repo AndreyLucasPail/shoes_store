@@ -86,7 +86,10 @@ class OrderTile extends StatelessWidget {
                 children: [
                   const Text(
                     "Valor total do pedido:",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     "R\$ ${formatNumber.format(order!.totalPrice)}",
@@ -115,6 +118,7 @@ class OrderTile extends StatelessWidget {
                   child: const Text(
                     "Acompanhar pedido",
                     style: TextStyle(
+                      color: CustomColors.white,
                       fontSize: 18,
                       letterSpacing: 1,
                     ),

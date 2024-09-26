@@ -46,7 +46,13 @@ class _UserScreenState extends State<UserScreen> {
     return AppBar(
       elevation: 0,
       backgroundColor: CustomColors.midNigthBlue,
-      title: const Text("Perfil"),
+      iconTheme: const IconThemeData(color: CustomColors.white),
+      title: const Text(
+        "Perfil",
+        style: TextStyle(
+          color: CustomColors.white,
+        ),
+      ),
       centerTitle: true,
     );
   }

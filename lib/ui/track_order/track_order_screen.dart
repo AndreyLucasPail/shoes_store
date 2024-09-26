@@ -27,7 +27,11 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
       backgroundColor: CustomColors.grey100,
       appBar: AppBar(
         backgroundColor: CustomColors.midNigthBlue,
-        title: const Text("Rastreamento do pedido"),
+        iconTheme: const IconThemeData(color: CustomColors.white),
+        title: const Text(
+          "Rastreamento do pedido",
+          style: TextStyle(color: CustomColors.white),
+        ),
         centerTitle: true,
       ),
       body: ListView(

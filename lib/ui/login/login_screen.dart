@@ -31,7 +31,13 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: CustomColors.grey200,
       appBar: AppBar(
-        title: const Text("SNKRS"),
+        iconTheme: const IconThemeData(color: CustomColors.white),
+        title: const Text(
+          "SNKRS",
+          style: TextStyle(
+            color: CustomColors.white,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: CustomColors.midNigthBlue,
       ),
@@ -124,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: const Text(
               "Entrar",
               style: TextStyle(
+                color: CustomColors.white,
                 fontSize: 18,
                 letterSpacing: 1,
               ),
@@ -149,6 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: const Text(
           "Criar Conta",
           style: TextStyle(
+            color: CustomColors.white,
             fontSize: 18,
             letterSpacing: 1,
           ),

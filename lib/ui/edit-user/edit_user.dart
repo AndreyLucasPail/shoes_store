@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/model/user_model.dart';
+import 'package:shoes_store/utils/colors/custom_colors.dart';
 import 'package:shoes_store/widgets/user_text_field.dart';
 
 class EditUserScreenArgs {}
@@ -45,8 +46,16 @@ class _EditUserScreenState extends State<EditUserScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 38, 24, 94),
-        title: const Text("Editar perfil"),
+        backgroundColor: CustomColors.midNigthBlue,
+        iconTheme: const IconThemeData(
+          color: CustomColors.white,
+        ),
+        title: const Text(
+          "Editar perfil",
+          style: TextStyle(
+            color: CustomColors.white,
+          ),
+        ),
         centerTitle: true,
       ),
       body: body(),
@@ -113,7 +122,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
             width: 300,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 38, 24, 94),
+                backgroundColor: CustomColors.midNigthBlue,
                 shape: const StadiumBorder(),
               ),
               onPressed: () async {
@@ -153,6 +162,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
               child: const Text(
                 "Salvar",
                 style: TextStyle(
+                  color: CustomColors.white,
                   fontSize: 18,
                 ),
               ),

@@ -42,7 +42,15 @@ class _OrderScreenState extends State<OrderScreen> {
       backgroundColor: CustomColors.grey100,
       appBar: AppBar(
         backgroundColor: CustomColors.midNigthBlue,
-        title: const Text("SNKRS"),
+        iconTheme: const IconThemeData(
+          color: CustomColors.white,
+        ),
+        title: const Text(
+          "Pedidos",
+          style: TextStyle(
+            color: CustomColors.white,
+          ),
+        ),
         centerTitle: true,
       ),
       body: body(),
