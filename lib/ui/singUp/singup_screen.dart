@@ -386,11 +386,8 @@ class _SingUpScreenState extends State<SingUpScreen> {
     );
     Future.delayed(const Duration(seconds: 1)).then(
       (value) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ),
-        );
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacementNamed(context, HomePage.tag);
       },
     );
   }
