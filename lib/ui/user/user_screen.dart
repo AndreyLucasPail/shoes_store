@@ -62,66 +62,70 @@ class _UserScreenState extends State<UserScreen> {
       child: StreamBuilder<UserModel>(
         stream: userBloc.outUser,
         builder: (context, snapshot) {
-          UserModel? userModel = snapshot.data;
+          if (!snapshot.hasData || snapshot.data == null) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            UserModel? userModel = snapshot.data;
 
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage("assets/homem.png"),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              SizedBox(
-                height: 45,
-                width: 150,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: CustomColors.white,
-                    shape: const StadiumBorder(),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => EditUserScreen(
-                          userModel: userModel!,
-                        ),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage("assets/homem.png"),
                       ),
-                    );
-                  },
-                  child: const Text(
-                    "Editar perfil",
-                    style: TextStyle(
-                      color: CustomColors.black,
-                      fontSize: 16,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 50),
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: const BoxDecoration(
-                  color: CustomColors.grey100,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(30),
+                const SizedBox(height: 25),
+                SizedBox(
+                  height: 45,
+                  width: 150,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: CustomColors.white,
+                      shape: const StadiumBorder(),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => EditUserScreen(
+                            userModel: userModel!,
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      "Editar perfil",
+                      style: TextStyle(
+                        color: CustomColors.black,
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
-                child: UserTile(userModel: userModel!),
-              ),
-            ],
-          );
+                const SizedBox(height: 50),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: const BoxDecoration(
+                    color: CustomColors.grey100,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(30),
+                    ),
+                  ),
+                  child: UserTile(userModel: userModel!),
+                ),
+              ],
+            );
+          }
         },
       ),
     );

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
 import 'package:shoes_store/ui/home/homepage.dart';
@@ -362,7 +364,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
             },
             style: ElevatedButton.styleFrom(
               shape: const StadiumBorder(),
-              backgroundColor: const Color.fromARGB(255, 38, 24, 94),
+              backgroundColor: CustomColors.midNigthBlue,
             ),
             child: const Text(
               "Finalizar Cadastro",
@@ -381,12 +383,11 @@ class _SingUpScreenState extends State<SingUpScreen> {
       const SnackBar(
         content: Text("Usuário criado com sucesso!"),
         duration: Duration(seconds: 1),
-        backgroundColor: Color.fromARGB(255, 38, 24, 94),
+        backgroundColor: CustomColors.midNigthBlue,
       ),
     );
     Future.delayed(const Duration(seconds: 1)).then(
       (value) {
-        // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, HomePage.tag);
       },
     );
@@ -396,7 +397,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text("Erro ao criar Usuário!"),
-        backgroundColor: Colors.red,
+        backgroundColor: CustomColors.red,
         duration: Duration(seconds: 2),
       ),
     );

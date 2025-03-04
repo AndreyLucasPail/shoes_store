@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: 50 * _animationController!.value,
                   child: const Text(
                     "Sneakers Shoes Store",
