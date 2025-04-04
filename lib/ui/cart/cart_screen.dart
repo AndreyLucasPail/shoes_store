@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/mixins/cart_mixin.dart';
 import 'package:shoes_store/ui/cart/widget/product_card.dart';
 import 'package:shoes_store/ui/cart/widget/price_card.dart';
 import 'package:shoes_store/ui/cart/widget/ship_card.dart';
@@ -18,10 +19,7 @@ class CartScreen extends StatefulWidget {
   State<CartScreen> createState() => _CartScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
-  late CartBloc cartBloc;
-  UserBloc userBloc = UserBloc();
-
+class _CartScreenState extends State<CartScreen> with CartMixin {
   @override
   void initState() {
     super.initState();

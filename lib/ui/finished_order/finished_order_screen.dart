@@ -33,7 +33,7 @@ class _FinishOrderState extends State<FinishOrder> {
         children: [
           const Icon(
             Icons.check_circle,
-            color: Colors.green,
+            color: CustomColors.green,
             size: 120,
           ),
           const SizedBox(height: 30),
@@ -59,7 +59,7 @@ class _FinishOrderState extends State<FinishOrder> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: const StadiumBorder(),
-                backgroundColor: const Color.fromARGB(255, 38, 24, 94),
+                backgroundColor: CustomColors.midNigthBlue,
               ),
               onPressed: () {
                 Navigator.pushReplacementNamed(context, OrderScreen.tag);

@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/mixins/singup_mixin.dart';
 import 'package:shoes_store/ui/home/homepage.dart';
 import 'package:shoes_store/utils/colors/custom_colors.dart';
 import 'package:shoes_store/widgets/login_custom_text_field.dart';
@@ -15,20 +15,7 @@ class SingUpScreen extends StatefulWidget {
   State<SingUpScreen> createState() => _SingUpScreenState();
 }
 
-class _SingUpScreenState extends State<SingUpScreen> {
-  final UserBloc userBloc = UserBloc();
-
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final cepController = TextEditingController();
-  final birthdayController = TextEditingController();
-  final addressController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-  final neighborhoodController = TextEditingController();
-  final cityController = TextEditingController();
-  final stateController = TextEditingController();
-
+class _SingUpScreenState extends State<SingUpScreen> with SingupMixin {
   @override
   void dispose() {
     super.dispose();
@@ -65,9 +52,36 @@ class _SingUpScreenState extends State<SingUpScreen> {
           child: Column(
             children: [
               image(),
-              nameInput(),
-              emailInput(),
-              passwordInput(),
+              input(
+                text: "Nome:",
+                controller: nameController,
+                keyboardType: TextInputType.emailAddress,
+                icon: Icons.person,
+                stream: userBloc.outName,
+                onChanged: userBloc.changeName,
+              ),
+              input(
+                text: "E-mail:",
+                controller: emailController,
+                keyboardType: TextInputType.emailAddress,
+                icon: Icons.person,
+                stream: userBloc.outEmail,
+                onChanged: userBloc.changeEmail,
+              ),
+              input(
+                text: "Senha:",
+                controller: passwordController,
+                keyboardType: TextInputType.multiline,
+                icon: Icons.lock,
+                stream: userBloc.outpass,
+                onChanged: userBloc.changePass,
+              ),
+              input(
+                text: "Confirme a Senha:",
+                controller: confirmPasswordController,
+                keyboardType: TextInputType.multiline,
+                icon: Icons.lock,
+              ),
               confirmPasswordInput(),
               cepInput(),
               addressInput(),
@@ -89,81 +103,6 @@ class _SingUpScreenState extends State<SingUpScreen> {
       height: 170,
       width: 170,
       child: Image.asset("assets/pngwing2.com.png"),
-    );
-  }
-
-  Widget nameInput() {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Nome:",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        CustomTextField(
-          controller: nameController,
-          keyboardType: TextInputType.name,
-          obscureText: false,
-          prefix: const Icon(Icons.person),
-          stream: userBloc.outName,
-          onChanged: userBloc.changeName,
-        ),
-      ],
-    );
-  }
-
-  Widget emailInput() {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "E-mail:",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        CustomTextField(
-          controller: emailController,
-          keyboardType: TextInputType.emailAddress,
-          obscureText: false,
-          prefix: const Icon(Icons.person),
-          stream: userBloc.outEmail,
-          onChanged: userBloc.changeEmail,
-        ),
-      ],
-    );
-  }
-
-  Widget passwordInput() {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Senha:",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        CustomTextField(
-          controller: passwordController,
-          keyboardType: TextInputType.multiline,
-          obscureText: true,
-          prefix: const Icon(Icons.lock),
-          stream: userBloc.outpass,
-          onChanged: userBloc.changePass,
-        ),
-      ],
     );
   }
 
@@ -330,6 +269,38 @@ class _SingUpScreenState extends State<SingUpScreen> {
           prefix: const Icon(Icons.cake),
           stream: userBloc.outBirthday,
           onChanged: userBloc.changeBirthday,
+        ),
+      ],
+    );
+  }
+
+  Widget input({
+    required String text,
+    required TextEditingController controller,
+    required TextInputType keyboardType,
+    required IconData icon,
+    Stream<String>? stream,
+    Function(String)? onChanged,
+  }) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        CustomTextField(
+          controller: controller,
+          keyboardType: keyboardType,
+          obscureText: false,
+          prefix: Icon(icon),
+          stream: stream,
+          onChanged: onChanged,
         ),
       ],
     );

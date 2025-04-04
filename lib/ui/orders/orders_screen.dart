@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/orders_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/mixins/orders_mixin.dart';
 import 'package:shoes_store/model/order_model.dart';
 import 'package:shoes_store/ui/login/login_screen.dart';
 import 'package:shoes_store/ui/orders/widgets/order_tile.dart';
@@ -16,10 +17,7 @@ class OrderScreen extends StatefulWidget {
   State<OrderScreen> createState() => _OrderScreenState();
 }
 
-class _OrderScreenState extends State<OrderScreen> {
-  late OrdersBloc ordersBloc;
-  UserBloc userBloc = UserBloc();
-
+class _OrderScreenState extends State<OrderScreen> with OrdersMixin {
   @override
   void initState() {
     super.initState();

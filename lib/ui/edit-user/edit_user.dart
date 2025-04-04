@@ -1,6 +1,7 @@
 // ignore_for_file: no_logic_in_create_state, use_build_context_synchronously
 import 'package:flutter/material.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/mixins/edit_user_mixin.dart';
 import 'package:shoes_store/model/user_model.dart';
 import 'package:shoes_store/utils/colors/custom_colors.dart';
 import 'package:shoes_store/widgets/user_text_field.dart';
@@ -15,23 +16,11 @@ class EditUserScreen extends StatefulWidget {
   static const tag = "/editUser";
 
   @override
-  State<EditUserScreen> createState() => _EditUserScreenState(userModel);
+  State<EditUserScreen> createState() => _EditUserScreenState();
 }
 
-class _EditUserScreenState extends State<EditUserScreen> {
-  _EditUserScreenState(this.userModel);
-
-  final UserModel? userModel;
-  late UserBloc? userBloc = UserBloc();
-
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final addressController = TextEditingController();
-  final birthdayController = TextEditingController();
-  final cepController = TextEditingController();
-  final cityController = TextEditingController();
-  final neighborhoodController = TextEditingController();
-  final stateController = TextEditingController();
+class _EditUserScreenState extends State<EditUserScreen> with EditUserMixin {
+  _EditUserScreenState();
 
   @override
   void initState() {
@@ -69,48 +58,48 @@ class _EditUserScreenState extends State<EditUserScreen> {
         children: [
           UserTextField(
             labelText: "Nome:",
-            hintText: "${userModel!.name}",
+            hintText: "${widget.userModel!.name}",
             controller: nameController,
           ),
           UserTextField(
             labelText: "Email:",
-            hintText: "${userModel!.email}",
+            hintText: "${widget.userModel!.email}",
             inputType: TextInputType.emailAddress,
             controller: emailController,
           ),
           UserTextField(
             labelText: "Endereço:",
-            hintText: "${userModel!.address}",
+            hintText: "${widget.userModel!.address}",
             inputType: TextInputType.streetAddress,
             controller: addressController,
           ),
           UserTextField(
             labelText: "Data de nascimento:",
-            hintText: "${userModel!.birthday}",
+            hintText: "${widget.userModel!.birthday}",
             inputType: TextInputType.datetime,
             controller: birthdayController,
           ),
           UserTextField(
             labelText: "Cidade:",
-            hintText: "${userModel!.city}",
+            hintText: "${widget.userModel!.city}",
             inputType: TextInputType.streetAddress,
             controller: cityController,
           ),
           UserTextField(
             labelText: "Bairro:",
-            hintText: "${userModel!.neighborhood}",
+            hintText: "${widget.userModel!.neighborhood}",
             inputType: TextInputType.streetAddress,
             controller: neighborhoodController,
           ),
           UserTextField(
             labelText: "Estado:",
-            hintText: "${userModel!.state}",
+            hintText: "${widget.userModel!.state}",
             inputType: TextInputType.streetAddress,
             controller: stateController,
           ),
           UserTextField(
             labelText: "CEP:",
-            hintText: "${userModel!.cep}",
+            hintText: "${widget.userModel!.cep}",
             inputType: TextInputType.number,
             controller: cepController,
           ),
@@ -128,28 +117,28 @@ class _EditUserScreenState extends State<EditUserScreen> {
               onPressed: () async {
                 Map<String, dynamic> userData = {
                   "name": nameController.text == ""
-                      ? userModel!.name
+                      ? widget.userModel!.name
                       : nameController.text,
                   "email": emailController.text == ""
-                      ? userModel!.email
+                      ? widget.userModel!.email
                       : emailController.text,
                   "adress": addressController.text == ""
-                      ? userModel!.address
+                      ? widget.userModel!.address
                       : addressController.text,
                   "birthday": birthdayController.text == ""
-                      ? userModel!.birthday
+                      ? widget.userModel!.birthday
                       : birthdayController.text,
                   "CEP": cepController.text == ""
-                      ? userModel!.cep
+                      ? widget.userModel!.cep
                       : cepController.text,
                   "city": cityController.text == ""
-                      ? userModel!.city
+                      ? widget.userModel!.city
                       : cityController.text,
                   "neighborhood": neighborhoodController.text == ""
-                      ? userModel!.neighborhood
+                      ? widget.userModel!.neighborhood
                       : neighborhoodController.text,
                   "state": stateController.text == ""
-                      ? userModel!.state
+                      ? widget.userModel!.state
                       : stateController.text,
                 };
 
@@ -176,11 +165,11 @@ class _EditUserScreenState extends State<EditUserScreen> {
   void onSuccess() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        backgroundColor: Color.fromARGB(255, 38, 24, 94),
+        backgroundColor: CustomColors.midNigthBlue,
         content: Text(
           "Usuaria atualizado com sucesso!",
           style: TextStyle(
-            color: Colors.white,
+            color: CustomColors.midNigthBlue,
             fontSize: 16,
           ),
         ),

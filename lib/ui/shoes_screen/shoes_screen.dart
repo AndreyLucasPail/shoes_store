@@ -2,9 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart' hide CarouselController;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:shoes_store/bloc/cart_bloc.dart';
 import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/mixins/shoes_mixin.dart';
 import 'package:shoes_store/ui/login/login_screen.dart';
 import 'package:shoes_store/model/cart_model.dart';
 import 'package:shoes_store/model/produtc_model.dart';
@@ -39,15 +39,8 @@ class ShoesScreen extends StatefulWidget {
   State<ShoesScreen> createState() => _ShoesScreenState();
 }
 
-class _ShoesScreenState extends State<ShoesScreen> {
+class _ShoesScreenState extends State<ShoesScreen> with ShoesMixin {
   _ShoesScreenState();
-
-  late UserBloc userBloc;
-
-  String? size;
-  bool activeButton = false;
-  CartBloc? cartBloc = CartBloc();
-  NumberFormat formatNumber = NumberFormat("#,##0.00", "pt_BR");
 
   @override
   void initState() {

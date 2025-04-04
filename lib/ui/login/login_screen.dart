@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/mixins/login_mixin.dart';
 import 'package:shoes_store/ui/singUp/singup_screen.dart';
 import 'package:shoes_store/utils/colors/custom_colors.dart';
 import 'package:shoes_store/widgets/login_custom_text_field.dart';
@@ -13,12 +13,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  UserBloc userBloc = UserBloc();
-
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
+class _LoginScreenState extends State<LoginScreen> with LoginMixin {
   @override
   void dispose() {
     super.dispose();

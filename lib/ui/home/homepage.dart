@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart' hide CarouselController;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shoes_store/bloc/user_bloc.dart';
+import 'package:shoes_store/mixins/home_mixin.dart';
 import 'package:shoes_store/ui/cart/cart_screen.dart';
 import 'package:shoes_store/ui/login/login_screen.dart';
 import 'package:shoes_store/widgets/custom_drawer.dart';
@@ -19,16 +19,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  UserBloc userBloc = UserBloc();
-
-  List ads = [
-    "assets/jordan1.png",
-    "assets/curry.jpg",
-    "assets/adidas.png",
-    "assets/nike4.png",
-  ];
-
+class _HomePageState extends State<HomePage> with HomeMixin {
   @override
   void initState() {
     super.initState();
@@ -64,9 +55,9 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
       child: SingleChildScrollView(
         child: Column(
+          spacing: 30,
           children: [
             carouselAds(),
-            const SizedBox(height: 30),
             const ProductsTile(),
           ],
         ),
