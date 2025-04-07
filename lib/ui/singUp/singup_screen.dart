@@ -76,19 +76,49 @@ class _SingUpScreenState extends State<SingUpScreen> with SingupMixin {
                 stream: userBloc.outpass,
                 onChanged: userBloc.changePass,
               ),
-              input(
-                text: "Confirme a Senha:",
-                controller: confirmPasswordController,
-                keyboardType: TextInputType.multiline,
-                icon: Icons.lock,
-              ),
               confirmPasswordInput(),
-              cepInput(),
-              addressInput(),
-              neighborhoodInput(),
-              cityInput(),
-              stateInput(),
-              birthdayInput(),
+              input(
+                text: "CEP:",
+                controller: cepController,
+                keyboardType: TextInputType.number,
+                icon: Icons.house,
+                stream: userBloc.cepController,
+                onChanged: userBloc.changeCep,
+              ),
+              input(
+                text: "Endereço:",
+                controller: addressController,
+                keyboardType: TextInputType.streetAddress,
+                icon: Icons.house,
+                stream: userBloc.addressController,
+                onChanged: userBloc.changeAddres,
+              ),
+              input(
+                text: "Bairro:",
+                controller: neighborhoodController,
+                keyboardType: TextInputType.streetAddress,
+                icon: Icons.house,
+              ),
+              input(
+                text: "Cidade:",
+                controller: cityController,
+                keyboardType: TextInputType.streetAddress,
+                icon: Icons.house,
+              ),
+              input(
+                text: "Estado:",
+                controller: cityController,
+                keyboardType: TextInputType.streetAddress,
+                icon: Icons.house,
+              ),
+              input(
+                text: "Data de Nascimento:",
+                controller: birthdayController,
+                keyboardType: TextInputType.datetime,
+                icon: Icons.cake,
+                stream: userBloc.birthdayController,
+                onChanged: userBloc.changeBirthday,
+              ),
               const SizedBox(height: 20),
               finishButton(),
             ],
@@ -125,150 +155,6 @@ class _SingUpScreenState extends State<SingUpScreen> with SingupMixin {
           obscureText: true,
           prefix: const Icon(Icons.lock),
           validator: validateConfirmPassword,
-        ),
-      ],
-    );
-  }
-
-  Widget cepInput() {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "CEP:",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        CustomTextField(
-          controller: cepController,
-          keyboardType: TextInputType.number,
-          obscureText: false,
-          prefix: const Icon(Icons.house),
-          stream: userBloc.outCep,
-          onChanged: userBloc.changeCep,
-        ),
-      ],
-    );
-  }
-
-  Widget addressInput() {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Endereço:",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        CustomTextField(
-          controller: addressController,
-          keyboardType: TextInputType.streetAddress,
-          obscureText: false,
-          prefix: const Icon(Icons.house),
-          stream: userBloc.outAddress,
-          onChanged: userBloc.changeAddres,
-        ),
-      ],
-    );
-  }
-
-  Widget neighborhoodInput() {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Bairro:",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        CustomTextField(
-          controller: neighborhoodController,
-          keyboardType: TextInputType.streetAddress,
-          obscureText: false,
-          prefix: const Icon(Icons.house),
-        ),
-      ],
-    );
-  }
-
-  Widget cityInput() {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Cidade:",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        CustomTextField(
-          controller: cityController,
-          keyboardType: TextInputType.streetAddress,
-          obscureText: false,
-          prefix: const Icon(Icons.house),
-        ),
-      ],
-    );
-  }
-
-  Widget stateInput() {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Estado:",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        CustomTextField(
-          controller: stateController,
-          keyboardType: TextInputType.streetAddress,
-          obscureText: false,
-          prefix: const Icon(Icons.house),
-        ),
-      ],
-    );
-  }
-
-  Widget birthdayInput() {
-    return Column(
-      children: [
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Data de Nascimento:",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        CustomTextField(
-          controller: birthdayController,
-          keyboardType: TextInputType.datetime,
-          obscureText: false,
-          prefix: const Icon(Icons.cake),
-          stream: userBloc.outBirthday,
-          onChanged: userBloc.changeBirthday,
         ),
       ],
     );
