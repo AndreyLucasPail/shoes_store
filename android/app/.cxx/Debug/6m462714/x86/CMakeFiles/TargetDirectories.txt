@@ -1,0 +1,2 @@
+D:/projetos/shoes_store/android/app/.cxx/Debug/6m462714/x86/CMakeFiles/edit_cache.dir
+D:/projetos/shoes_store/android/app/.cxx/Debug/6m462714/x86/CMakeFiles/rebuild_cache.dir
